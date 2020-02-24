@@ -21,7 +21,9 @@ export class FirestoreService {
     title: string,
     date: string,
     scale: number,
-    description: string
+    description: string,
+    timestamp: string,
+
   ): Promise<void> {
     const id = this.firestore.createId();
 
@@ -30,7 +32,8 @@ export class FirestoreService {
       title,
       date,
       scale,
-      description
+      description,
+      timestamp
     });
   }
 

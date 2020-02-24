@@ -14,6 +14,8 @@ import { OrderPipe } from 'ngx-order-pipe';
 })
 export class Tab1Page implements OnInit {
   public currentEntries;
+  public order = 'timestamp';
+
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,

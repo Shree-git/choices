@@ -1,6 +1,4 @@
-ion-title{
- text-align: center;
-}
+
      .entry-content {
        padding: 7%;
        width: 100%;
@@ -55,9 +53,22 @@ ion-title{
 
 
      }
-    #error-message{
-      color: red;
-      margin: 5%;
-      font-size: 20px;
+
+    ion-button{
+      width: 35%;
+      margin-bottom: 5%;
+      height: 6%;
+
+    }
+    #deletebtn{
+      display: inline-block;
+      margin-left: 5%;
+    
+    }
+    #editbtn{
+      display: inline-block;
+      margin-left: 20%;
+      
+
     }
   

@@ -4,4 +4,5 @@ export interface Impulse{
     date: string;
     scale: number;
     description: string;
+    timestamp: string;
 }
