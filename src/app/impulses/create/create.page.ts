@@ -20,9 +20,8 @@ export class CreatePage implements OnInit {
     public router: Router
     ) {
       this.createImpulseForm = formBuilder.group({
-        title: ['', Validators.required],
-        date: ['', Validators.required],
-        scale: ['', Validators.required],
+        title: ['', [Validators.maxLength(50), Validators.required]],
+        scale: ['', [Validators.min(1), Validators.max(10), Validators.required]],
         description: ['', Validators.required]
       })
      }
@@ -34,7 +33,7 @@ export class CreatePage implements OnInit {
     const loading = await this.loadingCtrl.create();
 
     const title = this.createImpulseForm.value.title;
-    const date = this.createImpulseForm.value.date;
+    const date = new Date().toString();
     const scale = this.createImpulseForm.value.scale;
     const description = this.createImpulseForm.value.description;
 
