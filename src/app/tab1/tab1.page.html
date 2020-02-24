@@ -25,7 +25,7 @@
     </div>
 <br>
 
-  <ion-card *ngFor="let entry of currentEntries | async" routerLink="/detail-entry/{{entry.id}}">
+  <ion-card *ngFor="let entry of currentEntries | async |  orderBy: order : reverse : true" routerLink="/detail-entry/{{entry.id}}">
     <ion-card-header>
         <img id="header_week" class="title-image" src="assets/days_of_week/{{entry.day}}_icon.png" />
        <ion-card-title id="header_title">{{entry.title}} </ion-card-title>

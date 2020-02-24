@@ -4,15 +4,22 @@ import { Entry } from '../models/entry.interface'
 import { FirestoreService } from '../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { OrderPipe } from 'ngx-order-pipe';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
+  providers: [OrderPipe]
 })
 export class Tab1Page implements OnInit {
   public currentEntries;
+    // to change the sort just change the value of order
+    order: string = 'timestamp';
+    reverse: boolean = true;
   constructor(
     public firestoreService: FirestoreService,
+    private orderPipe: OrderPipe,
     public router: Router) {}
 
   ngOnInit() {
