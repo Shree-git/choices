@@ -22,6 +22,14 @@ const routes: Routes = [
   {
     path: 'detail/:id',
     loadChildren: () => import('./impulses/detail/detail.module').then( m => m.DetailPageModule)
+  },
+  {
+    path: 'create-entry',
+    loadChildren: () => import('./entries/create-entry/create-entry.module').then( m => m.CreateEntryPageModule)
+  },
+  {
+    path: 'detail-entry/:id',
+    loadChildren: () => import('./entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
   }
 ];
 @NgModule({

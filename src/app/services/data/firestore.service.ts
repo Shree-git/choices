@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 import { Impulse } from '../../models/impulse.interface'
+import { Entry } from '../../models/entry.interface'
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,24 @@ export class FirestoreService {
     });
   }
 
+  createEntry(
+    title: string,
+    date: string,
+    day: string,
+    content: string
+  ): Promise<void> {
+    const id = this.firestore.createId();
+
+    return this.firestore.doc('currentEntries/' + id).set({
+      id,
+      title,
+      date,
+      day,
+      content
+    });
+  }
+
+
   getImpulseList(): AngularFirestoreCollection<Impulse> {
     return this.firestore.collection('impulseList');
   }
@@ -36,5 +55,18 @@ export class FirestoreService {
 
   deleteImpulse(impulseId: string): Promise<void>{
     return this.firestore.doc('impulseList/' + impulseId).delete();
+  }
+
+
+  getCurrentEntries(): AngularFirestoreCollection<Entry> {
+    return this.firestore.collection('currentEntries');
+  }
+
+  getEntryDetail(entryId: string): AngularFirestoreDocument<Entry>{
+    return this.firestore.collection('currentEntries').doc(entryId);
+  }
+
+  deleteEntry(entryId: string): Promise<void>{
+    return this.firestore.doc('currentEntries/' + entryId).delete();
   }
 }

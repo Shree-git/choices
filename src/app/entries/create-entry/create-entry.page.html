@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Entry</ion-title>
+    <ion-back-button slot="start"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="createEntryForm" (submit)="createEntry()">
+    <ion-item>
+      <ion-label stacked>Entry</ion-label>
+      <ion-input formControlName="title" type="text" placeholder="Title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Content</ion-label>
+      <ion-textarea formControlName="content" type="text" placeholder="Content"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!createEntryForm.valid">Add</ion-button>
+    <ion-button expand="block" color="dark" routerLink='/tabs/tab1'>Cancel</ion-button>
+  </form>
+</ion-content>
