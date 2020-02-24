@@ -23,6 +23,10 @@ export class TabsPage implements OnInit{
     {
       name: 'Wellness',
       path: '/tabs/tab3'
+    },
+    {
+      name: 'Account',
+      path: '/account'
     }
   ]
   constructor(

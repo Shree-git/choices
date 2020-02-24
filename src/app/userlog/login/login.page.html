@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,18 +9,18 @@
 
   <ion-list>
     
-    <ion-item>
+    <ion-item padding-horizontal margin-top>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" [(ngModel)]="email" required></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item padding-horizontal margin-bottom>
       <ion-label position="floating">Password</ion-label>
       <ion-input type="password" [(ngModel)]="password" required></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button fill="solid" expand="block" color="dark" (click)="login()">Log In</ion-button>
-  <ion-button fill="solid" expand="block" color="light" href="/register">Register</ion-button>
-  <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
+  <ion-button fill="solid" expand="block" color="dark" (click)="login()" padding-horizontal>Log In</ion-button>
+  <ion-button fill="solid" expand="block" color="light" href="/register" padding-horizontal>Register</ion-button>
+  <ion-button fill="solid" expand="block" color="danger" href="/forgot-password" padding-horizontal margin-bottom>Forgot Password?</ion-button>
   <ion-grid>
     <ion-row>
       <ion-col> 

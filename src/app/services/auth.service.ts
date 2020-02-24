@@ -17,7 +17,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone
   ) {
-    this.ngFireAuth.authState.subscribe(user => {
+    this.ngFireAuth.auth.onAuthStateChanged(user => {
       if(user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -95,6 +95,32 @@ export class AuthService {
     return userRef.set(userData, {
       merge: true
     })
+  }
+
+  updateDisplayName(dName){
+    var user = this.ngFireAuth.auth.currentUser;
+    user.updateProfile({
+      displayName: dName
+    }).then(()=>{
+      this.userData.displayName = user.displayName;
+    }).catch(err =>{
+      window.alert(err);
+    })
+  }
+
+  updatePhoto(photo){
+    var user = this.ngFireAuth.auth.currentUser;
+    user.updateProfile({
+      photoURL: photo
+    }).then(()=>{
+      this.userData.photoURL = user.photoURL;
+    }).catch(err =>{
+      window.alert(err);
+    })
+  }
+
+  getUserEmail(){
+    return this.userData.email;
   }
 
 

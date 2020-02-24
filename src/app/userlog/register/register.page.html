@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,20 +7,20 @@
 <ion-content padding>
   <ion-list>
     
-      <ion-item>
+      <ion-item padding-horizontal>
         <ion-label position="floating">Email</ion-label>
         <ion-input type="text" [(ngModel)]="email" required></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item padding-horizontal>
         <ion-label position="floating">Password</ion-label>
         <ion-input type="password" [(ngModel)]="password" required></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item padding-horizontal>
         <ion-label position="floating">Confirm Password</ion-label>
         <ion-input type="password" [(ngModel)]="cpassword" required></ion-input>
       </ion-item>
 
   </ion-list>
-  <ion-button fill="solid" expand="block" color="dark" (click)="register()">Register</ion-button>
-  <ion-button fill="solid" expand="block" color="light" href="/login">Log In</ion-button>
+  <ion-button fill="solid" expand="block" color="dark" (click)="register()" padding-horizontal>Register</ion-button>
+  <ion-button fill="solid" expand="block" color="light" href="/login" padding-horizontal>Log In</ion-button>
 </ion-content>
