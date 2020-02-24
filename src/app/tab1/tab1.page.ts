@@ -14,9 +14,6 @@ import { OrderPipe } from 'ngx-order-pipe';
 })
 export class Tab1Page implements OnInit {
   public currentEntries;
-    // to change the sort just change the value of order
-    order: string = 'timestamp';
-    reverse: boolean = true;
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,
@@ -37,6 +34,7 @@ search(ev) {
   }
   this.currentEntries = this.currentEntries.query({
     title: val, content: val, date: val, day: val});
+    
 }
 
    //opens and closes drop down menu

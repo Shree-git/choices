@@ -80,8 +80,8 @@
         transform: translateY(3px);
       }
       .sort{
-        position: fixed;
-        top:11%;
+        position: absolute;
+        top:5%;
         left: 83%;
         background-color: #3498DB;
         color: white;
@@ -97,12 +97,13 @@
 }
 .dropdown-content {
   display: none;
-  position: relative;
+  position: absolute;
   background-color: #f1f1f1;
   min-width: 20%;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   margin-left: 73%;
+  z-index:1000;
 }
 
 .dropdown-content a {
