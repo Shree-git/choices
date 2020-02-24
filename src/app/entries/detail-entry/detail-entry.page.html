@@ -1,20 +1,28 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{ (entry | async)?.title }}</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card class="impulse-card">
-    <ion-card-content>Entry: {{ (entry | async)?.title }}</ion-card-content>
-    <ion-card-content>Date: {{ (entry | async)?.date }}</ion-card-content>
-    <ion-card-content>Day: {{ (entry | async)?.day }}</ion-card-content>
-    <ion-card-content>Content: {{ (entry | async)?.content }}</ion-card-content>
-  </ion-card>
+    <div padding>
+        <h2 class="entry-titles">
+            <img class="title-image" src="assets/days_of_week/{{ (entry | async)?.day }}_icon.png" />
+            <span [hidden]="edit == true" (dblclick)="showEdit()">{{ (entry | async)?.title }}</span>
+            <input id= "edited-title"  value="{{ (entry | async)?.title }}"  [hidden]= "edit == false" >
+         </h2>
+         <p class="entry-date">{{ (entry | async)?.date }}  </p>
+        <span> <p class="entry-content" [hidden]="edit == true" (dblclick)="showEdit()">{{ (entry | async)?.content }}</p>
+   <textarea class="edit-content" id= "edited-content" [hidden]= "edit == false" >{{ (entry | async)?.content }} </textarea></span>
+    </div>
   <ion-button expand="block" (click)="deleteEntry()">
     <ion-icon name="trash"></ion-icon>
   </ion-button>
+  <ion-button expand="block" (click)="editEntry()">
+      <ion-icon name="check"></ion-icon>
+    </ion-button>
 </ion-content>

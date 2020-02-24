@@ -3,6 +3,17 @@
   max-height: 35vh;
   overflow: hidden;
 }
+    .title{
+      display: inline-block;
+      margin-left: 40%;
+    }    
+    .title-image {
+      vertical-align: middle;
+      width: 10%;
+      height: 10%;
+      top: 0%;
+    }
+    
  #header_week{
         display:inline-block;
         margin-bottom: 0;
@@ -10,45 +21,42 @@
     #header_title{
         display:inline-block;
         margin-bottom: 0;
+        margin-left: 2%;
     }
     #header_date{
         display:inline-block;
         padding-left: 2%;
         margin-bottom: 0;
     }
-    .title-image {
-        vertical-align: middle;
-        height: 30%;
-        width: 15%;
-        top: 0%;
-      }
+
     .header-image {
         vertical-align: middle;
         margin-bottom: 0;
-      }
-    .title{
 
-        margin-left: 30%;
       }
+
     .entry{
-        height: 23%;
-        padding-left: 7%;
-        padding-top: 1%;
-        padding-right: 3%;
-        padding-bottom: 3%;
-        border: 5px solid lightgray;
-        box-sizing: border-box;
-        border-radius: 15px 50px;
+        max-height: 100px;
         overflow: hidden;
         margin-bottom: 6%;
-        margin-top: 3%;
+        text-overflow: ellipsis;
+
+    }
+    ion-card{
+      width: 90%;
+      margin-left: 5%;
+      border-radius: 20px;
+      margin-bottom: 5%;
+      background-color: snow;
 
     }
     .search{
         width: 75%;
         overflow: hidden;
         border-radius: 20px;
-        margin-left: 2%;
+        margin-left: 5%;
+        margin-top: 6%;
+        
         
 
     }
@@ -71,30 +79,30 @@
         box-shadow: 0 2px #666;
         transform: translateY(3px);
       }
-      .menu{
+      .sort{
         position: fixed;
-        top:3%;
-        left: 78%;
+        top:11%;
+        left: 83%;
         background-color: #3498DB;
         color: white;
         border: none;
         cursor: pointer;
-        padding: 13px;
-        font-size: 16px;
+        padding: 15px;
+        font-size: 20px;
         border-radius: 20px;
 
     }
-.menu:hover, .menu:focus {
+.sort:hover, .sort:focus {
   background-color: #2980B9;
 }
 .dropdown-content {
   display: none;
-  position: absolute;
+  position: relative;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 20%;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  margin-left: 50%;
+  margin-left: 73%;
 }
 
 .dropdown-content a {

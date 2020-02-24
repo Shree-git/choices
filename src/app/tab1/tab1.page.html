@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header class="bar-positive" align-title="center">
   <ion-toolbar>
-    <ion-title>Journal</ion-title>
+    <ion-title class="title">Journal</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/create-entry">
         <ion-icon slot="icon-only" name="add"></ion-icon>
@@ -10,11 +10,28 @@
 </ion-header>
 
 <ion-content>
+    <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
+  <button  class="sort" id="dropbtn" (click)="dropMenu()">Sort</button>
+ 
+  <div class="dropdown">
+      <div id="myDropdown" class="dropdown-content">
+        <a (click) = "order ='title'; reverse = false">Title A-Z</a>
+        <a (click) = "order ='title'; reverse = true">Title Z-A</a>
+
+
+        <a (click) = "order ='timestamp'; reverse = false">Oldest</a>
+        <a (click) = "order ='timestamp'; reverse = true">Newest</a>
+      </div>
+    </div>
+<br>
+
   <ion-card *ngFor="let entry of currentEntries | async" routerLink="/detail-entry/{{entry.id}}">
     <ion-card-header>
-      {{ entry.title }}
+        <img id="header_week" class="title-image" src="assets/days_of_week/{{entry.day}}_icon.png" />
+       <ion-card-title id="header_title">{{entry.title}} </ion-card-title>
+       <ion-card-subtitle id ="header_date">{{entry.date}}</ion-card-subtitle>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content class="entry">
       {{ entry.content }}
     </ion-card-content>
   </ion-card>

@@ -4,4 +4,5 @@ export interface Entry{
     date: string;
     day: string;
     content: string;
+    timestamp: string;
 }

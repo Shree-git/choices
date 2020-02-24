@@ -26,6 +26,10 @@ export class DetailEntryPage implements OnInit {
     this.entry = this.fservice.getEntryDetail(entryId).valueChanges();
   }
 
+  edit = false;
+  showEdit(){
+    this.edit = !this.edit;
+  }
   async deleteEntry(){
     const alert = this.alertController.create({
       message: 'Are you sure you want to delete this entry?',
@@ -49,5 +53,20 @@ export class DetailEntryPage implements OnInit {
 
     (await alert).present();
   }
+
+  editEntry(){
+    let entryid = this.route.snapshot.paramMap.get('id');
+    let new_title = (<HTMLInputElement>document.getElementById("edited-title")).value;
+    let new_content = (<HTMLInputElement>document.getElementById("edited-content")).value;    
+    
+    this.fservice.editEntry(entryid, new_title, new_content);
+    this.showEdit();
+    this.router.navigateByUrl('tabs/tab1');
+
+
+
+  }
+
+  
 
 }
