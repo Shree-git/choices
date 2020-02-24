@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'
+import { Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -8,9 +9,30 @@ import { AuthService } from '../services/auth.service'
 })
 export class TabsPage implements OnInit{
 
+  activePath = '';
+
+  pages = [
+    {
+      name: 'Journal',
+      path: '/tabs/tab1'
+    },
+    {
+      name: 'Impulses',
+      path: '/tabs/tab2'
+    },
+    {
+      name: 'Wellness',
+      path: '/tabs/tab3'
+    }
+  ]
   constructor(
-    public authService: AuthService
-  ) {}
+    public authService: AuthService,
+    private router: Router
+  ) {
+    this.router.events.subscribe((event: RouterEvent) => {
+      this.activePath = event.url;
+    })
+  }
 
   ngOnInit() {
 

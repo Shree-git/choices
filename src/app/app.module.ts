@@ -16,6 +16,7 @@ import firebaseConfig from './firebase'
 
 import * as firebase from 'firebase';
 
+
 firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [AppComponent],

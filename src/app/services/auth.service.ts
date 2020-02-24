@@ -52,6 +52,7 @@ export class AuthService {
   resetPassword(email: string): Promise<void> {
     return this.ngFireAuth.auth.sendPasswordResetEmail(email).then(()=>{
       window.alert('Check your email to reset your password!')
+      this.router.navigateByUrl('/login')
     }).catch((error) => {
       window.alert(error);
     });

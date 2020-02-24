@@ -22,7 +22,12 @@ const routes: Routes = [
   {
     path: 'detail/:id',
     loadChildren: () => import('./impulses/detail/detail.module').then( m => m.DetailPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./userlog/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   }
+
 ];
 @NgModule({
   imports: [
