@@ -14,7 +14,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import firebaseConfig from './firebase'
 
+
 import * as firebase from 'firebase';
+import { DatePipe } from '@angular/common';
 
 
 firebase.initializeApp(firebaseConfig);
