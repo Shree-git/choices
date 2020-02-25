@@ -5,6 +5,9 @@
       <ion-button routerLink="/create-entry">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +15,7 @@
 <ion-content>
     <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
   <button  class="sort" id="dropbtn" (click)="dropMenu()">Sort</button>
- 
+
   <div class="dropdown">
       <div id="myDropdown" class="dropdown-content">
         <a (click) = "order ='title'; reverse = false">Title A-Z</a>
