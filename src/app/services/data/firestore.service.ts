@@ -83,7 +83,7 @@ export class FirestoreService {
   getCurrentEntries(): AngularFirestoreCollection<Entry> {
     return this.firestore.collection('currentEntries');
   }
-
+ 
   getEntryDetail(entryId: string): AngularFirestoreDocument<Entry>{
     return this.firestore.collection('currentEntries').doc(entryId);
   }
