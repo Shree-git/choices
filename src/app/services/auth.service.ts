@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { User } from "../models/user.interface";
+import { UserAccount } from "../models/user_account.interface"
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
@@ -10,6 +11,7 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firest
 })
 export class AuthService {
   userData: any;
+  accountData: any;
 
   constructor(
     public afStore: AngularFirestore,
@@ -19,7 +21,9 @@ export class AuthService {
   ) {
     this.ngFireAuth.auth.onAuthStateChanged(user => {
       if(user) {
+        this.SetUserData(user);
         this.userData = user;
+        this.accountData = this.afStore.doc('userAccount/' + this.userData.uid).valueChanges();
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
       } else {
@@ -29,18 +33,25 @@ export class AuthService {
     })
    }
 
+  setLocalPersist(){
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+  }
+
   loginUser(
     email: string,
     password: string
   ): Promise<firebase.auth.UserCredential> {
+
     return this.ngFireAuth.auth.signInWithEmailAndPassword(email, password);
+
   }
 
   registerUser(
     email: string,
     password: string
   ): Promise<any> {
-    return this.ngFireAuth.auth.createUserWithEmailAndPassword(email, password);
+    return this.ngFireAuth.auth.createUserWithEmailAndPassword(email, password).then(()=>{
+    });
   }
 
   sendVerificationMail(){
@@ -78,6 +89,8 @@ export class AuthService {
         this.router.navigateByUrl('/tabs/tab2');
       })
       this.SetUserData(result.user);
+      console.log(result.user);
+      console.log(this.userData);
     }).catch((error) => {
       window.alert(error);
     })
@@ -97,6 +110,20 @@ export class AuthService {
     })
   }
 
+  setAccountData(user){
+    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`userAccount/${user.uid}`);
+    const userData: UserAccount = {
+      uid: user.uid,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phoneNumber: user.phoneNumber,
+      birthdate: user.birthdate
+    }
+    return userRef.set(userData, {
+      merge: true
+    })
+  }
+
   updateDisplayName(dName){
     var user = this.ngFireAuth.auth.currentUser;
     user.updateProfile({
@@ -109,6 +136,17 @@ export class AuthService {
   }
 
   updatePhoto(photo){
+    var user = this.ngFireAuth.auth.currentUser;
+    user.updateProfile({
+      photoURL: photo
+    }).then(()=>{
+      this.userData.photoURL = user.photoURL;
+    }).catch(err =>{
+      window.alert(err);
+    })
+  }
+
+  updateEmail(photo){
     var user = this.ngFireAuth.auth.currentUser;
     user.updateProfile({
       photoURL: photo

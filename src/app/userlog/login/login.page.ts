@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-
+import 'firebase/app'
+import 'firebase/auth'
 import { AlertController } from '@ionic/angular';
 
 
@@ -30,6 +31,7 @@ export class LoginPage implements OnInit {
       ()=>{
         if(this.authService.isEmailVerified) {
           this.router.navigateByUrl('/tabs/tab2');
+          this.authService.setLocalPersist();
         } else {
           window.alert('Email is not verified');
           return false;

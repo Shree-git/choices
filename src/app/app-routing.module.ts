@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
- { path: '', redirectTo: '', pathMatch: 'full' },
+
+ { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: '',
+    path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
@@ -35,13 +36,13 @@ const routes: Routes = [
     path: 'search',
     loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
   },{
-    path: 'forgot-password',
-    loadChildren: () => import('./userlog/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
-  },
-  {
-    path: 'account',
-    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
-  }
+       path: 'forgot-password',
+      loadChildren: () => import('./userlog/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+    },
+    {
+      path: 'account',
+      loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+    }
 
 ];
 @NgModule({
