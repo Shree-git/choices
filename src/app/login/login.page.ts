@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
@@ -28,12 +28,7 @@ export class LoginPage implements OnInit {
     
     this.authService.loginUser(email,password).then(
       ()=>{
-        if(this.authService.isEmailVerified) {
-          this.router.navigateByUrl('/tabs/tab2');
-        } else {
-          window.alert('Email is not verified');
-          return false;
-        }
+        this.router.navigateByUrl('/tabs/tab2');
       },
       async error => {
         const alert = this.alertCtrl.create({

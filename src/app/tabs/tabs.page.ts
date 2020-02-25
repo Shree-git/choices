@@ -1,44 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service'
-import { Router, RouterEvent } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage implements OnInit{
+export class TabsPage {
 
-  activePath = '';
+  constructor() {}
 
-  pages = [
-    {
-      name: 'Journal',
-      path: '/tabs/tab1'
-    },
-    {
-      name: 'Impulses',
-      path: '/tabs/tab2'
-    },
-    {
-      name: 'Wellness',
-      path: '/tabs/tab3'
-    },
-    {
-      name: 'Account',
-      path: '/account'
-    }
-  ]
-  constructor(
-    public authService: AuthService,
-    private router: Router
-  ) {
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.activePath = event.url;
-    })
-  }
-
-  ngOnInit() {
-
-  }
 }
