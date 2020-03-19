@@ -1,9 +1,51 @@
-<ion-header>
-    <ion-toolbar>
-      <ion-title>Safe Contacts</ion-title>
-      <ion-back-button slot="start"></ion-back-button>
-    </ion-toolbar>
-  </ion-header>
-<ion-content>
-  <p> Hello</p>
-</ion-content>
+
+  <ion-header class="bar-positive" align-title="center">
+      <ion-toolbar>
+        <ion-title class="title">Safe Contacts</ion-title>
+        <ion-buttons slot="end">
+          <ion-button routerLink="/create-contact">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="start">
+            <ion-menu-button autoHide="false" ></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    
+    <ion-content>
+        <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
+     
+     
+        <button  class="sort" id="drop" (click)="dropMenu()">Sort</button>
+    
+      <div class="dropdown">
+          <div id="myDrop" class="dropdown-cont">
+            <a (click) = "order ='title'; reverse = true">Title A-Z</a>
+            <a (click) = "order ='title'; reverse = false">Title Z-A</a>
+    
+    
+            <a (click) = "order ='timestamp'; reverse = false">Oldest</a>
+            <a (click) = "order ='timestamp'; reverse = true">Newest</a>
+          </div>
+        </div>
+    <br>
+    <!--|  orderBy: ordering : reverse : true--><!--routerLink="/view-contact/{{contact.id}}"  -->
+      <ion-card *ngFor="let contact of userContacts | async"> 
+        <ion-card-header>
+           <ion-card-title id="header_title">{{contact.title}} </ion-card-title>
+           <ion-icon item-start
+           href="tel:+1-773-240-3061"
+         
+          ios="ios-call"
+          md="md-call"
+          tappable
+          style="margin-left: 70%; font-size:25px;"
+          ></ion-icon>
+        </ion-card-header>
+        <ion-card-content class="entry">
+          {{ contact.content }}
+        </ion-card-content>
+       
+      </ion-card>
+    </ion-content>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 import { Impulse } from '../../models/impulse.interface';
+import { Contact } from '../../models/contact.interface';
 import { Entry } from '../../models/entry.interface';
 import { DatePipe } from '@angular/common';
 
@@ -90,5 +91,38 @@ export class FirestoreService {
 
   deleteEntry(entryId: string): Promise<void>{
     return this.firestore.doc('currentEntries/' + entryId).delete();
+  }
+
+
+  
+  createContact(
+    title: string,
+    content: string,
+  ): Promise<void> {
+    const id = this.firestore.createId();
+
+    return this.firestore.doc('userContacts/' + id).set({
+      id,
+      title,
+      content,
+    });
+  }
+
+  editContact(contactId, new_title, new_content){
+    return this.firestore.doc('userContacts/' + contactId).set({
+      title: new_title,
+      content: new_content,
+    }, {merge:true});
+  }
+  getuserContacts(): AngularFirestoreCollection<Contact> {
+    return this.firestore.collection('userContacts');
+  }
+ 
+  getContactDetail(contactId: string): AngularFirestoreDocument<Contact>{
+    return this.firestore.collection('userContacts').doc(contactId);
+  }
+
+  deleteContact(contactId: string): Promise<void>{
+    return this.firestore.doc('userContacts/' + contactId).delete();
   }
 }

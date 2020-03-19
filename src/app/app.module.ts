@@ -13,8 +13,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import firebaseConfig from './firebase'
-import { CallNumber } from '@ionic-native/call-number';
-import { Contacts } from '@ionic-native/contacts';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { Contacts } from '@ionic-native/contacts/ngx';
 
 
 
@@ -37,7 +37,7 @@ firebase.initializeApp(firebaseConfig);
     StatusBar,
     SplashScreen,
     DatePipe,
-   // CallNumber,
+    CallNumber,
     Contacts,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFirestoreModule

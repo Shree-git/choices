@@ -46,7 +46,15 @@ const routes: Routes = [
     {
       path: 'contacts',
       loadChildren: () => import('./contacts/contacts.module').then( m => m.ContactsPageModule)
-    }
+    },
+    {
+      path: 'create-contact',
+      loadChildren: () => import('./contacts/create-contact/create-contact.module').then( m => m.CreateContactPageModule)
+    },
+    {
+      path: 'view-contact/:id',
+      loadChildren: () => import('./contacts/view-contact/view-contact.module').then( m => m.ViewContactPageModule)
+    },
 
 ];
 @NgModule({
