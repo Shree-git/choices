@@ -2,7 +2,7 @@
  padding-top: 5%;
 }
 ion-title{
-    margin-left:35%;
+    text-align: center;
 }
 #title{
  width: 70%;
@@ -23,7 +23,11 @@ label{
  padding-bottom: 5%;
 }
 input{
+margin-left: 1%;
  font-size: 30px;
  border-radius: 20px;
  margin-bottom: 3%;
+ display: inline-block;
+ border: 1px solid #ccc;
+ box-sizing: border-box;
 }

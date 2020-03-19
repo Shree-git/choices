@@ -4,8 +4,7 @@
   overflow: hidden;
 }
     .title{
-      display: inline-block;
-      margin-left: 40%;
+      text-align: center;
     }
     .title-image {
       vertical-align: middle;
@@ -48,7 +47,7 @@
       border-radius: 20px;
       margin-bottom: 5%;
 
-      background-color: #F3FCFD;
+      background-color: snow;
     }
     .search{
         width: 75%;
@@ -64,7 +63,7 @@
       .sort{
         position: absolute;
         top:5%;
-        left: 83%;
+        left: 80%;
         background-color: #3498DB;
         color: white;
         border: none;
@@ -77,7 +76,7 @@
 .sort:hover, .sort:focus {
   background-color: #2980B9;
 }
-.dropdown-content {
+.dropdown-cont {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -88,7 +87,7 @@
   z-index:1000;
 }
 
-.dropdown-content a {
+.dropdown-cont a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -100,7 +99,7 @@
 .show {display: block;}
 
 
-#dropbtn:active {
+#drop:active {
     box-shadow: 0 2px #666;
     transform: translateY(3px);
   }

@@ -14,7 +14,7 @@ import { OrderPipe } from 'ngx-order-pipe';
 })
 export class Tab1Page implements OnInit {
   public currentEntries;
-  public order = 'timestamp';
+  public ordering = 'timestamp';
 
   constructor(
     public firestoreService: FirestoreService,
@@ -41,12 +41,12 @@ search(ev) {
 
    //opens and closes drop down menu
    dropMenu() {
-    document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("myDrop").classList.toggle("show");
     //makes it so that clicking anywhere else on the screen closes drop down
     window.onclick = function(e) {
     var ele=<Element>e.target;
-        if (!ele.matches('#dropbtn')){
-          var dropdowns = document.getElementsByClassName("dropdown-content");
+        if (!ele.matches('#drop')){
+          var dropdowns = document.getElementsByClassName("dropdown-cont");
           var i;
           for (i = 0; i < dropdowns.length; i++) {
               var openDropdown = dropdowns[i];

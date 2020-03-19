@@ -14,12 +14,14 @@
 
 <ion-content>
     <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
-  <button  class="sort" id="dropbtn" (click)="dropMenu()">Sort</button>
+ 
+ 
+    <button  class="sort" id="drop" (click)="dropMenu()">Sort</button>
 
   <div class="dropdown">
-      <div id="myDropdown" class="dropdown-content">
-        <a (click) = "order ='title'; reverse = false">Title A-Z</a>
-        <a (click) = "order ='title'; reverse = true">Title Z-A</a>
+      <div id="myDrop" class="dropdown-cont">
+        <a (click) = "order ='title'; reverse = true">Title A-Z</a>
+        <a (click) = "order ='title'; reverse = false">Title Z-A</a>
 
 
         <a (click) = "order ='timestamp'; reverse = false">Oldest</a>
@@ -28,7 +30,7 @@
     </div>
 <br>
 
-  <ion-card *ngFor="let entry of currentEntries | async |  orderBy: order : reverse : true" routerLink="/detail-entry/{{entry.id}}">
+  <ion-card *ngFor="let entry of currentEntries | async |  orderBy: ordering : reverse : true" routerLink="/detail-entry/{{entry.id}}">
     <ion-card-header>
         <img id="header_week" class="title-image" src="assets/days_of_week/{{entry.day}}_icon.png" />
        <ion-card-title id="header_title">{{entry.title}} </ion-card-title>
