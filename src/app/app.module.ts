@@ -14,23 +14,26 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import firebaseConfig from './firebase'
 
+
 import * as firebase from 'firebase';
+import { DatePipe } from '@angular/common';
 
 
 firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, 
-    IonicModule.forRoot(), 
-    AngularFireModule.initializeApp(firebaseConfig), 
-    AngularFireAuthModule, 
-    AngularFirestoreModule, 
+  imports: [BrowserModule,
+    IonicModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     AngularFireDatabaseModule,
     AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
+    DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFirestoreModule
   ],

@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, Form } from '@angular/forms'
 import { LoadingController, AlertController } from '@ionic/angular'
-import { FirestoreService } from '../../services/data/firestore.service'
+import { FirestoreService } from '../../services/data/firestore.service' 
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
-@Component({
-  selector: 'app-create',
-  templateUrl: './create.page.html',
-  styleUrls: ['./create.page.scss'],
-})
-export class CreatePage implements OnInit {
-  public createImpulseForm: FormGroup;
-  currentDate = new Date();
 
+@Component({
+  selector: 'app-create-entry',
+  templateUrl: './create-entry.page.html',
+  styleUrls: ['./create-entry.page.scss'],
+  providers: [DatePipe],
+})
+export class CreateEntryPage implements OnInit {
+  public createEntryForm: FormGroup;
+  currentDate = new Date();
+  
   myDate : any = this.datePipe.transform(this.currentDate, 'short');
   day_week  : any = this.datePipe.transform(this.currentDate, 'EEE');
 
@@ -25,11 +27,11 @@ export class CreatePage implements OnInit {
     formBuilder: FormBuilder,
     public router: Router
     ) {
-      this.createImpulseForm = formBuilder.group({
-        title: ['', [Validators.maxLength(50), Validators.required]],
+      this.createEntryForm = formBuilder.group({
+        title: ['', Validators.required],
         date: this.myDate,
-        scale: ['', [Validators.min(1), Validators.max(10), Validators.required]],
-        description: ['', Validators.required],
+        day: this.day_week,
+        content: ['', Validators.required],
         timestamp : this.currentDate.getTime(),
       })
      }
@@ -37,24 +39,25 @@ export class CreatePage implements OnInit {
   ngOnInit() {
   }
 
-  async createImpulse(){
+  async createEntry(){
     const loading = await this.loadingCtrl.create();
 
-    const title = this.createImpulseForm.value.title;
-    const date = new Date().toString();
-    const scale = this.createImpulseForm.value.scale;
-    const description = this.createImpulseForm.value.description;
-    const timestamp = this.createImpulseForm.value.timestamp;
+    const title = this.createEntryForm.value.title;
+    const date = this.createEntryForm.value.date;
+    const day = this.createEntryForm.value.day;
+    const content = this.createEntryForm.value.content;
+    const timestamp = this.createEntryForm.value.timestamp;
 
-    this.firestoreService.createImpulse(title, date, scale, description, timestamp)
+    this.firestoreService.createEntry(title, date, day, content, timestamp)
     .then(() => {
       loading.dismiss().then(() => {
-        this.router.navigateByUrl('/tabs/tab2');
+        this.router.navigateByUrl('/tabs/tab1');
       });
     },
-    error => {
+      (    error: any) => {
       console.error(error);
     });
     return await loading.present();
   }
+
 }

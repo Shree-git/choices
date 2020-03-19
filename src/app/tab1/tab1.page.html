@@ -1,45 +1,41 @@
-<ion-header>
+<ion-header class="bar-positive" align-title="center">
   <ion-toolbar>
-    <ion-title>
-      Tab One
-    </ion-title> 
-    <!-- Side menu button -->
-    <ion-buttons slot="start">
-      <ion-menu-button autoHide="false"></ion-menu-button>
+    <ion-title class="title">Journal</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/create-entry">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
-      <img src="/assets/shapes.svg" alt="" />
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
-    </ion-list>
+    <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
+  <button  class="sort" id="dropbtn" (click)="dropMenu()">Sort</button>
+
+  <div class="dropdown">
+      <div id="myDropdown" class="dropdown-content">
+        <a (click) = "order ='title'; reverse = false">Title A-Z</a>
+        <a (click) = "order ='title'; reverse = true">Title Z-A</a>
+
+
+        <a (click) = "order ='timestamp'; reverse = false">Oldest</a>
+        <a (click) = "order ='timestamp'; reverse = true">Newest</a>
+      </div>
+    </div>
+<br>
+
+  <ion-card *ngFor="let entry of currentEntries | async |  orderBy: order : reverse : true" routerLink="/detail-entry/{{entry.id}}">
+    <ion-card-header>
+        <img id="header_week" class="title-image" src="assets/days_of_week/{{entry.day}}_icon.png" />
+       <ion-card-title id="header_title">{{entry.title}} </ion-card-title>
+       <ion-card-subtitle id ="header_date">{{entry.date}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="entry">
+      {{ entry.content }}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

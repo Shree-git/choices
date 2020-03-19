@@ -1,3 +1,4 @@
+
 .welcome-card img {
   max-height: 35vh;
   overflow: hidden;
@@ -5,14 +6,14 @@
     .title{
       display: inline-block;
       margin-left: 40%;
-    }    
+    }
     .title-image {
       vertical-align: middle;
       width: 10%;
       height: 10%;
       top: 0%;
     }
-    
+
  #header_week{
         display:inline-block;
         margin-bottom: 0;
@@ -46,8 +47,8 @@
       margin-left: 5%;
       border-radius: 20px;
       margin-bottom: 5%;
-      background-color: #F3FCFD; 
 
+      background-color: #F3FCFD;
     }
     .search{
         width: 75%;
@@ -55,10 +56,11 @@
         border-radius: 20px;
         margin-left: 5%;
         margin-top: 6%;
-        
-        
+
+
 
     }
+
       .sort{
         position: absolute;
         top:5%;
@@ -97,7 +99,7 @@
 
 .show {display: block;}
 
-  
+
 #dropbtn:active {
     box-shadow: 0 2px #666;
     transform: translateY(3px);

@@ -1,8 +1,8 @@
-export interface Impulse{
+export interface Entry{
     id: string;
     title: string;
     date: string;
-    scale: number;
-    description: string;
+    day: string;
+    content: string;
     timestamp: string;
 }

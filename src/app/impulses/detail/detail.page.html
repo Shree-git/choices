@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -9,12 +9,12 @@
 
 <ion-content padding>
   <ion-card class="impulse-card">
-    <ion-card-content>Impulse: {{ (impulse | async)?.title }}</ion-card-content>
-    <ion-card-content>Date: {{ (impulse | async)?.date }}</ion-card-content>
-    <ion-card-content>Scale: {{ (impulse | async)?.scale }}</ion-card-content>
-    <ion-card-content>Description: {{ (impulse | async)?.description }}</ion-card-content>
+    <ion-card-content class="entry-titles">{{ (impulse | async)?.title }}</ion-card-content>
+    <ion-card-content class="entry-info">Date: {{ (impulse | async)?.date }}</ion-card-content>
+    <ion-card-content class="entry-info">Scale: {{ (impulse | async)?.scale }}</ion-card-content>
+    <ion-card-content class="entry-content">Description: {{ (impulse | async)?.description }}</ion-card-content>
   </ion-card>
-  <ion-button expand="block" (click)="deleteImpulse()">
+  <ion-button expand="block" color="danger" (click)="deleteImpulse()">
     <ion-icon name="trash"></ion-icon>
   </ion-button>
 </ion-content>

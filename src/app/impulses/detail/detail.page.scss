@@ -1,4 +1,41 @@
-.impulse-card{
-    background: #d3f3e3;
-    border: 1px solid var(--ion-color-secondary);
+
+ion-card{
+    width: 70%;
+    margin-left: 15%;
+    border-radius: 20px;
+    background-color: snow;
+
 }
+
+   .entry-titles{
+    text-align: center;
+    margin-left: 11%;
+    height: 7%;
+    width: 80%;
+    overflow: hidden;
+    font-size: 35px;
+  }
+  
+  .entry-info {
+    text-align: center;
+    margin-left: 7%;
+   // height: 5%;
+    width: 90%;
+    overflow: hidden;
+    font-size: 25px;
+  }
+  .entry-content {
+    text-align: center;
+    width: 100%;
+    padding-bottom: 5%;
+    //fix later to not hide
+    overflow: hidden;
+    margin-bottom: 6%;
+    margin-top: 1%;
+    font-size: 20px;
+  }
+  ion-button{
+      width: 30%;
+      margin-left: 35%;
+      height: 6%;
+  }
