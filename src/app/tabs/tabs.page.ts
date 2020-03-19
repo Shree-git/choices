@@ -27,6 +27,10 @@ export class TabsPage implements OnInit{
     {
       name: 'Account',
       path: '/account'
+    },
+    {
+      name: 'Safe Contacts',
+      path: '/contacts'
     }
   ]
   constructor(
