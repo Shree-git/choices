@@ -1,37 +1,27 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Login</ion-title>
+  <ion-toolbar>
+    <ion-title>Login!</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   
+<br>
 
   <ion-list>
     
-    <ion-item padding-horizontal margin-top>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" [(ngModel)]="email" required></ion-input>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <input class="login_input" type="text" onfocus="this.value=''" value="" [(ngModel)]="email" required>
     </ion-item>
-    <ion-item padding-horizontal margin-bottom>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password" required></ion-input>
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <input type="password" class="login_input" onfocus="this.value=''" value="" [(ngModel)]="password" required>
     </ion-item>
   </ion-list>
-  <ion-button fill="solid" expand="block" color="dark" (click)="login()" padding-horizontal>Log In</ion-button>
-  <ion-button fill="solid" expand="block" color="light" href="/register" padding-horizontal>Register</ion-button>
-  <ion-button fill="solid" expand="block" color="danger" href="/forgot-password" padding-horizontal margin-bottom>Forgot Password?</ion-button>
-  <ion-grid>
-    <ion-row>
-      <ion-col> 
-        <ion-button 
-         type="submit" 
-         color="danger"
-         (click)="authService.GoogleAuth()" 
-         expand="block">
-           Login with Google
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-button fill="solid" color="light" href="/register" style="float:left; margin-left:5%;">Register</ion-button>
+  <ion-button fill="solid" color="tertiary" (click)="login()"style="float:right; margin-right:7%" >Log In</ion-button>
+  <!--<ion-button fill="solid" color="danger" href="/forgot-password" style="float:left; margin-left:5%;">Forgot Password?</ion-button>
+  <ion-button type="submit" color="danger"  (click)="authService.GoogleAuth()" style="float:right; margin-right:7%;">Login with Google</ion-button>
+      -->
 </ion-content>

@@ -14,12 +14,27 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let impulse of impulseList | async" routerLink="/detail/{{impulse.id}}">
-    <ion-card-header>
-      {{ impulse.title }}
-    </ion-card-header>
-    <ion-card-content>
-      {{ impulse.scale }}
+    <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
+  <button  class="sort" id="dropbtn" (click)="dropMenu()">Sort</button>
+ 
+  <div class="dropdown">
+      <div id="myDropdown" class="dropdown-content">
+        <a (click) = "order ='title'; reverse = false">Title A-Z</a>
+        <a (click) = "order ='title'; reverse = true">Title Z-A</a>
+        <a (click) = "order ='timestamp'; reverse = true">Newest</a>
+        <a (click) = "order ='timestamp'; reverse = false">Oldest</a>
+        <a (click) = "order ='scale'; reverse = true">Highest</a>
+        <a (click) = "order ='scale'; reverse = false">Lowest</a>
+      </div>
+    </div>
+<br>
+  <ion-card *ngFor="let impulse of impulseList | async |orderBy: order : reverse : true" routerLink="/detail/{{impulse.id}}">
+    <ion-card-header >
+        <ion-card-title id="header_title">{{impulse.title}} </ion-card-title>
+     </ion-card-header>
+     <ion-card-subtitle id ="header_date">{{impulse.date}}</ion-card-subtitle>
+    <ion-card-content id="content">
+      Scale: {{ impulse.scale }}
     </ion-card-content>
   </ion-card>
 </ion-content>
