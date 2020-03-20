@@ -57,7 +57,7 @@ search(ev) {
 }
   callContact(number: string) {
     this.callNumber.callNumber(number, true)
-      .then(() => console.log('Dialer Launched!'))
-      .catch(() => console.log('Error launching dialer'));
+      .then(() => console.log('Dialer Launched!' + number))
+      .catch(() => console.log('Error launching dialer' + number));
   }
 }
