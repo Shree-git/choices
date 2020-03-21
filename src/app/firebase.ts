@@ -1,12 +1,12 @@
 const config = {
-    apiKey: 'AIzaSyB4kYxZzEZ6reD-VwjkwG26cDMbXiNqAls',
-    authDomain: 'choices-cc8a8.firebaseapp.com',
-    databaseURL: 'https://choices-cc8a8.firebaseio.com',
-    projectId: 'choices-cc8a8',
-    storageBucket: 'choices-cc8a8.appspot.com',
-    messagingSenderId: '259669224325',
-    appId: '1:259669224325:web:6ea1e11f01e34bd55af2ec',
-    measurementId: 'G-G2V80G6437'
-}
+    apiKey: "AIzaSyAZtDwgD2mB2V8yp94dpUB7SyHNiOw17so",
+    authDomain: "choices2-app-2020.firebaseapp.com",
+    databaseURL: "https://choices2-app-2020.firebaseio.com",
+    projectId: "choices2-app-2020",
+    storageBucket: "choices2-app-2020.appspot.com",
+    messagingSenderId: "76194343670",
+    appId: "1:76194343670:web:17db5ebd90b6dc48d01ad7",
+    measurementId: "G-PVDRJXQB3F"
+  }
 
 export default config

@@ -36,15 +36,6 @@ const routes: Routes = [
        path: 'forgot-password',
       loadChildren: () => import('./userlog/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
     },
- /*   {
-      path: 'account',
-      loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
-    },
-    {
-      path: 'contacts',
-      loadChildren: () => import('./contacts/contacts.module').then( m => m.ContactsPageModule)
-    },
-    */
     {
       path: 'create-contact',
       loadChildren: () => import('./contacts/create-contact/create-contact.module').then( m => m.CreateContactPageModule)

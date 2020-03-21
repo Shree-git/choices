@@ -4,7 +4,6 @@ import { Impulse } from '../../models/impulse.interface';
 import { Contact } from '../../models/contact.interface';
 import { Entry } from '../../models/entry.interface';
 import { DatePipe } from '@angular/common';
-import { take } from 'rxjs/operators';
 
 
 @Injectable({
