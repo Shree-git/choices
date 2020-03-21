@@ -87,6 +87,12 @@ export class FirestoreService {
   getCurrentEntries(): AngularFirestoreCollection<Entry> {
     return this.firestore.collection('currentEntries');
   }
+
+  //currently case sensetive  NEEDS TO STAY TITLE
+  getSearchedEntries(search : string, collection : string): AngularFirestoreCollection<Entry> {
+    return this.firestore.collection(collection, ref => ref.where("title" ,'>=', search).where("title", "<=", search+"z"));
+
+  }
  
   getEntryDetail(entryId: string): AngularFirestoreDocument<Entry>{
     return this.firestore.collection('currentEntries').doc(entryId);

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -31,12 +32,14 @@ export class Tab1Page implements OnInit {
 //searches title, content, date and day of week up to three letters
 search(ev) {
   let val = ev.target.value;
-  if (!val || !val.trim()) {
-    this.currentEntries =  this.currentEntries.query();
+  if(!val || !val.trim()){
+    this.currentEntries = this.firestoreService.getCurrentEntries().valueChanges();
   }
-  this.currentEntries = this.currentEntries.query({
-    title: val, content: val, date: val, day: val});
-    
+  else{
+    this.currentEntries = this.firestoreService.getSearchedEntries(val, 'currentEntries').valueChanges()
+
+  }
+     
 }
 
    //opens and closes drop down menu

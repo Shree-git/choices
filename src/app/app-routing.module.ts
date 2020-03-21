@@ -32,10 +32,7 @@ const routes: Routes = [
     path: 'detail-entry/:id',
     loadChildren: () => import('./entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
   },
-  {
-    path: 'search',
-    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
-  },{
+ {
        path: 'forgot-password',
       loadChildren: () => import('./userlog/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
     },

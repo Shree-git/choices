@@ -29,12 +29,14 @@ export class ContactsPage implements OnInit {
 //searches title, content, date and day of week up to three letters
 search(ev) {
   let val = ev.target.value;
-  if (!val || !val.trim()) {
-    this.userContacts =  this.userContacts.query();
+  if(!val || !val.trim()){
+    this.userContacts = this.firestoreService.getuserContacts().valueChanges();
   }
-  this.userContacts = this.userContacts.query({
-    title: val, content: val});
-    
+  else{
+    this.userContacts = this.firestoreService.getSearchedEntries(val, 'userContacts').valueChanges()
+
+  }
+     
 }
 
    //opens and closes drop down menu

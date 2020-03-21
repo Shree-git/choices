@@ -20,9 +20,20 @@ export class Tab2Page implements OnInit{
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,
     public router: Router) {}
-
+ 
   ngOnInit() {
     this.impulseList = this.firestoreService.getImpulseList().valueChanges();
+  }
+  search(ev) {
+    let val = ev.target.value;
+    if(!val || !val.trim()){
+      this.impulseList = this.firestoreService.getImpulseList().valueChanges();
+    }
+    else{
+      this.impulseList = this.firestoreService.getSearchedEntries(val, 'impulseList').valueChanges()
+  
+    }
+       
   }
      //opens and closes drop down menu
      dropMenu() {
