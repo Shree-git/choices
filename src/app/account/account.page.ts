@@ -42,7 +42,6 @@ export class AccountPage implements OnInit {
       birthdate: this.birthDate
     }
     this.authService.setAccountData(user);
-    this.authService.updateDisplayName(displayName);
     this.location.back(); // <-- go back to previous location on cancel
   }
   cancel() {

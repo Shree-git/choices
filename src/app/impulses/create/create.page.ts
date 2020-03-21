@@ -7,6 +7,8 @@ import { DatePipe } from '@angular/common';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Contacts } from '@ionic-native/contacts/ngx';
 import { Contact } from '../../models/contact.interface'
+import { AngularFireAuth } from "@angular/fire/auth";
+
 
 @Component({
   selector: 'app-create',
@@ -16,7 +18,7 @@ import { Contact } from '../../models/contact.interface'
 export class CreatePage implements OnInit {
   public createImpulseForm: FormGroup;
   currentDate = new Date();
-
+  user;
   myDate : any = this.datePipe.transform(this.currentDate, 'short');
   day_week  : any = this.datePipe.transform(this.currentDate, 'EEE');
 
@@ -27,7 +29,8 @@ export class CreatePage implements OnInit {
     public firestoreService: FirestoreService,
     private datePipe: DatePipe,
     formBuilder: FormBuilder,
-    public router: Router
+    public router: Router,
+    public ngFireAuth: AngularFireAuth
     ) {
       this.createImpulseForm = formBuilder.group({
         title: ['', [Validators.maxLength(50), Validators.required]],
@@ -36,9 +39,12 @@ export class CreatePage implements OnInit {
         description: ['', Validators.required],
         timestamp : this.currentDate.getTime(),
       })
+      this.user = this.ngFireAuth.auth.currentUser;
+
      }
 
   ngOnInit() {
+
     //this.userContacts = this.firestoreService.getuserContacts().valueChanges();
   }
 
@@ -50,8 +56,10 @@ export class CreatePage implements OnInit {
     const scale = this.createImpulseForm.value.scale;
     const description = this.createImpulseForm.value.description;
     const timestamp = this.createImpulseForm.value.timestamp;
+    const uid = this.user.uid
 
-    this.firestoreService.createImpulse(title, date, scale, description, timestamp)
+
+    this.firestoreService.createImpulse(title, date, scale, description, timestamp, uid)
     .then(() => {
       loading.dismiss().then(() => {
         this.router.navigateByUrl('/tabs/tab2');

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, Form } from '@angular/forms'
 import { LoadingController, AlertController } from '@ionic/angular'
 import { FirestoreService } from '../../services/data/firestore.service'
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-create-contact',
@@ -11,18 +12,22 @@ import { Router } from '@angular/router';
 })
 export class CreateContactPage implements OnInit {
   public createContactForm: FormGroup;
+  user;
  
   constructor(
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public firestoreService: FirestoreService,
     formBuilder: FormBuilder,
+    public ngFireAuth: AngularFireAuth,
     public router: Router
     ) {
       this.createContactForm = formBuilder.group({
         title: ['', Validators.required],
         content: ['', Validators.required],
       })
+      this.user = this.ngFireAuth.auth.currentUser;
+
      }
      ngOnInit() {
     }
@@ -32,8 +37,9 @@ export class CreateContactPage implements OnInit {
   
       const title = this.createContactForm.value.title;
       const content = this.createContactForm.value.content;
-  
-      this.firestoreService.createContact(title, content)
+      const uid = this.user.uid
+
+      this.firestoreService.createContact(title, content, uid)
       .then(() => {
         loading.dismiss().then(() => {
           this.router.navigateByUrl('/src/app/contacts');

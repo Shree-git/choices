@@ -40,7 +40,7 @@ export class RegisterPage implements OnInit {
     this.authService.registerUser(email,password).then(
       ()=>{
         this.authService.sendVerificationMail();
-        this.router.navigateByUrl('/tabs/tab2');
+        this.router.navigateByUrl('/login');
       },
       async error => {
         const alert = this.AlertCtrl.create({

@@ -101,7 +101,6 @@ export class AuthService {
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     }
@@ -121,17 +120,6 @@ export class AuthService {
     }
     return userRef.set(userData, {
       merge: true
-    })
-  }
-
-  updateDisplayName(dName){
-    var user = this.ngFireAuth.auth.currentUser;
-    user.updateProfile({
-      displayName: dName
-    }).then(()=>{
-      this.userData.displayName = user.displayName;
-    }).catch(err =>{
-      window.alert(err);
     })
   }
 
@@ -161,11 +149,15 @@ export class AuthService {
     return this.userData.email;
   }
 
+  getUserId(){
+    return this.userData.uid;
+  }
 
   logOutUser(): Promise<void> {
     return this.ngFireAuth.auth.signOut().then(()=>{
+      console.log("Logout successful");
       localStorage.removeItem('user');
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/register');
     });
   }
 }

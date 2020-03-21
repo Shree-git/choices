@@ -5,4 +5,5 @@ export interface Entry{
     day: string;
     content: string;
     timestamp: string;
+    userUID :string;
 }

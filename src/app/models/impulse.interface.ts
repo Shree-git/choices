@@ -5,4 +5,5 @@ export interface Impulse{
     scale: number;
     description: string;
     timestamp: string;
+    userUID :string;
 }
