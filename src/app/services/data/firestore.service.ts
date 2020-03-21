@@ -141,9 +141,8 @@ export class FirestoreService {
     }, {merge:true});
   }
   getuserContacts(): AngularFirestoreCollection<Contact> {
-    console.log(this.firestore.collection('userContacts'))
+    return this.firestore.collection('userContacts', ref => ref.where("userUID" ,'==', this.userId));
 
-    return this.firestore.collection('userContacts');
 
   }
   getContactDetail(contactId: string): AngularFirestoreDocument<Contact>{
