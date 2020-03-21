@@ -4,6 +4,9 @@ import { LoadingController, AlertController } from '@ionic/angular'
 import { FirestoreService } from '../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { Contacts } from '@ionic-native/contacts/ngx';
+import { Contact } from '../../models/contact.interface'
 
 @Component({
   selector: 'app-create',
@@ -20,6 +23,7 @@ export class CreatePage implements OnInit {
   constructor(
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
+    public callNumber: CallNumber, public contacts: Contacts,
     public firestoreService: FirestoreService,
     private datePipe: DatePipe,
     formBuilder: FormBuilder,
@@ -35,6 +39,7 @@ export class CreatePage implements OnInit {
      }
 
   ngOnInit() {
+    //this.userContacts = this.firestoreService.getuserContacts().valueChanges();
   }
 
   async createImpulse(){
@@ -50,11 +55,16 @@ export class CreatePage implements OnInit {
     .then(() => {
       loading.dismiss().then(() => {
         this.router.navigateByUrl('/tabs/tab2');
+        
       });
+      //let cont= this.firestoreService.getSafeContact();
+      //console.log(this.cont.content)
+     // this.callContact(this.cont.content)
     },
     error => {
       console.error(error);
     });
     return await loading.present();
+
   }
 }

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QuerySnapshot } from '@angular/fire/firestore'
 import { Impulse } from '../../models/impulse.interface';
 import { Contact } from '../../models/contact.interface';
 import { Entry } from '../../models/entry.interface';
 import { DatePipe } from '@angular/common';
+import { take } from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,7 +12,9 @@ import { DatePipe } from '@angular/common';
   
 })
 export class FirestoreService {
-  currentDate = new Date();
+  currentDate = new Date();4
+  public collectionRef;
+  public ID;
   
   myDate : any = this.datePipe.transform(this.currentDate, 'short');
   day_week  : any = this.datePipe.transform(this.currentDate, 'EEE');
@@ -115,13 +118,14 @@ export class FirestoreService {
     }, {merge:true});
   }
   getuserContacts(): AngularFirestoreCollection<Contact> {
+    console.log(this.firestore.collection('userContacts'))
+
     return this.firestore.collection('userContacts');
+
   }
- 
   getContactDetail(contactId: string): AngularFirestoreDocument<Contact>{
     return this.firestore.collection('userContacts').doc(contactId);
   }
-
   deleteContact(contactId: string): Promise<void>{
     return this.firestore.doc('userContacts/' + contactId).delete();
   }
