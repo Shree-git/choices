@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UserAccount } from '../models/user_account.interface'
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-account',
@@ -23,7 +25,8 @@ export class AccountPage implements OnInit {
   constructor(
     public authService: AuthService,
     public router: Router,
-    public afStore: AngularFirestore
+    public afStore: AngularFirestore,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -40,7 +43,9 @@ export class AccountPage implements OnInit {
     }
     this.authService.setAccountData(user);
     this.authService.updateDisplayName(displayName);
-    this.router.navigateByUrl('/tabs/tab2');
+    this.location.back(); // <-- go back to previous location on cancel
   }
-
+  cancel() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
 }

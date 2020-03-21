@@ -38,6 +38,26 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'account',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../account/account.module').then( m => m.AccountPageModule)
+          }
+        ]
+      },
+      {
+        path: 'contacts',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../contacts/contacts.module').then( m => m.ContactsPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

@@ -33,4 +33,6 @@
     <ion-input type="text" [(ngModel)]="email" [placeholder]="authService.userData.email" disabled></ion-input>
   </ion-item>
   <ion-button type="submit" expand="block" (click)="saveUserData()">Save</ion-button>
+  <ion-button expand="block" color="dark" (click)="cancel()">Cancel</ion-button>
+
 </ion-content>

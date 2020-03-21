@@ -26,11 +26,11 @@ export class TabsPage implements OnInit{
     },
     {
       name: 'Account',
-      path: '/account'
+      path: '/tabs/account'
     },
     {
       name: 'Safe Contacts',
-      path: '/contacts'
+      path: '/tabs/contacts'
     }
   ]
   constructor(
