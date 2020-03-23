@@ -29,13 +29,16 @@ export class LoginPage implements OnInit {
     
     this.authService.loginUser(email,password).then(
       ()=>{
-        if(this.authService.isEmailVerified) {
-          this.router.navigateByUrl('/tabs/tab2');
-          this.authService.setLocalPersist();
-        } else {
+
+
+        //only allows pass if email is verified
+        ///if(this.authService.isEmailVerified) {
+          /* } else {
           window.alert('Email is not verified');
           return false;
-        }
+        }*/
+          this.router.navigateByUrl('/tabs/tab2');
+          this.authService.setLocalPersist();
       },
       async error => {
         const alert = this.alertCtrl.create({
