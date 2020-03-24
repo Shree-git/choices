@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Three
+      Calendar
     </ion-title>
     <!-- Side menu button -->
     <ion-buttons slot="start">
@@ -10,4 +10,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+ <!-- Basic/Single Date Select -->
+ <ion-calendar [(ngModel)]="date" [options]="optionsSingle" (change)="onChange($event)" [type]="type"
+   [format]="'YYYY-MM-DD'">
+ </ion-calendar>
+<!--
+ // Date Range
+ <h2 text-center>Date Range</h2>
+ <ion-calendar [(ngModel)]="dateRange" [options]="optionsRange" [type]="type" [format]="'YYYY-MM-DD'">
+ </ion-calendar>
+
+ //Multi Date Select
+ <h2 text-center>Multi Date</h2>
+ <ion-calendar [(ngModel)]="dateMulti" [options]="optionsMulti" [type]="type" [format]="'YYYY-MM-DD'">
+ </ion-calendar>
+-->
+</ion-content>
