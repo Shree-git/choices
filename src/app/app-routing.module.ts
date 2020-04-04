@@ -6,7 +6,7 @@ const routes: Routes = [
  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./addict/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'register',
@@ -18,19 +18,19 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    loadChildren: () => import('./impulses/create/create.module').then( m => m.CreatePageModule)
+    loadChildren: () => import('./addict/impulses/create/create.module').then( m => m.CreatePageModule)
   },
   {
     path: 'detail/:id',
-    loadChildren: () => import('./impulses/detail/detail.module').then( m => m.DetailPageModule)
+    loadChildren: () => import('./addict/impulses/detail/detail.module').then( m => m.DetailPageModule)
   },
   {
     path: 'create-entry',
-    loadChildren: () => import('./entries/create-entry/create-entry.module').then( m => m.CreateEntryPageModule)
+    loadChildren: () => import('./addict/entries/create-entry/create-entry.module').then( m => m.CreateEntryPageModule)
   },
   {
     path: 'detail-entry/:id',
-    loadChildren: () => import('./entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
+    loadChildren: () => import('./addict/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
   },
  {
        path: 'forgot-password',
@@ -38,11 +38,11 @@ const routes: Routes = [
     },
     {
       path: 'create-contact',
-      loadChildren: () => import('./contacts/create-contact/create-contact.module').then( m => m.CreateContactPageModule)
+      loadChildren: () => import('./addict/contacts/create-contact/create-contact.module').then( m => m.CreateContactPageModule)
     },
     {
       path: 'view-contact/:id',
-      loadChildren: () => import('./contacts/view-contact/view-contact.module').then( m => m.ViewContactPageModule)
+      loadChildren: () => import('./addict/contacts/view-contact/view-contact.module').then( m => m.ViewContactPageModule)
     },
 
 ];

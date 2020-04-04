@@ -1,47 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs'
-import { Entry } from '../models/entry.interface'
-import { FirestoreService } from '../services/data/firestore.service'
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { Contacts } from '@ionic-native/contacts/ngx';
+import { Contact } from '../../models/contact.interface'
+import { FirestoreService } from '../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
 
-
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  selector: 'app-contacts',
+  templateUrl: 'contacts.page.html',
+  styleUrls: ['contacts.page.scss'],
   providers: [OrderPipe]
 })
-export class Tab1Page implements OnInit {
-  public currentEntries;
-  public ordering = 'timestamp';
+export class ContactsPage implements OnInit {
+  public userContacts;
+  public ordering = 'title';
 
-  constructor(
-    public firestoreService: FirestoreService,
-    private orderPipe: OrderPipe,
-    public router: Router) {}
-
-  ngOnInit() {
-    this.currentEntries = this.firestoreService.getCurrentEntries().valueChanges();
+  everybody;
+  constructor(public callNumber: CallNumber, public contacts: Contacts,public firestoreService: FirestoreService,private orderPipe: OrderPipe, public router: Router) {
+    this.everybody = this.contacts.find(["*"]);
   }
-
-  
+  ngOnInit() {
+    this.userContacts = this.firestoreService.getuserContacts().valueChanges();
+  }
 //searches through the list of current entries. If search is left empty after already clicking in
 //it just returns all entries so you aren't left with a blank page
 //searches title, content, date and day of week up to three letters
 search(ev) {
   let val = ev.target.value;
   if(!val || !val.trim()){
-    this.currentEntries = this.firestoreService.getCurrentEntries().valueChanges();
+    this.userContacts = this.firestoreService.getuserContacts().valueChanges();
   }
   else{
-    this.currentEntries = this.firestoreService.getSearchedEntries(val, 'currentEntries').valueChanges()
+    this.userContacts = this.firestoreService.getSearchedEntries(val, 'userContacts').valueChanges()
 
   }
      
 }
-
+callContact(number: string) {
+  this.callNumber.callNumber(number, true)
+    .then(() => console.log('Dialer Launched!' + number))
+    .catch(() => console.log('Error launching dialer' + number));
+}
    //opens and closes drop down menu
    dropMenu() {
     document.getElementById("myDrop").classList.toggle("show");

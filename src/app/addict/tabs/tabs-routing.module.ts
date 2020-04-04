@@ -43,7 +43,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../account/account.module').then( m => m.AccountPageModule)
+              import('../../account/account.module').then( m => m.AccountPageModule)
           }
         ]
       },

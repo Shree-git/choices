@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs'
-import { Impulse } from '../models/impulse.interface'
-import { FirestoreService } from '../services/data/firestore.service'
+import { Impulse } from '../../models/impulse.interface'
+import { FirestoreService } from '../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';

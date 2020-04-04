@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, Form } from '@angular/forms'
 import { LoadingController, AlertController } from '@ionic/angular'
-import { FirestoreService } from '../../services/data/firestore.service'
+import { FirestoreService } from '../../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Contacts } from '@ionic-native/contacts/ngx';
-import { Contact } from '../../models/contact.interface'
+import { Contact } from '../../../models/contact.interface'
 import { AngularFireAuth } from "@angular/fire/auth";
 
 

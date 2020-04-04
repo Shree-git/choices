@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../../services/data/firestore.service'
+import { FirestoreService } from '../../../services/data/firestore.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
-import { Contact } from '../../models/contact.interface'
+import { Contact } from '../../../models/contact.interface'
 import { AlertController } from '@ionic/angular';
  
 @Component({
