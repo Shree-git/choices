@@ -37,7 +37,10 @@ export class LoginPage implements OnInit {
           window.alert('Email is not verified');
           return false;
         }*/
-          this.router.navigateByUrl('/tabs/tab2');
+
+
+        //set to go to the admin side of tabs
+          this.router.navigateByUrl('/tabs-admin/tab2');
           this.authService.setLocalPersist();
       },
       async error => {

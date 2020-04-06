@@ -4,7 +4,23 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 
  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  {
+  
+ {
+  path: 'tabs-admin',
+  loadChildren: () => import('./admin/tabs/tabs.module').then(m => m.TabsPageModule)
+},
+{
+  path: 'detail-admin/:id',
+  loadChildren: () => import('./admin/impulses/detail/detail.module').then( m => m.DetailPageModule)
+},
+{
+  path: 'detail-entry-admin/:id',
+  loadChildren: () => import('./admin/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
+},
+ 
+ 
+ 
+ {
     path: 'tabs',
     loadChildren: () => import('./addict/tabs/tabs.module').then(m => m.TabsPageModule)
   },
