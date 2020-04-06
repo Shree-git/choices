@@ -5,4 +5,5 @@ export interface User {
     photoURL?: string;
     emailVerified: boolean;
     isAdmin?: boolean;
+    isAgent?: boolean;
 }

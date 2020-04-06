@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
 
   email = '';
   password = '';
+  admin: any;
 
   constructor(
     public authService: AuthService,
@@ -29,9 +30,7 @@ export class LoginPage implements OnInit {
     
     this.authService.loginUser(email,password).then(
       ()=>{
-
-
-        //only allows pass if email is verified
+          //only allows pass if email is verified
         ///if(this.authService.isEmailVerified) {
           /* } else {
           window.alert('Email is not verified');
@@ -39,8 +38,25 @@ export class LoginPage implements OnInit {
         }*/
 
 
-        //set to go to the admin side of tabs
+
+
+        ///this part works when isAdmin is filled
+
+//        this.admin = this.authService.isAdmin;
+        console.log(this.authService.isAdmin)
+        if(this.authService.isAdmin == true){
           this.router.navigateByUrl('/tabs-admin/tab2');
+        }
+        else{
+          this.router.navigateByUrl('/tabs/tab2');
+        }
+
+      
+        //set to go to the admin side of tabs
+
+        ///to go to addict side '/tabs/tab2
+        //dependant on what you named it in the tab selector and in app router
+      //    this.router.navigateByUrl('/tabs-admin/tab2');
           this.authService.setLocalPersist();
       },
       async error => {

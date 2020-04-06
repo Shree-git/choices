@@ -12,6 +12,8 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firest
 export class AuthService {
   userData: any;
   accountData: any;
+  admin= false;
+  agent = false;
 
   constructor(
     public afStore: AngularFirestore,
@@ -46,6 +48,7 @@ export class AuthService {
 
   }
 
+
   registerUser(
     email: string,
     password: string
@@ -53,6 +56,8 @@ export class AuthService {
     return this.ngFireAuth.auth.createUserWithEmailAndPassword(email, password).then(()=>{
     });
   }
+
+
 
   sendVerificationMail(){
     return this.ngFireAuth.auth.currentUser.sendEmailVerification().then(()=>{
@@ -71,8 +76,21 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    return (user !== null) ? true : false;
   }
+
+
+
+  get isAdmin(): boolean {
+    return  (this.userData.isAdmin !== null) ? true : false;
+  }
+
+
+  get isAgent(): boolean {
+    return  (this.userData.isAgent !== null) ? true : false;
+  }
+
+  // && user.emailVerified !== false
 
   get isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -102,11 +120,23 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
+      isAdmin: this.admin,
+    //  isAdmin: user.isAdmin,
+      isAgent: this.agent,
+
     }
     return userRef.set(userData, {
       merge: true
     })
+  }
+
+  setIsAdmin(Apin){
+    this.admin = Apin;
+  }
+
+  setIsAgent(Apin){
+    this.agent = Apin;
   }
 
   setAccountData(user){

@@ -13,6 +13,9 @@ export class RegisterPage implements OnInit {
   email: string = ""
   password: string = ""
   cpassword: string = ""
+  pin: string=""
+  isAdmin = false;
+  isAgent = false;
 
   constructor(
     public authService: AuthService,
@@ -23,12 +26,7 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  async register(): Promise<void> {
-    const { email, password, cpassword } = this;
-    if(password !== cpassword){
-      return console.error("Passwords don't match")
-    }
-    // try {
+ // try {
     // const res = await this.authService.auth.createUserWithEmailAndPassword(email,password).then(
     //     ()=>{
     //     this.router.navigateByUrl('/tabs/tab2');
@@ -37,9 +35,35 @@ export class RegisterPage implements OnInit {
     // } catch (error) {
     //   console.dir(error)
     // }
+
+  async register(): Promise<void> {
+    const { email, password, cpassword, pin } = this;
+    ///temporary pin inputed
+    if(pin === "2216"){
+      this.isAdmin = true;
+      this.authService.setIsAdmin(this.isAdmin)
+      console.log("pins match!!")
+    }
+
+    //temporary pin for agent
+    else if(pin === "1129"){
+      this.isAgent = true;
+      this.authService.setIsAgent(this.isAgent)
+      console.log("pins match!!")
+    }
+    if(password !== cpassword){
+      return console.error("Passwords don't match")
+    }
+   
+
+
+
     this.authService.registerUser(email,password).then(
       ()=>{
-        this.authService.sendVerificationMail();
+      //  this.authService.sendVerificationMail();
+
+        ////
+       // this.authService.makeAdmin(this.user, this.isAdmin);
         this.router.navigateByUrl('/login');
       },
       async error => {
