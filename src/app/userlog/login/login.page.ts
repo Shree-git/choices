@@ -42,9 +42,10 @@ export class LoginPage implements OnInit {
 
         ///this part works when isAdmin is filled
 
+
 //        this.admin = this.authService.isAdmin;
-        console.log(this.authService.isAdmin)
-        if(this.authService.isAdmin == true){
+      console.log(this.authService.getIsAdmin())
+        if(this.authService.getIsAdmin() == true){
           this.router.navigateByUrl('/tabs-admin/tab2');
         }
         else{

@@ -12,8 +12,7 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firest
 export class AuthService {
   userData: any;
   accountData: any;
-  admin= false;
-  agent = false;
+  pin= false;
 
   constructor(
     public afStore: AngularFirestore,
@@ -79,15 +78,26 @@ export class AuthService {
     return (user !== null) ? true : false;
   }
 
+/*
 
+  getIsAdmin(): boolean {
+    return  (this.userData.isAdmin == true);
 
   get isAdmin(): boolean {
     return  (this.userData.isAdmin !== null) ? true : false;
   }
+  setIsAdmin(Apin){
+    this.userData.isAgent = Apin;
+  }
 
+*/
 
-  get isAgent(): boolean {
-    return  (this.userData.isAgent !== null) ? true : false;
+  getIsAdmin(): boolean {
+    const user = this.userData;
+    console.log(user.email + "user admin")
+    console.log(this.getUserId() + "getuser uid")
+    console.log((this.userData.isAdmin == true) + "Admin")
+    return  (this.userData.isAdmin == true);
   }
 
   // && user.emailVerified !== false
@@ -121,9 +131,9 @@ export class AuthService {
       email: user.email,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
-      isAdmin: this.admin,
+      isAdmin: this.pin,
     //  isAdmin: user.isAdmin,
-      isAgent: this.agent,
+    //  isAgent: user.isAgent,
 
     }
     return userRef.set(userData, {
@@ -132,11 +142,7 @@ export class AuthService {
   }
 
   setIsAdmin(Apin){
-    this.admin = Apin;
-  }
-
-  setIsAgent(Apin){
-    this.agent = Apin;
+    this.pin = Apin;
   }
 
   setAccountData(user){
@@ -180,6 +186,7 @@ export class AuthService {
   }
 
   getUserId(){
+    console.log(this.userData.uid)
     return this.userData.uid;
   }
 

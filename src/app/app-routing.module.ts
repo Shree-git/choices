@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
 
- { path: '', redirectTo: 'login', pathMatch: 'full' },
+ { path: '', redirectTo: 'register', pathMatch: 'full' },
   
  {
   path: 'tabs-admin',
@@ -17,6 +17,25 @@ const routes: Routes = [
   path: 'detail-entry-admin/:id',
   loadChildren: () => import('./admin/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
 },
+
+
+{
+  path: 'tabs-agent',
+  loadChildren: () => import('./agent/tabs/tabs.module').then(m => m.TabsPageModule)
+},
+{
+  path: 'detail-agent/:id',
+  loadChildren: () => import('./agent/impulses/detail/detail.module').then( m => m.DetailPageModule)
+},
+{
+  path: 'detail-entry-agent/:id',
+  loadChildren: () => import('./agent/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
+},
+ 
+
+
+
+
  
  
  

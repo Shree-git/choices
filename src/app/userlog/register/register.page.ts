@@ -14,8 +14,7 @@ export class RegisterPage implements OnInit {
   password: string = ""
   cpassword: string = ""
   pin: string=""
-  isAdmin = false;
-  isAgent = false;
+
 
   constructor(
     public authService: AuthService,
@@ -38,22 +37,20 @@ export class RegisterPage implements OnInit {
 
   async register(): Promise<void> {
     const { email, password, cpassword, pin } = this;
-    ///temporary pin inputed
-    if(pin === "2216"){
-      this.isAdmin = true;
-      this.authService.setIsAdmin(this.isAdmin)
-      console.log("pins match!!")
-    }
-
-    //temporary pin for agent
-    else if(pin === "1129"){
-      this.isAgent = true;
-      this.authService.setIsAgent(this.isAgent)
-      console.log("pins match!!")
-    }
     if(password !== cpassword){
       return console.error("Passwords don't match")
     }
+    ///temporary pin inputed
+    if(pin === "2216"){
+      this.authService.setIsAdmin(true)
+      console.log("pins match!!")
+    }
+    else{
+      this.authService.setIsAdmin(false)
+      console.log("pins do not match")
+    }
+
+    
    
 
 

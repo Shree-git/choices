@@ -111,7 +111,7 @@ export class FirestoreService {
     return this.firestore.collection('currentEntries').doc(entryId);
   }
 
-  deleteEntry(entryId: string): Promise<void>{
+  deleteEntry(entryId: string): Promise<void>{ 
     return this.firestore.doc('currentEntries/' + entryId).delete();
   }
 

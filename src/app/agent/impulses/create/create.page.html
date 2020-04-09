@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Impulse</ion-title>
+    <ion-back-button slot="start"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="createImpulseForm" (submit)="createImpulse()">
+    <ion-item>
+      <ion-label stacked>Impulse</ion-label>
+      <ion-input formControlName="title" type="text" placeholder="What's the impulse?"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Scale</ion-label>
+      <ion-input formControlName="scale" type="number" placeholder="1-10"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Description</ion-label>
+      <ion-textarea formControlName="description" type="text" placeholder="What are you feeling?"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!createImpulseForm.valid">Add</ion-button>
+    <ion-button expand="block" color="dark" routerLink='/tabs/tab2'>Cancel</ion-button>
+  </form>
+</ion-content>
