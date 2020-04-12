@@ -17,28 +17,10 @@ const routes: Routes = [
   path: 'detail-entry-admin/:id',
   loadChildren: () => import('./admin/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
 },
-
-
-{
-  path: 'tabs-agent',
-  loadChildren: () => import('./agent/tabs/tabs.module').then(m => m.TabsPageModule)
-},
-{
-  path: 'detail-agent/:id',
-  loadChildren: () => import('./agent/impulses/detail/detail.module').then( m => m.DetailPageModule)
-},
-{
-  path: 'detail-entry-agent/:id',
-  loadChildren: () => import('./agent/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
-},
  
 
 
 
-
- 
- 
- 
  {
     path: 'tabs',
     loadChildren: () => import('./addict/tabs/tabs.module').then(m => m.TabsPageModule)

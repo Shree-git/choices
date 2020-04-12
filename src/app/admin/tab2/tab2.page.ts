@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs'
-import { Impulse } from '../../models/impulse.interface'
 import { FirestoreService } from '../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -22,12 +21,12 @@ export class Tab2Page implements OnInit{
     public router: Router) {}
  
   ngOnInit() {
-    this.impulseList = this.firestoreService.getImpulseList().valueChanges();
+    this.impulseList = this.firestoreService.getList("impulseList").valueChanges();
   }
   search(ev) {
     let val = ev.target.value;
     if(!val || !val.trim()){
-      this.impulseList = this.firestoreService.getImpulseList().valueChanges();
+      this.impulseList = this.firestoreService.getList("impulseList").valueChanges();
     }
     else{
       this.impulseList = this.firestoreService.getSearchedEntries(val, 'impulseList').valueChanges()

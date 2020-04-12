@@ -37,7 +37,7 @@ export class CreateContactPage implements OnInit {
   
       const title = this.createContactForm.value.title;
       const content = this.createContactForm.value.content;
-      const uid = this.user.uid
+      const uid = this.user.userUID
 
       this.firestoreService.createContact(title, content, uid)
       .then(() => {

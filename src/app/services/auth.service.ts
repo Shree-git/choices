@@ -1,7 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { User } from "../models/user.interface";
-import { UserAccount } from "../models/user_account.interface"
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
@@ -12,7 +11,6 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firest
 export class AuthService {
   userData: any;
   accountData: any;
-  pin= false;
 
   constructor(
     public afStore: AngularFirestore,
@@ -22,9 +20,7 @@ export class AuthService {
   ) {
     this.ngFireAuth.auth.onAuthStateChanged(user => {
       if(user) {
-        this.SetUserData(user);
         this.userData = user;
-        this.accountData = this.afStore.doc('userAccount/' + this.userData.uid).valueChanges();
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
       } else {
@@ -56,8 +52,6 @@ export class AuthService {
     });
   }
 
-
-
   sendVerificationMail(){
     return this.ngFireAuth.auth.currentUser.sendEmailVerification().then(()=>{
       this.router.navigate(['verify-email']);
@@ -77,29 +71,6 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user !== null) ? true : false;
   }
-
-/*
-
-  getIsAdmin(): boolean {
-    return  (this.userData.isAdmin == true);
-
-  get isAdmin(): boolean {
-    return  (this.userData.isAdmin !== null) ? true : false;
-  }
-  setIsAdmin(Apin){
-    this.userData.isAgent = Apin;
-  }
-
-*/
-
-  getIsAdmin(): boolean {
-    const user = this.userData;
-    console.log(user.email + "user admin")
-    console.log(this.getUserId() + "getuser uid")
-    console.log((this.userData.isAdmin == true) + "Admin")
-    return  (this.userData.isAdmin == true);
-  }
-
   // && user.emailVerified !== false
 
   get isEmailVerified(): boolean {
@@ -107,6 +78,7 @@ export class AuthService {
     return (user.emailVerified !== false) ? true : false;
   }
 
+  /*
   GoogleAuth(){
     return this.AuthLogin(new firebase.auth.GoogleAuthProvider());
   }
@@ -123,42 +95,32 @@ export class AuthService {
       window.alert(error);
     })
   }
+  */
 
-  SetUserData(user){
-    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      isAdmin: this.pin,
-    //  isAdmin: user.isAdmin,
-    //  isAgent: user.isAgent,
-
-    }
-    return userRef.set(userData, {
-      merge: true
-    })
+  createUser(
+    firstName: string, lastName: string,  email: string,
+    emailVerified: boolean, isAdmin: boolean, isAgent: boolean,
+    photoURL: string, phoneNumber: string
+  ): Promise<void> {
+    var user = firebase.auth().currentUser;
+    var user_id = user.uid;
+    return this.afStore.doc('users/' + user_id).set({user_id, firstName, lastName, email, emailVerified, isAdmin, isAgent, photoURL, phoneNumber});
   }
-
-  setIsAdmin(Apin){
-    this.pin = Apin;
+  
+  editUserData(user_id, first, last, email_A, photo, number){
+    return this.afStore.doc('users/' + user_id).set({
+      uid : this.userData.uid,
+      firstName: first,
+      lastName: last,
+      email: email_A,
+      emailVerified: this.userData.emailVerified,
+      isAdmin: this.userData.isAdmin,
+      isAgent: this.userData.isAgent,
+      photoURL: photo,
+      phoneNumber: number,
+    }, {merge:true});
   }
-
-  setAccountData(user){
-    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`userAccount/${user.uid}`);
-    const userData: UserAccount = {
-      uid: user.uid,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      phoneNumber: user.phoneNumber,
-      birthdate: user.birthdate
-    }
-    return userRef.set(userData, {
-      merge: true
-    })
-  }
-
+  
   updatePhoto(photo){
     var user = this.ngFireAuth.auth.currentUser;
     user.updateProfile({
@@ -170,21 +132,12 @@ export class AuthService {
     })
   }
 
-  updateEmail(photo){
-    var user = this.ngFireAuth.auth.currentUser;
-    user.updateProfile({
-      photoURL: photo
-    }).then(()=>{
-      this.userData.photoURL = user.photoURL;
-    }).catch(err =>{
-      window.alert(err);
-    })
-  }
 
+
+  //DO NOT WORK
   getUserEmail(){
     return this.userData.email;
   }
-
   getUserId(){
     console.log(this.userData.uid)
     return this.userData.uid;

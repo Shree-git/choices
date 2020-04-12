@@ -56,7 +56,7 @@ export class CreatePage implements OnInit {
     const scale = this.createImpulseForm.value.scale;
     const description = this.createImpulseForm.value.description;
     const timestamp = this.createImpulseForm.value.timestamp;
-    const uid = this.user.uid
+    const uid = this.user.userUID
 
 
     this.firestoreService.createImpulse(title, date, scale, description, timestamp, uid)

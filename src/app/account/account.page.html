@@ -10,28 +10,22 @@
 <ion-content>
   <ion-item>
     <ion-label display="floating">First Name</ion-label>
-    <ion-input type="text" [(ngModel)]="firstName" [placeholder]="this.authService.accountData.firstName"></ion-input>
+    <ion-input type="text" [(ngModel)]="firstName" [placeholder]="this.authService.userData.first_name"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label display="floating">Last Name</ion-label>
-    <ion-input type="text" [(ngModel)]="lastName" [placeholder]="this.authService.accountData.lastName"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label display="floating">Display Name</ion-label>
-    <ion-input type="text" [(ngModel)]="displayName" [placeholder]="authService.userData.displayName"></ion-input>
+    <ion-input type="text" [(ngModel)]="lastName" [placeholder]="this.authService.userData.last_name"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label display="floating">Phone Number</ion-label>
-    <ion-input type="number" [(ngModel)]="phoneNumber" [placeholder]="this.authService.accountData.phoneNumber"></ion-input>
+    <ion-input type="number" [(ngModel)]="phoneNumber" [placeholder]="this.authService.userData.phoneNumber"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="birthDate" [placeholder]="this.authService.accountData.birthDate"></ion-datetime>
-  </ion-item>
+  <!--
   <ion-item>
     <ion-label display="floating">Email</ion-label>
     <ion-input type="text" [(ngModel)]="email" [placeholder]="authService.userData.email" disabled></ion-input>
   </ion-item>
+  -->
   <ion-button type="submit" expand="block" (click)="saveUserData()">Save</ion-button>
   <ion-button expand="block" color="dark" (click)="cancel()">Cancel</ion-button>
 

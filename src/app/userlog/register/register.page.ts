@@ -10,10 +10,14 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  fname: string = " "
+  lname: string = " "
   email: string = ""
   password: string = ""
   cpassword: string = ""
   pin: string=""
+  admin: boolean;
+  agent: boolean;
 
 
   constructor(
@@ -36,31 +40,30 @@ export class RegisterPage implements OnInit {
     // }
 
   async register(): Promise<void> {
-    const { email, password, cpassword, pin } = this;
+    const { fname, lname, email, password, cpassword, pin } = this;
     if(password !== cpassword){
       return console.error("Passwords don't match")
     }
-    ///temporary pin inputed
-    if(pin === "2216"){
-      this.authService.setIsAdmin(true)
-      console.log("pins match!!")
+    
+    if(this.pin == '2216'){
+      this.admin = true;
+      this.agent = false;
+    }
+    else if(this.pin == '1173'){
+      this.admin = false;
+      this.agent = true;
     }
     else{
-      this.authService.setIsAdmin(false)
-      console.log("pins do not match")
+      this.admin = false;
+      this.agent = false;
     }
-
-    
-   
-
 
 
     this.authService.registerUser(email,password).then(
       ()=>{
       //  this.authService.sendVerificationMail();
 
-        ////
-       // this.authService.makeAdmin(this.user, this.isAdmin);
+      this.authService.createUser(fname, lname, email, false, this.admin, this.agent, null, null)
         this.router.navigateByUrl('/login');
       },
       async error => {

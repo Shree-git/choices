@@ -54,7 +54,7 @@ export class CreateEntryPage implements OnInit {
     const day = this.createEntryForm.value.day;
     const content = this.createEntryForm.value.content;
     const timestamp = this.createEntryForm.value.timestamp;
-    const uid = this.user.uid
+    const uid = this.user.userUID
 
     
 

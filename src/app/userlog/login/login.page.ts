@@ -38,26 +38,9 @@ export class LoginPage implements OnInit {
         }*/
 
 
+        ///AUTO ROUTES TO ADMIN FOR TESTING
 
-
-        ///this part works when isAdmin is filled
-
-
-//        this.admin = this.authService.isAdmin;
-      console.log(this.authService.getIsAdmin())
-        if(this.authService.getIsAdmin() == true){
           this.router.navigateByUrl('/tabs-admin/tab2');
-        }
-        else{
-          this.router.navigateByUrl('/tabs/tab2');
-        }
-
-      
-        //set to go to the admin side of tabs
-
-        ///to go to addict side '/tabs/tab2
-        //dependant on what you named it in the tab selector and in app router
-      //    this.router.navigateByUrl('/tabs-admin/tab2');
           this.authService.setLocalPersist();
       },
       async error => {
