@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs'
+import { Entry } from '../../models/entry.interface'
 import { FirestoreService } from '../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -22,7 +23,7 @@ export class Tab1Page implements OnInit {
     public router: Router) {}
 
   ngOnInit() {
-    this.currentEntries = this.firestoreService.getList("currentEntries").valueChanges();
+    this.currentEntries = this.firestoreService.getCurrentEntries().valueChanges();
   }
 
   
@@ -32,7 +33,7 @@ export class Tab1Page implements OnInit {
 search(ev) {
   let val = ev.target.value;
   if(!val || !val.trim()){
-    this.currentEntries = this.firestoreService.getList("currentEntries").valueChanges();
+    this.currentEntries = this.firestoreService.getCurrentEntries().valueChanges();
   }
   else{
     this.currentEntries = this.firestoreService.getSearchedEntries(val, 'currentEntries').valueChanges()

@@ -23,7 +23,7 @@ export class DetailEntryPage implements OnInit {
   ngOnInit() {
     const entryId = this.route.snapshot.paramMap.get('id');
     this.iID = entryId;
-    this.entry = this.fservice.getDetail("currentEntries",entryId).valueChanges();
+    this.entry = this.fservice.getEntryDetail(entryId).valueChanges();
   }
 
   edit = false;
@@ -44,7 +44,7 @@ export class DetailEntryPage implements OnInit {
       {
         text: 'Delete',
         handler: () => {
-          this.fservice.delete("currentEntries",this.iID);
+          this.fservice.deleteEntry(this.iID);
           this.router.navigateByUrl('tabs/tab1');
         },
       },

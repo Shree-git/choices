@@ -22,7 +22,7 @@ export class ContactsPage implements OnInit {
     this.everybody = this.contacts.find(["*"]);
   }
   ngOnInit() {
-    this.userContacts = this.firestoreService.getList("userContacts").valueChanges();
+    this.userContacts = this.firestoreService.getuserContacts().valueChanges();
   }
 //searches through the list of current entries. If search is left empty after already clicking in
 //it just returns all entries so you aren't left with a blank page
@@ -30,7 +30,7 @@ export class ContactsPage implements OnInit {
 search(ev) {
   let val = ev.target.value;
   if(!val || !val.trim()){
-    this.userContacts = this.firestoreService.getList("userContacts").valueChanges();
+    this.userContacts = this.firestoreService.getuserContacts().valueChanges();
   }
   else{
     this.userContacts = this.firestoreService.getSearchedEntries(val, 'userContacts').valueChanges()

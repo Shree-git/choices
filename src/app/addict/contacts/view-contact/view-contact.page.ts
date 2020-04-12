@@ -23,7 +23,7 @@ export class ViewContactPage implements OnInit {
   ngOnInit() {
     const contactId = this.route.snapshot.paramMap.get('id');
     this.iID = contactId;
-    this.contact = this.fservice.getDetail("userContacts", contactId).valueChanges();
+    this.contact = this.fservice.getContactDetail(contactId).valueChanges();
   }
 
   async deleteContact(){
@@ -40,7 +40,7 @@ export class ViewContactPage implements OnInit {
       {
         text: 'Delete',
         handler: () => {
-          this.fservice.delete("userContacts", this.iID);
+          this.fservice.deleteContact(this.iID);
           this.router.navigateByUrl('contacts');
         },
       },
