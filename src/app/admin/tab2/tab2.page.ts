@@ -14,27 +14,31 @@ import { OrderPipe } from 'ngx-order-pipe';
 
 })
 export class Tab2Page implements OnInit{
-  public impulseList;
-  public order = 'timestamp';
+  public currentUsers;
+  public order = 'firstName';
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,
     public router: Router) {}
  
   ngOnInit() {
-    this.impulseList = this.firestoreService.getImpulseList().valueChanges();
+    this.currentUsers = this.firestoreService.getListAll("users").valueChanges();
   }
   search(ev) {
     let val = ev.target.value;
     if(!val || !val.trim()){
-      this.impulseList = this.firestoreService.getImpulseList().valueChanges();
+      this.currentUsers = this.firestoreService.getListAll("users").valueChanges();
     }
     else{
-      this.impulseList = this.firestoreService.getSearchedEntries(val, 'impulseList').valueChanges()
+      this.currentUsers = this.firestoreService.getSearchedEntries(val, 'users').valueChanges();
   
     }
-       
+      
   }
+
+
+
+
      //opens and closes drop down menu
      dropMenu() {
       document.getElementById("myDropdown").classList.toggle("show");

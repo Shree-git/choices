@@ -19,21 +19,6 @@ const routes: Routes = [
 },
 
 
-{
-  path: 'tabs-agent',
-  loadChildren: () => import('./agent/tabs/tabs.module').then(m => m.TabsPageModule)
-},
-{
-  path: 'detail-agent/:id',
-  loadChildren: () => import('./agent/impulses/detail/detail.module').then( m => m.DetailPageModule)
-},
-{
-  path: 'detail-entry-agent/:id',
-  loadChildren: () => import('./agent/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
-},
- 
-
-
 
 
  

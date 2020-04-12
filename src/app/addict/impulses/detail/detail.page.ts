@@ -23,7 +23,7 @@ export class DetailPage implements OnInit {
   ngOnInit() {
     const impulseId = this.route.snapshot.paramMap.get('id');
     this.iID = impulseId;
-    this.impulse = this.fservice.getImpulseDetail(impulseId).valueChanges();
+    this.impulse = this.fservice.getDetail("impulseList",impulseId).valueChanges();
   }
 
   async deleteImpulse(){
@@ -40,7 +40,7 @@ export class DetailPage implements OnInit {
       {
         text: 'Delete',
         handler: () => {
-          this.fservice.deleteImpulse(this.iID);
+          this.fservice.delete("impulseList", this.iID);
           this.router.navigateByUrl('tabs/tab2');
         },
       },

@@ -28,13 +28,15 @@
       </div>
     </div>
 <br>
-  <ion-card *ngFor="let impulse of impulseList | async |orderBy: order : reverse : true" routerLink="/detail/{{impulse.id}}">
-    <ion-card-header >
-        <ion-card-title id="header_title">{{impulse.title}} </ion-card-title>
-     </ion-card-header>
-     <ion-card-subtitle id ="header_date">{{impulse.date}}</ion-card-subtitle>
-    <ion-card-content id="content">
-      Scale: {{ impulse.scale }}
-    </ion-card-content>
-  </ion-card>
+<!-- routerLink="/detail-entry/{{entry.id}}"
+      <img id="photo_id" class="title-image" src="{{user.photoURL}}" />
+
+-->
+<ion-card *ngFor="let user of currentUsers | async |  orderBy: ordering : reverse : true">
+  <ion-card-header>
+     <ion-card-title id="user_name">{{user.email}} </ion-card-title>
+     <ion-card-subtitle id ="user_type">{{user.isAdmin}}</ion-card-subtitle>
+  </ion-card-header>
+</ion-card>
 </ion-content>
+
