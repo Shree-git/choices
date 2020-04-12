@@ -16,9 +16,7 @@ export class RegisterPage implements OnInit {
   password: string = ""
   cpassword: string = ""
   pin: string=""
-  admin: boolean;
-  agent: boolean;
-
+  user_type: string = ""
 
   constructor(
     public authService: AuthService,
@@ -46,16 +44,14 @@ export class RegisterPage implements OnInit {
     }
     
     if(this.pin == '2216'){
-      this.admin = true;
-      this.agent = false;
+      this.user_type = "Admin"
     }
     else if(this.pin == '1173'){
-      this.admin = false;
-      this.agent = true;
+      this.user_type = "Agent"
+
     }
     else{
-      this.admin = false;
-      this.agent = false;
+      this.user_type = "Addict"
     }
 
 
@@ -63,7 +59,7 @@ export class RegisterPage implements OnInit {
       ()=>{
       //  this.authService.sendVerificationMail();
 
-      this.authService.createUser(fname, lname, email, false, this.admin, this.agent, null, null)
+      this.authService.createUser(fname, lname, email, false, this.user_type, "assets/icon/default_icon.png", null)
         this.router.navigateByUrl('/login');
       },
       async error => {

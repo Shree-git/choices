@@ -99,12 +99,12 @@ export class AuthService {
 
   createUser(
     firstName: string, lastName: string,  email: string,
-    emailVerified: boolean, isAdmin: boolean, isAgent: boolean,
+    emailVerified: boolean, userType: string,
     photoURL: string, phoneNumber: string
   ): Promise<void> {
     var user = firebase.auth().currentUser;
-    var user_id = user.uid;
-    return this.afStore.doc('users/' + user_id).set({user_id, firstName, lastName, email, emailVerified, isAdmin, isAgent, photoURL, phoneNumber});
+    var userUID = user.uid;
+    return this.afStore.doc('users/' + userUID).set({userUID, firstName, lastName, email, emailVerified, userType, photoURL, phoneNumber});
   }
   
   editUserData(user_id, first, last, email_A, photo, number){
@@ -114,8 +114,7 @@ export class AuthService {
       lastName: last,
       email: email_A,
       emailVerified: this.userData.emailVerified,
-      isAdmin: this.userData.isAdmin,
-      isAgent: this.userData.isAgent,
+      userType: this.userData.userType,
       photoURL: photo,
       phoneNumber: number,
     }, {merge:true});
@@ -138,9 +137,19 @@ export class AuthService {
   getUserEmail(){
     return this.userData.email;
   }
+
+
+
+  ///works
   getUserId(){
     console.log(this.userData.uid)
     return this.userData.uid;
+  }
+
+
+  getUserType(){
+    console.log(this.userData.userType)
+    return this.userData.userType;
   }
 
   logOutUser(): Promise<void> {

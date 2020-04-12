@@ -30,13 +30,13 @@ export class LoginPage implements OnInit {
     
     this.authService.loginUser(email,password).then(
       ()=>{
+
           //only allows pass if email is verified
         ///if(this.authService.isEmailVerified) {
           /* } else {
           window.alert('Email is not verified');
           return false;
         }*/
-
 
         ///AUTO ROUTES TO ADMIN FOR TESTING
 

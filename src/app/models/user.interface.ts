@@ -5,9 +5,7 @@ export interface User {
     email: string;
     emailVerified: boolean;
 
-    
-    isAdmin?: boolean;
-    isAgent?: boolean;
+    userType: string;
     photoURL?: string;
     phoneNumber?: string;
 

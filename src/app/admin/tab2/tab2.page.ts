@@ -13,23 +13,23 @@ import { OrderPipe } from 'ngx-order-pipe';
 
 })
 export class Tab2Page implements OnInit{
-  public impulseList;
-  public order = 'timestamp';
+  public currentUsers;
+  public order = 'lastName';
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,
     public router: Router) {}
  
   ngOnInit() {
-    this.impulseList = this.firestoreService.getList("impulseList").valueChanges();
+    this.currentUsers = this.firestoreService.getListAll("users").valueChanges();
   }
   search(ev) {
     let val = ev.target.value;
     if(!val || !val.trim()){
-      this.impulseList = this.firestoreService.getList("impulseList").valueChanges();
+      this.currentUsers = this.firestoreService.getList("users").valueChanges();
     }
     else{
-      this.impulseList = this.firestoreService.getSearchedEntries(val, 'impulseList').valueChanges()
+      this.currentUsers = this.firestoreService.getSearchedEntries(val, 'users').valueChanges()
   
     }
        

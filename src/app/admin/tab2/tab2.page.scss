@@ -58,26 +58,23 @@ transform: translateY(3px);
     top: 0%;
   }
 
+  #photo{
+    display:inline-block;
+    margin-bottom: 0;
+    margin-left: 2%;
+}
 
-  #header_title{
+  #name{
       display:inline-block;
       margin-bottom: 0;
       margin-left: 2%;
   }
-  #header_date{
+  #user_type{
      margin-left: 5%;
       display:inline-block;
       margin-bottom: 0;
   }
 
-  #content{
-      max-height: 100px;
-      overflow: hidden;
-      margin-left: 2%;
-      font-size: 20px;
-      text-overflow: ellipsis;
-
-  }
   ion-card{
     width: 90%;
     margin-left: 5%;
@@ -92,7 +89,4 @@ transform: translateY(3px);
       border-radius: 20px;
       margin-left: 5%;
       margin-top: 6%;
-
-
-
   }
