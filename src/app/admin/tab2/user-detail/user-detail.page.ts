@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { User } from '../../../models/user.interface'
 import { AlertController } from '@ionic/angular';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-user-detail',
@@ -22,7 +23,12 @@ export class UserDetailPage implements OnInit {
 
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('id');
+    this.iID = userId
     this.user = this.fservice.getDetail("users", userId).valueChanges();
+  }
+
+  routeToClient(){
+    this.router.navigateByUrl('/ca-tabs/'+ this.iID);
   }
 
   async deleteUser(){
@@ -45,9 +51,9 @@ export class UserDetailPage implements OnInit {
       },
     ],
     });
-
     (await alert).present();
   }
+  
 
 
   

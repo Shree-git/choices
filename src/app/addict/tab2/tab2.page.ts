@@ -22,15 +22,15 @@ export class Tab2Page implements OnInit{
     public router: Router) {}
  
   ngOnInit() {
-    this.impulseList = this.firestoreService.getList("impulseList").valueChanges();
+    this.impulseList = this.firestoreService.getYourList("impulseList").valueChanges();
   }
   search(ev) {
     let val = ev.target.value;
     if(!val || !val.trim()){
-      this.impulseList = this.firestoreService.getList("impulseList").valueChanges();
+      this.impulseList = this.firestoreService.getYourList("impulseList").valueChanges();
     }
     else{
-      this.impulseList = this.firestoreService.getSearchedEntries(val, 'impulseList').valueChanges()
+      this.impulseList = this.firestoreService.getSearched(val, 'impulseList', 'title', '').valueChanges()
   
     }
        

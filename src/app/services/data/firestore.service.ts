@@ -74,8 +74,13 @@ getDetail(doc:string, id: string): AngularFirestoreDocument<any>{
   return this.firestore.collection(doc).doc(id);
 }
 
-//gets all of ONE LOGGED IN users documents
-getList(doc): AngularFirestoreCollection<any> {
+//gets all of ONE user's documents
+getList(doc, useriiD): AngularFirestoreCollection<any> {
+  return this.firestore.collection(doc, ref => ref.where("userUID" ,'==', useriiD));
+}
+
+//gets all of ONE LOGGED IN user's documents
+getYourList(doc): AngularFirestoreCollection<any> {
   return this.firestore.collection(doc, ref => ref.where("userUID" ,'==', this.userId));
 }
 

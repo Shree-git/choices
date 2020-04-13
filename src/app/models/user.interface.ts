@@ -8,5 +8,6 @@ export interface User {
     userType: string;
     photoURL?: string;
     phoneNumber?: string;
+    agentUID?:string;
 
 }

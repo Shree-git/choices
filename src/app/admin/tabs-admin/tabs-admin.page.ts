@@ -4,34 +4,26 @@ import { Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-tabs-admin',
-  templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  templateUrl: 'tabs-admin.page.html',
+  styleUrls: ['tabs-admin.page.scss']
 })
-export class TabsPage implements OnInit{
+export class TabsAdminPage implements OnInit{
 
   activePath = '';
 
   pages = [
     {
       name: 'Journal',
-      path: '/tabs/tab1'
+      path: '/tabs-admin/tab1'
     },
     {
-      name: 'Impulses',
-      path: '/tabs/tab2'
+      name: 'Users',
+      path: '/tabs-admin/tab2'
     },
     {
-      name: 'Wellness',
-      path: '/tabs/tab3'
+      name: 'Agenda',
+      path: '/tabs-admin/tab3'
     },
-    {
-      name: 'Account',
-      path: '/tabs/account'
-    },
-    {
-      name: 'Safe Contacts',
-      path: '/tabs/contacts'
-    }
   ]
   constructor(
     public authService: AuthService,

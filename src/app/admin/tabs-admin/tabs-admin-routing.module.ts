@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TabsPage } from './tabs.page';
+import { TabsAdminPage } from './tabs-admin.page';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'tab2', pathMatch: 'full' },
+
   {
     path: '',
-    component: TabsPage,
+    component: TabsAdminPage,
     children: [
       {
         path: 'tab1',
@@ -47,23 +49,13 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
-      }
     ]
   },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsAdminPageRoutingModule {}
  

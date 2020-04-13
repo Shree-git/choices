@@ -40,7 +40,9 @@ export class LoginPage implements OnInit {
 
         ///AUTO ROUTES TO ADMIN FOR TESTING
 
-          this.router.navigateByUrl('/tabs-admin/tab2');
+          //console.log(this.authService.getUserId()
+
+          this.router.navigateByUrl('/tabs-admin');
           this.authService.setLocalPersist();
       },
       async error => {

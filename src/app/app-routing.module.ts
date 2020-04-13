@@ -3,11 +3,14 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
 
- { path: '', redirectTo: 'register', pathMatch: 'full' },
+ { path: '', redirectTo: 'login', pathMatch: 'full' },
   
+
+
+///////////////////// ADMIN SIDE 
  {
   path: 'tabs-admin',
-  loadChildren: () => import('./admin/tabs/tabs.module').then(m => m.TabsPageModule)
+  loadChildren: () => import('./admin/tabs-admin/tabs-admin.module').then(m => m.TabsAdminPageModule)
 },
 {
   path: 'user-detail/:id',
@@ -17,14 +20,21 @@ const routes: Routes = [
   path: 'detail-entry-admin/:id',
   loadChildren: () => import('./admin/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
 },
+
+
+
+///////////////////ADMIN TO CLIENT
+{
+  path: 'ca-tabs/:id',
+  loadChildren: () => import('./admin/client-admin/ca-tabs/ca-tabs.module').then(m => m.CaTabsPageModule)
+},
+
+
  
 
 
 
- {
-    path: 'tabs',
-    loadChildren: () => import('./addict/tabs/tabs.module').then(m => m.TabsPageModule)
-  },
+  ///AVAILABLE TO ALL USERS
   {
     path: 'register',
     loadChildren: () => import('./userlog/register/register.module').then( m => m.RegisterPageModule)
@@ -32,6 +42,17 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./userlog/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'forgot-password',
+   loadChildren: () => import('./userlog/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+ },
+
+
+  ////////////CLIENT SIDE
+  {
+    path: 'tabs',
+    loadChildren: () => import('./addict/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'create',
@@ -49,10 +70,6 @@ const routes: Routes = [
     path: 'detail-entry/:id',
     loadChildren: () => import('./addict/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
   },
- {
-       path: 'forgot-password',
-      loadChildren: () => import('./userlog/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
-    },
     {
       path: 'create-contact',
       loadChildren: () => import('./addict/contacts/create-contact/create-contact.module').then( m => m.CreateContactPageModule)

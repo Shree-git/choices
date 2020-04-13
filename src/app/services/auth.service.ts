@@ -100,15 +100,22 @@ export class AuthService {
   createUser(
     firstName: string, lastName: string,  email: string,
     emailVerified: boolean, userType: string,
-    photoURL: string, phoneNumber: string
+    photoURL: string, phoneNumber: string, agentUID:string
   ): Promise<void> {
     var user = firebase.auth().currentUser;
     var userUID = user.uid;
-    return this.afStore.doc('users/' + userUID).set({userUID, firstName, lastName, email, emailVerified, userType, photoURL, phoneNumber});
+    return this.afStore.doc('users/' + userUID).set({userUID, firstName, lastName, email, emailVerified, userType, photoURL, phoneNumber, agentUID});
   }
   
-  editUserData(user_id, first, last, email_A, photo, number){
-    return this.afStore.doc('users/' + user_id).set({
+
+//data the admin can edit of the clients
+editUserDataAdmin(){
+
+}
+
+  //Data the users can edit of themselves
+  editUserData(first, last, email_A, photo, number){
+    return this.afStore.doc('users/' + this.userData.uid).set({
       uid : this.userData.uid,
       firstName: first,
       lastName: last,
@@ -120,6 +127,7 @@ export class AuthService {
     }, {merge:true});
   }
   
+  //confusing
   updatePhoto(photo){
     var user = this.ngFireAuth.auth.currentUser;
     user.updateProfile({
@@ -131,21 +139,14 @@ export class AuthService {
     })
   }
 
-
-
-  //DO NOT WORK
   getUserEmail(){
     return this.userData.email;
   }
 
-
-
-  ///works
   getUserId(){
     console.log(this.userData.uid)
     return this.userData.uid;
   }
-
 
   getUserType(){
     console.log(this.userData.userType)

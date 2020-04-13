@@ -23,7 +23,7 @@ export class Tab1Page implements OnInit {
     public router: Router) {}
 
   ngOnInit() {
-    this.currentEntries = this.firestoreService.getList("currentEntries").valueChanges();
+    this.currentEntries = this.firestoreService.getYourList("currentEntries").valueChanges();
   }
 
   
@@ -33,10 +33,10 @@ export class Tab1Page implements OnInit {
 search(ev) {
   let val = ev.target.value;
   if(!val || !val.trim()){
-    this.currentEntries = this.firestoreService.getList("currentEntries").valueChanges();
+    this.currentEntries = this.firestoreService.getYourList("currentEntries").valueChanges();
   }
   else{
-    this.currentEntries = this.firestoreService.getSearchedEntries(val, 'currentEntries').valueChanges()
+    this.currentEntries = this.firestoreService.getSearched(val, 'currentEntries', 'title', '').valueChanges()
 
   }
      
