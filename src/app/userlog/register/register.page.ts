@@ -51,7 +51,7 @@ export class RegisterPage implements OnInit {
 
     }
     else{
-      this.user_type = "Addict"
+      this.user_type = "Client"
     }
 
 

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs'
 import { FirestoreService } from '../../services/data/firestore.service'
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
+//'../tab2/user-detail/user-detail.page.ts'
 
 @Component({
   selector: 'app-tab2',
@@ -13,27 +14,42 @@ import { OrderPipe } from 'ngx-order-pipe';
 
 })
 export class Tab2Page implements OnInit{
-  public currentUsers;
-  public order = 'lastName';
+  currentUsers;
+  type = "all";
+  order2 = 'lastName';
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,
+    public route: ActivatedRoute,
+
     public router: Router) {}
  
   ngOnInit() {
+    if(this.type == "all"){
     this.currentUsers = this.firestoreService.getListAll("users").valueChanges();
+    }
+    else{
+      this.currentUsers = this.firestoreService.getOnly("users", "userType", this.type).valueChanges();
+    }
   }
   search(ev) {
     let val = ev.target.value;
     if(!val || !val.trim()){
-      this.currentUsers = this.firestoreService.getList("users").valueChanges();
+      this.currentUsers = this.firestoreService.getListAll("users").valueChanges();
     }
     else{
-      this.currentUsers = this.firestoreService.getSearchedEntries(val, 'users').valueChanges()
-  
+      this.currentUsers = this.firestoreService.getSearched(val, 'users', "lastName", "firstName").valueChanges();
     }
        
   }
+  setType(typ: string){
+    this.type = typ;
+    this.ngOnInit()
+  }
+
+
+ 
+
      //opens and closes drop down menu
      dropMenu() {
       document.getElementById("myDropdown").classList.toggle("show");

@@ -12,7 +12,6 @@ import { AlertController } from '@ionic/angular';
 })
 export class UserDetailPage implements OnInit {
   public user: Observable<User>;
-  userId;
   public iID;
   constructor(
     public route: ActivatedRoute,
@@ -22,14 +21,11 @@ export class UserDetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    this.userId = user.userUID
-    this.iID = this.userId;
-    this.user = this.fservice.getDetail("users", this.userId).valueChanges();
-    console.log(this.userId)
+    const userId = this.route.snapshot.paramMap.get('id');
+    this.user = this.fservice.getDetail("users", userId).valueChanges();
   }
 
-  async deleteEntry(){
+  async deleteUser(){
     const alert = this.alertController.create({
       message: 'Are you sure you want to delete this user?',
       buttons: [

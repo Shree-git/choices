@@ -53,25 +53,38 @@ export class FirestoreService {
     }
   
 
- //currently case sensetive  NEEDS TO STAY TITLE
- getSearchedEntries(search : string, collection : string): AngularFirestoreCollection<Entry> {
-  return this.firestore.collection(collection, ref => ref.where("title" ,'>=', search).where("title", "<=", search+"z"));
+ //currently case sensetive 
+ //set up to search by two values but is currently incapable
+ getSearched(search : string, collection : string, condition: string, condition2: string): AngularFirestoreCollection<any> {
+  
+  return this.firestore.collection(collection, ref => ref.where(condition ,'>=', search).where(condition, "<=", search+"z")
+  );
 
 }
 
 
+///gets all documents with field set to a particular condition
+getOnly(collection : string, field: string, condition: string): AngularFirestoreCollection<any> {
+  return this.firestore.collection(collection, ref => ref.where(field ,'==', condition));
+
+}
+
+//gets the details of a particular document
 getDetail(doc:string, id: string): AngularFirestoreDocument<any>{
   return this.firestore.collection(doc).doc(id);
 }
 
+//gets all of ONE LOGGED IN users documents
 getList(doc): AngularFirestoreCollection<any> {
   return this.firestore.collection(doc, ref => ref.where("userUID" ,'==', this.userId));
 }
 
+//returns ALL documents in that collection
 getListAll(doc): AngularFirestoreCollection<any> {
   return this.firestore.collection(doc);
 }
 
+//deletes document with corresponding ID
 delete(doc: string, id: string): Promise<void>{
   return this.firestore.doc(doc + '/' + id).delete();
 }
