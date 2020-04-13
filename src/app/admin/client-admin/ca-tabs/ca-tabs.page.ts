@@ -49,10 +49,6 @@ export class CaTabsPage implements OnInit{
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('id');
     this.iID = userId
-    console.log("Tabs" + userId)
-    console.log("Tabs Location" + this.router.url);
-
-
   }
 
   routeToTab1(){

@@ -1,43 +1,34 @@
-<ion-header class="bar-positive" align-title="center">
+<ion-header>
   <ion-toolbar>
-    <ion-title class="title">Journal</ion-title>
-    <ion-buttons slot="end">
-      <ion-button routerLink="/create-entry">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-menu-button autoHide="false" ></ion-menu-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/user-detail/{{this.userId}}'></ion-back-button>
     </ion-buttons>
+    <ion-title>Entries</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
- 
- 
-    <button  class="sort" id="drop" (click)="dropMenu()">Sort</button>
+  <button  class="sort" id="dropb" (click)="dropMenu()">Sort</button>
 
   <div class="dropdown">
-      <div id="myDrop" class="dropdown-cont">
-        <a (click) = "order ='title'; reverse = true">Title A-Z</a>
-        <a (click) = "order ='title'; reverse = false">Title Z-A</a>
-
-
-        <a (click) = "order ='timestamp'; reverse = false">Oldest</a>
-        <a (click) = "order ='timestamp'; reverse = true">Newest</a>
+      <div id="myDropd" class="dropdown-content">
+        <a (click) = "order3 ='title'; reverse = false">Title A-Z</a>
+        <a (click) = "order3 ='title'; reverse = true">Title Z-A</a>
+        <a (click) = "order3 ='timestamp'; reverse = true">Newest</a>
+        <a (click) = "order3 ='timestamp'; reverse = false">Oldest</a>
+        <a (click) = "order3 ='scale'; reverse = true">Highest</a>
+        <a (click) = "order3 ='scale'; reverse = false">Lowest</a>
       </div>
     </div>
 <br>
-
-  <ion-card *ngFor="let entry of currentEntries | async |  orderBy: ordering : reverse : true" routerLink="/detail-entry/{{entry.id}}">
-    <ion-card-header>
-        <img id="header_week" class="title-image" src="assets/days_of_week/{{entry.day}}_icon.png" />
-       <ion-card-title id="header_title">{{entry.title}} </ion-card-title>
-       <ion-card-subtitle id ="header_date">{{entry.date}}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content class="entry">
-      {{ entry.content }}
+  <ion-card *ngFor="let impulse of impulseList | async |orderBy: order3 : reverse : true" routerLink="/ca-detail/{{impulse.id}}">
+    <ion-card-header >
+        <ion-card-title id="header_title">{{impulse.title}} </ion-card-title>
+     </ion-card-header>
+     <ion-card-subtitle id ="header_date">{{impulse.date}}</ion-card-subtitle>
+    <ion-card-content id="content">
+      Scale: {{ impulse.scale }}
     </ion-card-content>
   </ion-card>
 </ion-content>

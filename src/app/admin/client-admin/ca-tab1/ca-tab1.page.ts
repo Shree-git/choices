@@ -14,55 +14,47 @@ import { OrderPipe } from 'ngx-order-pipe';
   providers: [OrderPipe]
 })
 export class CaTab1Page implements OnInit {
-  public currentEntries;
-  public ordering = 'timestamp';
-  userId;
-
+  public impulseList;
+  public order3 = 'timestamp';
+  public userId;
   constructor(
     public firestoreService: FirestoreService,
-    private orderPipe: OrderPipe,
     public route: ActivatedRoute,
+    private orderPipe: OrderPipe,
     public router: Router) {}
-
+ 
   ngOnInit() {
     var useri = (this.router.url).split('/');
     this.userId = useri[2]
-    console.log("Tab1!!!!" +this.userId)
-    this.currentEntries = this.firestoreService.getList("currentEntries", this.userId).valueChanges();
+    this.impulseList = this.firestoreService.getList("impulseList", this.userId).valueChanges();
   }
-
+  search(ev) {
+    let val = ev.target.value;
+    if(!val || !val.trim()){
+      this.impulseList = this.firestoreService.getList("impulseList", this.userId).valueChanges();
+    }
+    else{
+      this.impulseList = this.firestoreService.getSearched(val, 'impulseList', 'title', '').valueChanges()
   
-//searches through the list of current entries. If search is left empty after already clicking in
-//it just returns all entries so you aren't left with a blank page
-//searches title, content, date and day of week up to three letters
-search(ev) {
-  let val = ev.target.value;
-  if(!val || !val.trim()){
-    this.currentEntries = this.firestoreService.getList("currentEntries", this.userId).valueChanges();
+    }
+       
   }
-  else{
-    this.currentEntries = this.firestoreService.getSearched(val, 'currentEntries', 'title', '').valueChanges()
-
-  }
-     
-}
-
-   //opens and closes drop down menu
-   dropMenu() {
-    document.getElementById("myDrop").classList.toggle("show");
-    //makes it so that clicking anywhere else on the screen closes drop down
-    window.onclick = function(e) {
-    var ele=<Element>e.target;
-        if (!ele.matches('#drop')){
-          var dropdowns = document.getElementsByClassName("dropdown-cont");
-          var i;
-          for (i = 0; i < dropdowns.length; i++) {
-              var openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                  openDropdown.classList.remove('show');
-              }
+     //opens and closes drop down menu
+     dropMenu() {
+      document.getElementById("myDropd").classList.toggle("show");
+      //makes it so that clicking anywhere else on the screen closes drop down
+      window.onclick = function(e) {
+      var ele=<Element>e.target;
+          if (!ele.matches('#dropb')){
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
           }
-        }
+    }
   }
-}
 }

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../../../../services/data/firestore.service'
+import { FirestoreService } from '../../../services/data/firestore.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
-import { Impulse } from '../../../../models/impulse.interface'
+import { Impulse } from '../../../models/impulse.interface'
 import { AlertController } from '@ionic/angular';
 
-@Component({ 
-  selector: 'app-detail',
-  templateUrl: './detail.page.html',
-  styleUrls: ['./detail.page.scss'],
+@Component({
+  selector: 'app-ca-detail',
+  templateUrl: './ca-detail.page.html',
+  styleUrls: ['./ca-detail.page.scss'],
 })
-export class DetailPage implements OnInit {
+export class CaDetailPage implements OnInit {
   public impulse: Observable<Impulse>;
   public iID;
   constructor(
@@ -19,7 +19,7 @@ export class DetailPage implements OnInit {
     public alertController: AlertController,
     public fservice: FirestoreService
   ) { }
-
+ 
   ngOnInit() {
     const impulseId = this.route.snapshot.paramMap.get('id');
     this.iID = impulseId;
