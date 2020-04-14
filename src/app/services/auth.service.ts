@@ -109,14 +109,24 @@ export class AuthService {
   
 
 //data the admin can edit of the clients
-editUserDataAdmin(){
-
+assignAgent(agent){
+  return this.afStore.doc('users/' + this.userData.uid).set({
+    userUID: this.userData.uid,
+    firstName: this.userData.firstName,
+    lastName:this.userData.lastName,
+    email: this.userData.email,
+    emailVerified: this.userData.emailVerified,
+    userType: this.userData.userType,
+    photoURL: this.userData.photoURL,
+    phoneNumber: this.userData.phoneNumber,
+    agentUID: agent
+  }, {merge:true});
 }
 
   //Data the users can edit of themselves
   editUserData(first, last, email_A, photo, number){
     return this.afStore.doc('users/' + this.userData.uid).set({
-      uid : this.userData.uid,
+      userUID: this.userData.uid,
       firstName: first,
       lastName: last,
       email: email_A,
@@ -147,26 +157,6 @@ editUserDataAdmin(){
    // console.log(this.userData.uid)
     return this.userData.uid;
   }
-
-//gets the details of a particular document
-getData(iID){
-var db = firebase.firestore();
-//var user = firebase.auth().currentUser;
-db.collection("users").where("userUID", "==", iID)
-                    .get()
-                    .then(function(querySnapshot) {
-                        querySnapshot.forEach(function(doc) {
-                            // doc.data() is never undefined for query doc snapshots
-                            //console.log(doc.id, " => ", doc.data());
-                            var data = doc.data();
-                            var agent = data.agentUID
-                            console.log(agent)
-                        });
-                    })
-                    .catch(function(error) {
-                        console.log("Error getting documents: ", error);
-                    });
-}
 
   getUserType(){
     console.log(this.userData.userType)

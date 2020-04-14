@@ -26,6 +26,9 @@ export class UserDetailPage implements OnInit {
   getAgent(): string{
     return this.dataService.agentID
   }
+  getPairing(): boolean{
+    return this.dataService.pairing
+  }
 
 
   setAgent(ag: string){
@@ -40,6 +43,8 @@ export class UserDetailPage implements OnInit {
   setClient(ag : string){
     this.dataService.clientID = ag;
   }
+  
+ 
 
   constructor(
     public route: ActivatedRoute,
@@ -62,26 +67,36 @@ export class UserDetailPage implements OnInit {
     var documentReference = this.db.collection('users').doc(this.iID);
     documentReference.get().then(function(documentSnapshot) {
                               if (documentSnapshot.exists) {
-                                  console.log(documentSnapshot.data().userType == "Agent")
                                 if(documentSnapshot.data().userType == "Agent"){
                                 self.setAgent(documentSnapshot.data().userUID)
                                 }
                                 else if(documentSnapshot.data().userType == "Client"){
                                   self.setClient(documentSnapshot.data().userUID)
 
+
                                 }}
                                 else {
                                 console.log('document not found');
                               }
                         })
-    console.log("THIS IS OUR CLIENT" + this.getClient())
-    console.log("THIS IS OUR AGENT" + this.getAgent())
+    
+  
 
 
   }
 
   Pair(){
-    //var user = firebase.auth().currentUser;
+
+    //checks if pairing is on. if it is then set agent field in user data
+    if(this.getPairing() == true){
+      this.fservice.updateAgent(this.getClient(), this.getAgent())
+      console.log("Pairing Complete!")
+      this.router.navigateByUrl("/tabs-admin");
+
+    }
+    else{
+
+      //var user = firebase.auth().currentUser;
     let self = this;
     var documentReference = this.db.collection('users').doc(this.iID);
     documentReference.get().then(function(documentSnapshot) {
@@ -89,26 +104,31 @@ export class UserDetailPage implements OnInit {
 
 
                                 ///this is soley pairing from the user side
-                                if(documentSnapshot.data().agentUID !== null || documentSnapshot.data().agentUID !== undefined){
-                                self.setAgent(documentSnapshot.data().agentUID)
-                                self.setPairing(false)
-                                self.router.navigateByUrl("/user-detail/" + self.getAgent()) 
+
+                                
+                                let agent = documentSnapshot.data().agentUID
+
+                                //client does not have an agent so route to list of all users and create a pair of client and agent
+                                if(agent == undefined || agent == null){
+                                  console.log("There is no agent!!")
+                                  self.setPairing(true)
+                                  console.log("Creating Pair!! Here is our Client!" + self.getClient() )
+                                  self.router.navigateByUrl("/tab2-admin"); 
+                            
                                 }
+
+                                //client does have an agent so view that agent's information
                                 else{
-                                  self.createPair()
+                                  self.setAgent(agent)
+                                  self.setPairing(false)
+                                  self.router.navigateByUrl("/user-detail/" + self.getAgent()) 
                                 }
                               } else {
                                 console.log('document not found');
                               }
                         })
 
-                      }
-
-
-  createPair(){
-    this.router.navigateByUrl("/tab2"); 
-    this.setPairing(true)
-  }
+                      }}
 
 
   async deleteUser(){

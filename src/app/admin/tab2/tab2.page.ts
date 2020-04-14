@@ -24,15 +24,7 @@ export class Tab2Page implements OnInit{
   getClient(): string{
     return this.dataService.clientID
   }
-
-  getPairing(): boolean{
-    return this.dataService.pairing
-  }
-
-  setPairing(val: boolean){
-    this.dataService.pairing = val
-  }
-
+  
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,

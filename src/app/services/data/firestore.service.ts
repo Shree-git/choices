@@ -55,7 +55,10 @@ export class FirestoreService {
       return this.firestore.doc('userContacts/' + contactId).set({title: new_title, content: new_content, userUID : this.userId,
       }, {merge:true});
     }
-  
+
+updateAgent(id: string, val:string){
+  this.db.doc("users/"+id).update({"agentUID" : val})
+}  
 
  //currently case sensetive 
  //set up to search by two values but is currently incapable
@@ -96,10 +99,5 @@ getListAll(doc): AngularFirestoreCollection<any> {
 delete(doc: string, id: string): Promise<void>{
   return this.firestore.doc(doc + '/' + id).delete();
 }
-  /*
-  querySnapshot.forEach(function (doc) {
-    let agent = doc.data()['agentUID']; 
-    console.log(agent)
-  });
-  */
+ 
 }
