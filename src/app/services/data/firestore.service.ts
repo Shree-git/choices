@@ -3,6 +3,8 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Entry } from '../../models/entry.interface';
 import { DatePipe } from '@angular/common';
 import { AngularFireAuth } from "@angular/fire/auth";
+import { User } from 'firebase';
+import * as firebase from 'firebase';
 
 
 @Injectable({
@@ -12,13 +14,15 @@ import { AngularFireAuth } from "@angular/fire/auth";
 export class FirestoreService {
   currentDate = new Date();
   public collectionRef; public ID; userId; user;
-  
+  public db;
+
   myDate : any = this.datePipe.transform(this.currentDate, 'short');
   day_week  : any = this.datePipe.transform(this.currentDate, 'EEE');
 
   constructor(public firestore: AngularFirestore,  private datePipe: DatePipe, public ngFireAuth: AngularFireAuth,) {
     this.user = this.ngFireAuth.auth.currentUser;
     this.userId = this.user.uid
+    this.db = firebase.firestore();
    }
 
   createImpulse(title: string, date: string,
@@ -88,9 +92,14 @@ getYourList(doc): AngularFirestoreCollection<any> {
 getListAll(doc): AngularFirestoreCollection<any> {
   return this.firestore.collection(doc);
 }
-
 //deletes document with corresponding ID
 delete(doc: string, id: string): Promise<void>{
   return this.firestore.doc(doc + '/' + id).delete();
 }
+  /*
+  querySnapshot.forEach(function (doc) {
+    let agent = doc.data()['agentUID']; 
+    console.log(agent)
+  });
+  */
 }

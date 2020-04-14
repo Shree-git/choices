@@ -144,9 +144,29 @@ editUserDataAdmin(){
   }
 
   getUserId(){
-    console.log(this.userData.uid)
+   // console.log(this.userData.uid)
     return this.userData.uid;
   }
+
+//gets the details of a particular document
+getData(iID){
+var db = firebase.firestore();
+//var user = firebase.auth().currentUser;
+db.collection("users").where("userUID", "==", iID)
+                    .get()
+                    .then(function(querySnapshot) {
+                        querySnapshot.forEach(function(doc) {
+                            // doc.data() is never undefined for query doc snapshots
+                            //console.log(doc.id, " => ", doc.data());
+                            var data = doc.data();
+                            var agent = data.agentUID
+                            console.log(agent)
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log("Error getting documents: ", error);
+                    });
+}
 
   getUserType(){
     console.log(this.userData.userType)
