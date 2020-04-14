@@ -91,6 +91,7 @@ export class UserDetailPage implements OnInit {
     if(this.getPairing() == true){
       this.fservice.updateAgent(this.getClient(), this.getAgent())
       console.log("Pairing Complete!")
+      this.PairComplete()
       this.router.navigateByUrl("/tabs-admin");
 
     }
@@ -105,14 +106,17 @@ export class UserDetailPage implements OnInit {
 
                                 ///this is soley pairing from the user side
 
-                                
-                                let agent = documentSnapshot.data().agentUID
+                                let type = documentSnapshot.data().userType
 
+
+                                
+                                ///if the user type is Client if statements
+
+                                if(type == "Client"){
+                                let agent = documentSnapshot.data().agentUID
                                 //client does not have an agent so route to list of all users and create a pair of client and agent
                                 if(agent == undefined || agent == null){
-                                  console.log("There is no agent!!")
                                   self.setPairing(true)
-                                  console.log("Creating Pair!! Here is our Client!" + self.getClient() )
                                   self.router.navigateByUrl("/tab2-admin"); 
                             
                                 }
@@ -123,7 +127,20 @@ export class UserDetailPage implements OnInit {
                                   self.setPairing(false)
                                   self.router.navigateByUrl("/user-detail/" + self.getAgent()) 
                                 }
-                              } else {
+                              }
+
+
+                                //if the user type is Agent if statements
+                                //goes directly to setting a pairing
+                              
+                              else if(type == "Agent"){
+                                self.setAgent(documentSnapshot.data().userUID)
+                                self.setPairing(true)
+                                self.router.navigateByUrl("/tab2-admin")
+
+                              }}
+                              
+                              else {
                                 console.log('document not found');
                               }
                         })
@@ -154,6 +171,21 @@ export class UserDetailPage implements OnInit {
     (await alert).present();
   }
   
+  async PairComplete(){
+      const alert = this.alertController.create({
+        message: "Done! These users are paired!",
+        buttons: [
+          {
+            text: "OK",
+            handler: async () => {
+              (await alert).dismiss()
+            }
+          }
+        ]
+      });
+      
+    (await alert).present();
+  }
 
 
   

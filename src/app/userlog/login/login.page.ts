@@ -60,7 +60,6 @@ export class LoginPage implements OnInit {
          
           documentReference.get().then(function(documentSnapshot) {
                                     if (documentSnapshot.exists) {
-                                      console.log(documentSnapshot.data())
 
 
                ///AGENT TEMPORARILY ROUTES TO THE ADMIN SIDE 
