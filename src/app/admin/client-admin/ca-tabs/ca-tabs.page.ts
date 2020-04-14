@@ -47,19 +47,7 @@ export class CaTabsPage implements OnInit{
   }
 
   ngOnInit() {
-    const userId = this.route.snapshot.paramMap.get('id');
-    this.iID = userId
-  }
-
-  routeToTab1(){
-    this.router.navigateByUrl('/ca-tabs/' + this.iID + '/tab1');
-  }
-
-  routeToTab2(){
-    this.router.navigateByUrl('/ca-tabs/' + this.iID + '/tab2');
-  }
-  routeToTab3(){
-    this.router.navigateByUrl('/ca-tabs/' + this.iID + '/tab3');
+    
   }
 
 }

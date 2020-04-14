@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs'
 import { FirestoreService } from '../../services/data/firestore.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
+import { UserDetailPage } from './user-detail/user-detail.page';
+import { DataService } from 'src/app/services/data.service';
 //'../tab2/user-detail/user-detail.page.ts'
 
 @Component({
@@ -17,10 +19,17 @@ export class Tab2Page implements OnInit{
   currentUsers;
   type = "all";
   order2 = 'lastName';
+  pairing: any;
+
+  getClient(): string{
+    return this.dataService.clientID
+  }
+
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,
     public route: ActivatedRoute,
+    private dataService: DataService,
 
     public router: Router) {}
  
@@ -46,6 +55,8 @@ export class Tab2Page implements OnInit{
     this.type = typ;
     this.ngOnInit()
   }
+
+
 
 
  

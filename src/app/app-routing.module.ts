@@ -25,7 +25,7 @@ const routes: Routes = [
 
 ///////////////////ADMIN TO CLIENT
 {
-  path: 'ca-tabs/:id',
+  path: 'ca-tabs',
   loadChildren: () => import('./admin/client-admin/ca-tabs/ca-tabs.module').then(m => m.CaTabsPageModule)
 },
 

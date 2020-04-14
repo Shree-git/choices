@@ -5,6 +5,7 @@ import { FirestoreService } from '../../../services/data/firestore.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
@@ -17,15 +18,20 @@ export class CaTab1Page implements OnInit {
   public impulseList;
   public order3 = 'timestamp';
   public userId;
+
+  getClient(): string{
+    return this.dataService.clientID
+  }
+
   constructor(
     public firestoreService: FirestoreService,
     public route: ActivatedRoute,
     private orderPipe: OrderPipe,
+    private dataService: DataService,
     public router: Router) {}
  
   ngOnInit() {
-    var useri = (this.router.url).split('/');
-    this.userId = useri[2]
+    this.userId = this.getClient()
     this.impulseList = this.firestoreService.getList("impulseList", this.userId).valueChanges();
   }
   search(ev) {

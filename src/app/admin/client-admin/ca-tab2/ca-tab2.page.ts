@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs'
-import { Impulse } from '../../../models/impulse.interface'
 import { FirestoreService } from '../../../services/data/firestore.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-ca-tab2',
@@ -16,15 +16,22 @@ import { OrderPipe } from 'ngx-order-pipe';
 })
 export class CaTab2Page implements OnInit{
   public userId;
+
+
+  getClient(): string{
+    return this.dataService.clientID
+  }
+
   constructor(
     public firestoreService: FirestoreService,
     public route: ActivatedRoute,
     private orderPipe: OrderPipe,
+    private dataService: DataService,
+
     public router: Router) {}
  
   ngOnInit() {
-    var useri = (this.router.url).split('/');
-    this.userId = useri[2]
+    this.userId = this.getClient()
     //this.impulseList = this.firestoreService.getList("impulseList", this.userId).valueChanges();
   }
 }
