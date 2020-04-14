@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 export class DataService {
   agentID: string;
   clientID: string;
+  pairing: boolean;
+  type: string;
 
   constructor() { }
 

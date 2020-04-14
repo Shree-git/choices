@@ -32,10 +32,14 @@ export class UserDetailPage implements OnInit {
     this.dataService.agentID = ag;
   }
 
+  setPairing(val: boolean){
+    this.dataService.pairing = val;
+  }
+
+
   setClient(ag : string){
     this.dataService.clientID = ag;
   }
-
 
   constructor(
     public route: ActivatedRoute,
@@ -87,6 +91,7 @@ export class UserDetailPage implements OnInit {
                                 ///this is soley pairing from the user side
                                 if(documentSnapshot.data().agentUID !== null || documentSnapshot.data().agentUID !== undefined){
                                 self.setAgent(documentSnapshot.data().agentUID)
+                                self.setPairing(false)
                                 self.router.navigateByUrl("/user-detail/" + self.getAgent()) 
                                 }
                                 else{
@@ -102,6 +107,7 @@ export class UserDetailPage implements OnInit {
 
   createPair(){
     this.router.navigateByUrl("/tab2"); 
+    this.setPairing(true)
   }
 
 

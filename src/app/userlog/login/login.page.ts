@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import 'firebase/app'
 import 'firebase/auth'
 import { AlertController } from '@ionic/angular';
+import {DataService} from '../../services/data.service'
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -15,11 +17,20 @@ export class LoginPage implements OnInit {
 
   email = '';
   password = '';
-  admin: any;
+  db = firebase.firestore();
+
+  setAgent(ag: string){
+    this.dataService.agentID = ag;
+  }
+
+  setClient(ag : string){
+    this.dataService.clientID = ag;
+  }
 
   constructor(
     public authService: AuthService,
     private router: Router,
+    private dataService: DataService,
     private alertCtrl: AlertController) { }
 
   ngOnInit() {
@@ -38,12 +49,44 @@ export class LoginPage implements OnInit {
           return false;
         }*/
 
-        ///AUTO ROUTES TO ADMIN FOR TESTING
 
-          //console.log(this.authService.getUserId()
 
-          this.router.navigateByUrl('/tabs-admin');
-          this.authService.setLocalPersist();
+
+        //TAKES A SNAPSHOT OF USER DATA TO FIND OUT WHAT TYPE OF USER IS SIGNING IN
+        //AFTER WHICH SETS THE DATA SERVICE VARIABLES AND ROUTES
+
+          let self = this;
+          var documentReference = this.db.collection('users').doc(this.authService.getUserId());
+         
+          documentReference.get().then(function(documentSnapshot) {
+                                    if (documentSnapshot.exists) {
+                                      console.log(documentSnapshot.data())
+
+
+               ///AGENT TEMPORARILY ROUTES TO THE ADMIN SIDE 
+                                      
+
+                                      if(documentSnapshot.data().userType == "Agent"){
+                                      self.setAgent(documentSnapshot.data().userUID)
+                                      self.router.navigateByUrl('/tabs-admin');
+                                      self.authService.setLocalPersist();
+
+                                    }
+                                      else if(documentSnapshot.data().userType == "Client"){
+                                        self.setClient(documentSnapshot.data().userUID)
+                                        self.router.navigateByUrl('/tabs');
+                                        self.authService.setLocalPersist();
+
+      
+                                      }
+                                    else if(documentSnapshot.data().userType == "Admin"){
+                                      self.router.navigateByUrl('/tabs-admin');
+                                      self.authService.setLocalPersist();
+                                    }}
+                                      else {
+                                      console.log('document not found');
+                                    }
+                              })
       },
       async error => {
         const alert = this.alertCtrl.create({

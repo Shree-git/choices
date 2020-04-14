@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import {DataService} from '../../services/data.service'
+
 
 
 @Component({
@@ -16,12 +18,19 @@ export class RegisterPage implements OnInit {
   password: string = ""
   cpassword: string = ""
   pin: string=""
-  user_type: string = ""
 
+  setType(val: string){
+    this.dataService.type = val;
+  }
+  getType(): string{
+    return this.dataService.type
+  }
   constructor(
     public authService: AuthService,
     private router: Router,
-    public AlertCtrl: AlertController
+    public AlertCtrl: AlertController,
+    private dataService: DataService
+
     ) { }
 
   ngOnInit() {
@@ -44,14 +53,14 @@ export class RegisterPage implements OnInit {
     }
     
     if(this.pin == '2216'){
-      this.user_type = "Admin"
+      this.setType("Admin")
     }
     else if(this.pin == '1173'){
-      this.user_type = "Agent"
+      this.setType("Agent")
 
     }
     else{
-      this.user_type = "Client"
+      this.setType("Client")
     }
 
 
@@ -59,7 +68,7 @@ export class RegisterPage implements OnInit {
       ()=>{
       //  this.authService.sendVerificationMail();
 
-      this.authService.createUser(fname, lname, email, false, this.user_type, "assets/icon/default_icon.png", null, null)
+      this.authService.createUser(fname, lname, email, false, this.getType(), "assets/icon/default_icon.png", null, null)
         this.router.navigateByUrl('/login');
       },
       async error => {
