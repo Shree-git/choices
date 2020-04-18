@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Contact</ion-title>
+    <ion-back-button slot="start"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="createContactForm" (submit)="createContact()">
+    <ion-item>
+      <ion-label stacked>Full Name</ion-label>
+      <ion-input formControlName="title" type="text" placeholder="John Smith"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Phone Number</ion-label>
+      <ion-textarea formControlName="content" type="text" placeholder="000-000-0000"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!createContactForm.valid">Add</ion-button>
+    <ion-button expand="block" color="dark" routerLink='/contact'>Cancel</ion-button>
+  </form>
+</ion-content>

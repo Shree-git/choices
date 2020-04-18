@@ -15,6 +15,7 @@ export class FirestoreService {
   currentDate = new Date();
   public collectionRef; public ID; userId; user;
   public db;
+  public col: AngularFirestoreCollection<any>;
 
   myDate : any = this.datePipe.transform(this.currentDate, 'short');
   day_week  : any = this.datePipe.transform(this.currentDate, 'EEE');
@@ -51,11 +52,13 @@ export class FirestoreService {
       return this.firestore.doc('userContacts/' + id).set({id, title, content, userUID,});
     }
   
-    editContact(contactId, new_title, new_content){
+ editContact(contactId, new_title, new_content){
       return this.firestore.doc('userContacts/' + contactId).set({title: new_title, content: new_content, userUID : this.userId,
       }, {merge:true});
     }
 
+
+//updates the agent field in of a particular user
 updateAgent(id: string, val:string){
   this.db.doc("users/"+id).update({"agentUID" : val})
 }  
@@ -65,10 +68,7 @@ updateAgent(id: string, val:string){
  getSearched(search : string, collection : string, condition: string, condition2: string): AngularFirestoreCollection<any> {
   
   return this.firestore.collection(collection, ref => ref.where(condition ,'>=', search).where(condition, "<=", search+"z")
-  );
-
-}
-
+  );}
 
 ///gets all documents with field set to a particular condition
 getOnly(collection : string, field: string, condition: string): AngularFirestoreCollection<any> {
