@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Impulses</ion-title>
+    <ion-title>Groups</ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/create">
+      <ion-button routerLink="/agent-create-group">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -15,26 +15,30 @@
 
 <ion-content>
     <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
-  <button  class="sort" id="dropbtn" (click)="dropMenu()">Sort</button>
+  <button  class="sort" id="drobtn" (click)="dropMenu()">Sort</button>
 
-  <div class="dropdown">
-      <div id="myDropdown" class="dropdown-content">
-        <a (click) = "order ='title'; reverse = false">Title A-Z</a>
-        <a (click) = "order ='title'; reverse = true">Title Z-A</a>
-        <a (click) = "order ='timestamp'; reverse = true">Newest</a>
-        <a (click) = "order ='timestamp'; reverse = false">Oldest</a>
-        <a (click) = "order ='scale'; reverse = true">Highest</a>
-        <a (click) = "order ='scale'; reverse = false">Lowest</a>
+  <div class="dro">
+      <div id="myDro" class="dropdown-content">
+        <a (click) = "order ='lastName'; reverse = true">Title A-Z</a>
+        <a (click) = "order ='lastName'; reverse = false">Title Z-A</a>
       </div>
-    </div>
+    </div> 
 <br>
-  <ion-card *ngFor="let impulse of impulseList | async |orderBy: order : reverse : true" routerLink="/detail/{{impulse.id}}">
-    <ion-card-header >
-        <ion-card-title id="header_title">{{impulse.title}} </ion-card-title>
-     </ion-card-header>
-     <ion-card-subtitle id ="header_date">{{impulse.date}}</ion-card-subtitle>
-    <ion-card-content id="content">
-      Scale: {{ impulse.scale }}
-    </ion-card-content>
-  </ion-card>
+<!-- |orderBy: order2 : reverse : true-->
+<ion-card *ngFor="let user of currentUsers | async " >
+  <ion-card-header  routerLink="/user-detail-agent/{{user.userUID}}">
+      <img id="photo" class="title-image" src="{{user.photoURL}}" />
+     <ion-card-title id="name">{{user.firstName}} {{user.lastName}} </ion-card-title>
+     <ion-card-subtitle id ="user_type">{{user.userType}}</ion-card-subtitle>
+  </ion-card-header>
+</ion-card>
+
+
+<ion-card *ngFor="let group of currentGroups | async " >
+  <ion-card-header  routerLink="/agent-detail-group/{{group.id}}">
+     <ion-card-title id="name">{{group.title}}</ion-card-title>
+     <ion-card-subtitle id="user_type">{{group.date}}</ion-card-subtitle>
+  </ion-card-header>
+</ion-card>
+
 </ion-content>

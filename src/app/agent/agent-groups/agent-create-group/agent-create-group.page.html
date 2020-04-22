@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Group</ion-title>
+    <ion-back-button slot="start"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="createGroupForm" (submit)="createGroup()">
+    <ion-item>
+      <ion-label stacked>Group Name</ion-label>
+      <ion-input formControlName="title" type="text" placeholder="Enter Group Name"></ion-input>
+    </ion-item>
+    <ion-button expand="block" type="submit" [disabled]="!createGroupForm.valid">Add</ion-button>
+    <ion-button expand="block" color="dark" routerLink='agent-tab2'>Cancel</ion-button>
+  </form>
+</ion-content>

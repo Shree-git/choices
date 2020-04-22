@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AgentTab1Page } from './agent-tab1.page';
+import {AgentDetailGroupPage } from './agent-detail-group.page';
 
-describe('AgentTab1Page', () => {
-  let component: AgentTab1Page;
-  let fixture: ComponentFixture<AgentTab1Page>;
+describe('AgentDetailGroupPage', () => {
+  let component: AgentDetailGroupPage;
+  let fixture: ComponentFixture<AgentDetailGroupPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AgentTab1Page],
+      declarations: [ AgentDetailGroupPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AgentTab1Page);
+    fixture = TestBed.createComponent(AgentDetailGroupPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
@@ -22,4 +22,3 @@ describe('AgentTab1Page', () => {
     expect(component).toBeTruthy();
   });
 });
- 

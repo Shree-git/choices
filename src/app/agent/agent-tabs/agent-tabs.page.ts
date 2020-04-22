@@ -3,27 +3,28 @@ import { AuthService } from '../../services/auth.service'
 import { Router, RouterEvent } from '@angular/router';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  selector: 'app-agent-tabs',
+  templateUrl: 'agent-tabs.page.html',
+  styleUrls: ['agent-tabs.page.scss']
 })
-export class TabsPage implements OnInit{
+export class AgentTabsPage implements OnInit{
 
   activePath = '';
 
   pages = [
     {
-      name: 'Journal',
-      path: '/tabs/tab1'
+      name: 'Assignments',
+      path: '/agent-tabs/agent-tab1'
     },
     {
-      name: 'Impulses',
-      path: '/tabs/tab2'
+      name: 'Groups',
+      path: '/agent-tabs/agent-tab2'
     },
     {
-      name: 'Wellness',
-      path: '/tabs/tab3'
+      name: 'Agenda',
+      path: '/agent-tabs/agent-tab3'
     },
+    /*
     {
       name: 'Account',
       path: '/tabs/account'
@@ -32,6 +33,7 @@ export class TabsPage implements OnInit{
       name: 'Safe Contacts',
       path: '/tabs/contacts'
     }
+    */
   ]
   constructor(
     public authService: AuthService,

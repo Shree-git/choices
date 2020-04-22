@@ -3,11 +3,11 @@ import { Platform } from '@ionic/angular';
 import { CalendarComponentOptions } from 'ion2-calendar';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-agent-tab3',
+  templateUrl: 'agent-tab3.page.html',
+  styleUrls: ['agent-tab3.page.scss']
 })
-export class Tab3Page {
+export class AgentTab3Page {
 
 
   optionsSingle: CalendarComponentOptions = {

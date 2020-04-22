@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab2Page } from './agent-tab2.page';
+import { AgentTab2Page } from './agent-tab2.page';
 import { OrderModule} from 'ngx-order-pipe';
 
 
@@ -13,8 +13,8 @@ import { OrderModule} from 'ngx-order-pipe';
     CommonModule,
     FormsModule,
     OrderModule,
-    RouterModule.forChild([{ path: '', component: Tab2Page }])
+    RouterModule.forChild([{ path: '', component: AgentTab2Page }])
   ],
-  declarations: [Tab2Page]
+  declarations: [AgentTab2Page]
 })
-export class Tab2PageModule {}
+export class AgentTab2PageModule {}

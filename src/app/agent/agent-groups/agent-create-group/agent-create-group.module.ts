@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreatePageRoutingModule } from './agent-create-routing.module';
+import { AgentCreateGroupPageRoutingModule } from './agent-create-group-routing.module';
 
-import { CreatePage } from './agent-create.page';
+import { AgentCreateGroupPage } from './agent-create-group.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { CreatePage } from './agent-create.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    CreatePageRoutingModule
+    AgentCreateGroupPageRoutingModule
   ],
-  declarations: [CreatePage]
+  declarations: [AgentCreateGroupPage]
 })
-export class CreatePageModule {}
+export class AgentCreateGroupPageModule {}

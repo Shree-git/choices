@@ -27,6 +27,27 @@ const routes: Routes = [
 
 
 
+
+///////////////////// AGENT SIDE 
+{
+  path: 'tabs-agent',
+  loadChildren: () => import('./agent/agent-tabs/agent-tabs.module').then(m => m.AgentTabsPageModule)
+},
+{
+  path: 'user-detail-agent/:id',
+  loadChildren: () => import('./agent/agent-tab2/user-detail-agent/user-detail-agent.module').then( m => m.UserDetailAgentPageModule)
+},
+{
+  path: 'agent-create-group',
+  loadChildren: () => import('./agent/agent-groups/agent-create-group/agent-create-group.module').then( m => m.AgentCreateGroupPageModule)
+},
+{
+  path: 'agent-detail-group/:id',
+  loadChildren: () => import('./agent/agent-groups/agent-detail-group/agent-detail-group.module').then( m => m.AgentDetailGroupPageModule)
+},
+
+
+
 ///////////////////ADMIN TO CLIENT
 {
   path: 'ca-tabs',

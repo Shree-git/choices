@@ -26,6 +26,21 @@ export class FirestoreService {
     this.db = firebase.firestore();
    }
 
+
+
+//////////////////// group methods
+
+   createGroup(title: string, date: string
+): Promise<void> {
+    const id = this.firestore.createId();
+    const leader = this.userId
+    return this.firestore.doc('groups/' + id).set({id, title, date, leader});
+  }
+
+
+
+
+
   createImpulse(title: string, date: string,
     scale: number, description: string, timestamp: string, userUID : string,
 ): Promise<void> {
@@ -73,6 +88,12 @@ updateAgent(id: string, val:string){
 ///gets all documents with field set to a particular condition
 getOnly(collection : string, field: string, condition: string): AngularFirestoreCollection<any> {
   return this.firestore.collection(collection, ref => ref.where(field ,'==', condition));
+
+}
+
+///gets all documents with field set to a particular condition
+getMy(collection : string, field: string): AngularFirestoreCollection<any> {
+  return this.firestore.collection(collection, ref => ref.where(field ,'==', this.userId));
 
 }
 

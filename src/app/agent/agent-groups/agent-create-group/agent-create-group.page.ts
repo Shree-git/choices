@@ -11,12 +11,12 @@ import { AngularFireAuth } from "@angular/fire/auth";
 
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.page.html',
-  styleUrls: ['./create.page.scss'],
+  selector: 'app-agent-create-group',
+  templateUrl: './agent-create-group.page.html',
+  styleUrls: ['./agent-create-group.page.scss'],
 })
-export class CreatePage implements OnInit {
-  public createImpulseForm: FormGroup;
+export class AgentCreateGroupPage implements OnInit {
+  public createGroupForm: FormGroup;
   currentDate = new Date();
   user;
   myDate : any = this.datePipe.transform(this.currentDate, 'short');
@@ -32,12 +32,9 @@ export class CreatePage implements OnInit {
     public router: Router,
     public ngFireAuth: AngularFireAuth
     ) {
-      this.createImpulseForm = formBuilder.group({
+      this.createGroupForm = formBuilder.group({
         title: ['', [Validators.maxLength(50), Validators.required]],
         date: this.myDate,
-        scale: ['', [Validators.min(1), Validators.max(10), Validators.required]],
-        description: ['', Validators.required],
-        timestamp : this.currentDate.getTime(),
       })
       this.user = this.ngFireAuth.auth.currentUser;
 
@@ -48,21 +45,17 @@ export class CreatePage implements OnInit {
     //this.userContacts = this.firestoreService.getuserContacts().valueChanges();
   }
 
-  async createImpulse(){
+  async createGroup(){
     const loading = await this.loadingCtrl.create();
 
-    const title = this.createImpulseForm.value.title;
+    const title = this.createGroupForm.value.title;
     const date = new Date().toString();
-    const scale = this.createImpulseForm.value.scale;
-    const description = this.createImpulseForm.value.description;
-    const timestamp = this.createImpulseForm.value.timestamp;
-    const uid = this.user.userUID
 
 
-    this.firestoreService.createImpulse(title, date, scale, description, timestamp, uid)
+    this.firestoreService.createGroup(title, date)
     .then(() => {
       loading.dismiss().then(() => {
-        this.router.navigateByUrl('/tabs/tab2');
+        this.router.navigateByUrl('agent-tab2');
         
       });
       //let cont= this.firestoreService.getSafeContact();

@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../../../services/data/firestore.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
-import { Impulse } from '../../../models/impulse.interface'
+import { Group } from '../../../models/group.interface'
 import { AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.page.html',
-  styleUrls: ['./detail.page.scss'],
+  selector: 'app-agent-detail-group',
+  templateUrl: './agent-detail-group.page.html',
+  styleUrls: ['./agent-detail-group.page.scss'],
 })
-export class DetailPage implements OnInit {
-  public impulse: Observable<Impulse>;
-  public iID;
+export class AgentDetailGroupPage implements OnInit {
+  public group: Observable<Group>;
+  public groupId;
   constructor(
     public route: ActivatedRoute,
     public router: Router,
@@ -21,14 +21,14 @@ export class DetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const impulseId = this.route.snapshot.paramMap.get('id');
-    this.iID = impulseId;
-    this.impulse = this.fservice.getDetail("impulseList",impulseId).valueChanges();
+    const groupI = this.route.snapshot.paramMap.get('id');
+    this.groupId = groupI;
+    this.group = this.fservice.getDetail("groups",this.groupId).valueChanges();
   }
 
-  async deleteImpulse(){
+  async deleteGroup(){
     const alert = this.alertController.create({
-      message: 'Are you sure you want to delete this impulse?',
+      message: 'Are you sure you want to delete this Group?',
       buttons: [
       {
         text: 'Cancel',
@@ -40,8 +40,8 @@ export class DetailPage implements OnInit {
       {
         text: 'Delete',
         handler: () => {
-          this.fservice.delete("impulseList", this.iID);
-          this.router.navigateByUrl('tabs/tab2');
+          this.fservice.delete("groups", this.groupId);
+          this.router.navigateByUrl('agent-tabs/agent-tab2');
         },
       },
     ],

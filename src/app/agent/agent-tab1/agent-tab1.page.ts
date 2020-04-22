@@ -8,12 +8,12 @@ import { OrderPipe } from 'ngx-order-pipe';
 
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  selector: 'app-agent-tab1',
+  templateUrl: 'agent-tab1.page.html',
+  styleUrls: ['agent-tab1.page.scss'],
   providers: [OrderPipe]
 })
-export class Tab1Page implements OnInit {
+export class AgentTab1Page implements OnInit {
   public currentEntries;
   public ordering = 'timestamp';
 
@@ -39,7 +39,7 @@ search(ev) {
     this.currentEntries = this.firestoreService.getSearched(val, 'currentEntries', 'title', '').valueChanges()
 
   }
-     
+      
 }
 
    //opens and closes drop down menu

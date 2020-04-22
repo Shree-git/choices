@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ViewContactPageRoutingModule } from './view-contact-routing.module';
+import { ViewContactPageRoutingModule } from './agent-view-contact-routing.module';
 
 import { ViewContactPage } from './agent-view-contact.page';
 
