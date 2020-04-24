@@ -9,5 +9,7 @@ export interface User {
     photoURL?: string;
     phoneNumber?: string;
     agentUID?:string;
+    check?: boolean;
+    groupUID?: string;
 
 }

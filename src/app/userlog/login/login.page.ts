@@ -67,7 +67,7 @@ export class LoginPage implements OnInit {
 
                                       if(documentSnapshot.data().userType == "Agent"){
                                       self.setAgent(documentSnapshot.data().userUID)
-                                      self.router.navigateByUrl('/tabs-agent');
+                                      self.router.navigateByUrl('/agent-tabs');
                                       self.authService.setLocalPersist();
 
                                     }

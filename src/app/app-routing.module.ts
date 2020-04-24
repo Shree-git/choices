@@ -30,7 +30,7 @@ const routes: Routes = [
 
 ///////////////////// AGENT SIDE 
 {
-  path: 'tabs-agent',
+  path: 'agent-tabs',
   loadChildren: () => import('./agent/agent-tabs/agent-tabs.module').then(m => m.AgentTabsPageModule)
 },
 {

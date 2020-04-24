@@ -2,7 +2,10 @@
   <ion-toolbar>
     <ion-title>Groups</ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/agent-create-group">
+      <ion-button  [hidden]="this.getRegular() != false" (click)="addMembers()">
+        <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+      </ion-button>
+      <ion-button  [hidden]="this.getRegular() == false" routerLink="/agent-create-group">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -25,12 +28,13 @@
     </div> 
 <br>
 <!-- |orderBy: order2 : reverse : true-->
-<ion-card *ngFor="let user of currentUsers| async;  let i = index  " id="{{i}}">
+<ion-card *ngFor="let user of currentUsers| async ">
   <ion-card-header>
       <img id="photo" class="title-image"  routerLink="/user-detail-agent/{{user.userUID}}"src="{{user.photoURL}}" />
-    
-      <button id="add_group" type="button" (click)="changeCheck(i, user.userUID)">
-        <ion-icon slot="icon-only" name="{{icon_name}}"></ion-icon>
+    <!-- "changeCheck(i, user.userUID)"-->
+      <button id="add_group" [hidden]="this.getRegular() != false"  type="button" (click)="showCheck(user.userUID, user.check)">
+        <ion-icon slot="icon-only" [hidden]="user.check == true" name="add"></ion-icon>
+        <ion-icon slot="icon-only" [hidden]="user.check== false" name="checkmark"></ion-icon>
       </button>
 
      <ion-card-title routerLink="/user-detail-agent/{{user.userUID}}" id="name">{{user.firstName}} {{user.lastName}} </ion-card-title>

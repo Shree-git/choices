@@ -8,6 +8,8 @@ export class DataService {
   clientID: string;
   pairing: boolean;
   type: string;
+  group: string;
+  regular: boolean;
 
   constructor() { }
 

@@ -100,11 +100,11 @@ export class AuthService {
   createUser(
     firstName: string, lastName: string,  email: string,
     emailVerified: boolean, userType: string,
-    photoURL: string, phoneNumber: string, agentUID:string
+    photoURL: string, phoneNumber: string, agentUID:string, check: boolean, groupUID: string,
   ): Promise<void> {
     var user = firebase.auth().currentUser;
     var userUID = user.uid;
-    return this.afStore.doc('users/' + userUID).set({userUID, firstName, lastName, email, emailVerified, userType, photoURL, phoneNumber, agentUID});
+    return this.afStore.doc('users/' + userUID).set({userUID, firstName, lastName, email, emailVerified, userType, photoURL, phoneNumber, agentUID, check, groupUID});
   }
   
 
@@ -119,7 +119,9 @@ assignAgent(agent){
     userType: this.userData.userType,
     photoURL: this.userData.photoURL,
     phoneNumber: this.userData.phoneNumber,
-    agentUID: agent
+    agentUID: agent,
+    check: this.userData.check,
+    groupUID: this.userData.groupUID,
   }, {merge:true});
 }
 

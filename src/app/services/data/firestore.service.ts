@@ -78,6 +78,16 @@ updateAgent(id: string, val:string){
   this.db.doc("users/"+id).update({"agentUID" : val})
 }  
 
+
+updateCheck(id: string, val:boolean){
+  this.db.doc("users/"+id).update({"check" : val})
+}  
+
+updateGroup(id: string, val:string){
+  this.db.doc("users/"+id).update({"groupUID" : val})
+}  
+
+
  //currently case sensetive 
  //set up to search by two values but is currently incapable
  getSearched(search : string, collection : string, condition: string, condition2: string): AngularFirestoreCollection<any> {
