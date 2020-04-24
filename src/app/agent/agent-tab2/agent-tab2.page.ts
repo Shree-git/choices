@@ -16,6 +16,8 @@ import { OrderPipe } from 'ngx-order-pipe';
 export class AgentTab2Page implements OnInit{
   public currentUsers;
   public currentGroups;
+  icon_name = "add"
+  new_members = new Array<String>()
   //public order = 'lastName';
 
 
@@ -29,8 +31,27 @@ export class AgentTab2Page implements OnInit{
   ngOnInit() {
     this.currentUsers = this.firestoreService.getMy("users", "agentUID").valueChanges();
     this.currentGroups = this.firestoreService.getMy("groups", "leader").valueChanges();
+    console.log(this.currentUsers)
+  }
+
+changeCheck(ind, iid){
+  let card =document.getElementById(ind).getElementsByTagName("ion-icon")[0]   
+  if(card.getAttribute("name") == "add"){
+    card.setAttribute("name", "checkmark")
+  //  if(this.new_members.includes(iid) != true){
+    this.new_members.push(iid)
+  //}
 
   }
+  else{
+    card.setAttribute("name", "add")
+    let indx = this.new_members.indexOf(iid, 0)
+    this.new_members.splice(indx, 1); 
+  }
+  console.log(this.new_members)
+
+}
+
   search(ev) {
     let val = ev.target.value;
     if(!val || !val.trim()){

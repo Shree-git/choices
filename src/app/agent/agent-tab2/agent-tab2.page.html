@@ -25,11 +25,16 @@
     </div> 
 <br>
 <!-- |orderBy: order2 : reverse : true-->
-<ion-card *ngFor="let user of currentUsers | async " >
-  <ion-card-header  routerLink="/user-detail-agent/{{user.userUID}}">
-      <img id="photo" class="title-image" src="{{user.photoURL}}" />
-     <ion-card-title id="name">{{user.firstName}} {{user.lastName}} </ion-card-title>
-     <ion-card-subtitle id ="user_type">{{user.userType}}</ion-card-subtitle>
+<ion-card *ngFor="let user of currentUsers| async;  let i = index  " id="{{i}}">
+  <ion-card-header>
+      <img id="photo" class="title-image"  routerLink="/user-detail-agent/{{user.userUID}}"src="{{user.photoURL}}" />
+    
+      <button id="add_group" type="button" (click)="changeCheck(i, user.userUID)">
+        <ion-icon slot="icon-only" name="{{icon_name}}"></ion-icon>
+      </button>
+
+     <ion-card-title routerLink="/user-detail-agent/{{user.userUID}}" id="name">{{user.firstName}} {{user.lastName}} </ion-card-title>
+     <ion-card-subtitle routerLink="/user-detail-agent/{{user.userUID}}" id ="user_type">{{user.userType}}</ion-card-subtitle>
   </ion-card-header>
 </ion-card>
 

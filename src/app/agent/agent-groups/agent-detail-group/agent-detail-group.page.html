@@ -12,7 +12,12 @@
     <ion-card-content class="entry-titles">{{ (group | async)?.title }}</ion-card-content>
     <ion-card-content class="entry-info">Date: {{ (group | async)?.date }}</ion-card-content>
   </ion-card>
-  <ion-button expand="block" color="danger" (click)="deleteGroup()">
-    Delete<ion-icon name="trash"></ion-icon>
-  </ion-button>
+  <br>
+  <ion-button expand="block" color="light" id="groupbtn" routerLink='/ca-tabs'>
+    View Group
+    </ion-button>
+  
+    <ion-button expand="block" color="medium" id="addbtn"(click)="addMember()">
+    Add Member
+    </ion-button>
 </ion-content>
