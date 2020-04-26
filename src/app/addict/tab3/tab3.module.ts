@@ -5,7 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 import { CalendarModule } from 'ion2-calendar';
-
+import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
+import {NgCalendarModule } from 'ionic2-calendar';
 
 
 @NgModule({
@@ -13,6 +14,8 @@ import { CalendarModule } from 'ion2-calendar';
     IonicModule,
     CommonModule,
     FormsModule,
+    ExploreContainerComponentModule,
+    NgCalendarModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     CalendarModule
   ],
