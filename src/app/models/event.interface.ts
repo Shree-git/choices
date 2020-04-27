@@ -2,8 +2,8 @@ export interface Event{
     eventUID: string;
     title: string;
     desc: string;
-    startTime: Date;
-    endTime: Date;
+    startTime: string;
+    endTime: string;
     userUID :string;
     done: boolean;
 

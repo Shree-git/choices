@@ -45,7 +45,7 @@ createAssignment( assignerUID: string, userUID: string, eventUID: string, title:
 
 ////////////Event methods///////////////
 
-   createEvent( title: string, desc: string, startTime: Date, endTime: Date, done: boolean, assignerUID: string, notifTime: string): Promise<void> {
+   createEvent( title: string, desc: string, startTime: string, endTime: string, done: boolean, assignerUID: string, notifTime: string): Promise<void> {
     const eventUID = this.firestore.createId();
     const userUID = this.userId;
     return this.firestore.doc('events/'  + eventUID).set({eventUID, title, desc, startTime, endTime, userUID, done, assignerUID, notifTime});

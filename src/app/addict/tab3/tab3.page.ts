@@ -27,8 +27,9 @@ export class Tab3Page  implements OnInit{
 
   minDate = new Date().toISOString();
 
-                                           eventSource = [];
-
+  eventSource = [];
+  private eventIDS = [];
+  
   calendar = {
     mode: 'month',
     currentDate:new Date()
@@ -36,7 +37,6 @@ export class Tab3Page  implements OnInit{
   
   viewTitle= '';
   public eventList;
-
   @ViewChild(CalendarComponent, {static: false}) myCal: CalendarComponent;
 
   constructor(
@@ -57,13 +57,31 @@ export class Tab3Page  implements OnInit{
 
   ngOnInit() {
     this.resetEvent();
-    this.eventList = this.fservice.getYourList("events").valueChanges();
-  /*
-    this. eventSource = Object.keys(this.eventList).map(event => {
-      return {title: event, desc: event, startTime: event, endTime: event} 
-  });
-  */
+    this.eventList = this.fservice.getYourList("events").snapshotChanges();
+
+
+/// adds all of user events to calendar
+    this.eventList.subscribe( payload => {
+      payload.forEach( item => {
+        ///checks if event has already been added to calendar
+        if(this.eventIDS.indexOf(item.payload.doc.data().eventUID) == -1){
+
+        let eventCopy = {
+          title: item.payload.doc.data().title,
+          desc: item.payload.doc.data().desc,
+          startTime:new Date(item.payload.doc.data().startTime),
+          endTime: new Date(item.payload.doc.data().endTime),
+          allDay: false
+        }
+        this.eventIDS.push(item.payload.doc.data().eventUID)
+         this.eventSource.push(eventCopy);
+
+        }})  
+        this.myCal.loadEvents();
+      this.resetEvent();
+    })
 }
+
 
 
 //when you click on the event it shows this pop up
@@ -90,22 +108,16 @@ export class Tab3Page  implements OnInit{
 
 
     addEvent() {
-      let eventCopy = {
-        title: this.event.title, 
-        desc: this.event.desc,
-        startTime: new Date(this.event.startTime),
-        endTime: new Date(this.event.endTime)
-      }
-   
-      this.fservice.createEvent(this.event.title,this.event.desc, new Date(this.event.startTime), new Date(this.event.endTime), false, null, null)
-
-      this.eventSource.push(eventCopy);
+      let start = this.event.startTime
+      let end = this.event.endTime
+      this.fservice.createEvent(this.event.title,this.event.desc, start, end, false, null, null)
+     // this.eventSource.push(eventCopy);
       this.myCal.loadEvents();
       this.resetEvent();
     }
 
   
-
+///changes the title at the top that tells month and year
   onViewTitleChanged(title){
     this.viewTitle = title;
   }
