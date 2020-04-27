@@ -11,9 +11,25 @@
       <label>Title</label>
       <input type="text" name ="title"  formControlName="title" class="form-control" id="title">
     </div>
+
+    <div class="field"> 
+      <label id="assign_label">Assigned To</label>
+    <select name ="assign"  formControlName="assignedTo" class="form-control" id="assign">
+      <option *ngFor="let user of currentUsers| async " value="{{user.userUID}}">{{user.firstName}} {{user.lastName}}</option>  
+      <option *ngFor="let group of currentGroups| async " value="{{group.id}}">{{group.title}}</option>  
+
+    </select>
+    </div>
     <div class="field"> 
       <textarea formControlName="desc" id= "desc" type="text" placeholder="Description"></textarea>
     </div>
+    <div class="field"> 
+
+    <ion-item>
+      <ion-label>Due Date: </ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY HH:mm"  formControlName="due" pickerFormat="MMM D:HH:mm" [min]="minDate"></ion-datetime>
+    </ion-item>
+  </div>
     <!--
     <div>
       <label>Due Date</label>
@@ -26,4 +42,5 @@
     <br>
     <ion-button expand="block" color="dark" routerLink='/tabs/tab1'>Cancel</ion-button>
   </form>
+
 </ion-content>

@@ -25,6 +25,10 @@ export class Tab3Page  implements OnInit{
   
   };
 
+  groups = {
+    groupId: ''
+  }
+
   minDate = new Date().toISOString();
 
   eventSource = [];
@@ -39,6 +43,10 @@ export class Tab3Page  implements OnInit{
   public eventList;
   @ViewChild(CalendarComponent, {static: false}) myCal: CalendarComponent;
 
+
+  user;
+  group = [];
+  groupEvents;
   constructor(
     private alertCtrl: AlertController,
     public fservice: FirestoreService,
@@ -55,9 +63,36 @@ export class Tab3Page  implements OnInit{
     allDay: false
     }}
 
+    findObjectByKey(array, key, value) {
+      for (var i = 0; i < array.length; i++) {
+          if (array[i][key] === value) {
+              return array[i];
+          }
+      }
+      return null;
+  }
+
   ngOnInit() {
     this.resetEvent();
     this.eventList = this.fservice.getYourList("events").snapshotChanges();
+    this.user = JSON.parse(localStorage.getItem('user'));
+    let userId = this.user.uid
+    this.user =this.fservice.getList("users", userId).snapshotChanges()
+   
+    this.user.subscribe( payload => {
+      payload.forEach( item => {
+        let groups = {
+          groupId: item.payload.doc.data().groupUID,
+        
+        }
+        this.group.push(groups)
+        })
+
+      })
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        console.log("Group",this.group)
+      this.groupEvents = this.fservice.getOnly("events", "userUID", "ftV7dsLyiROqWognExBz").snapshotChanges()
+
 
 
 /// adds all of user events to calendar
@@ -78,8 +113,31 @@ export class Tab3Page  implements OnInit{
 
         }})  
         this.myCal.loadEvents();
-      this.resetEvent();
+        this.resetEvent();
     })
+
+  
+    this.groupEvents.subscribe( payload => {
+      payload.forEach( item => {
+        ///checks if event has already been added to calendar
+        if(this.eventIDS.indexOf(item.payload.doc.data().eventUID) == -1){
+
+        let eventCopy = {
+          title: item.payload.doc.data().title,
+          desc: item.payload.doc.data().desc,
+          startTime:new Date(item.payload.doc.data().startTime),
+          endTime: new Date(item.payload.doc.data().endTime),
+          allDay: false
+        }
+        this.eventIDS.push(item.payload.doc.data().eventUID)
+         this.eventSource.push(eventCopy);
+
+        }})  
+        this.myCal.loadEvents();
+        this.resetEvent();
+    })
+
+
 }
 
 

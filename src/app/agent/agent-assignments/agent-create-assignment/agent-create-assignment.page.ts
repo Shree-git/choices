@@ -20,6 +20,10 @@ export class AgentCreateAssignmentPage implements OnInit {
   user;
   id;
   iid;
+  minDate;
+  currentUsers;
+  currentGroups;
+
   
 
   getClient(): string{
@@ -38,8 +42,9 @@ export class AgentCreateAssignmentPage implements OnInit {
     ) {
       this.createAssignmentForm = formBuilder.group({
         title: ['', Validators.required],
+        assignedTo: ['', Validators.required],
         desc:['', Validators.required],
-       // due: ['', Validators.required],
+        due: ['', Validators.required],
       })
 
      }
@@ -49,6 +54,12 @@ this.user = JSON.parse(localStorage.getItem('user'));
 this.id = this.user.uid;
 this.iid = this.id;
 console.log(this.iid)
+this.minDate = new Date().toISOString();
+this.currentUsers = this.firestoreService.getMy("users", "agentUID").valueChanges();
+this.currentGroups = this.firestoreService.getMy("groups", "leader").valueChanges();
+
+
+
   }
 
   async createAssignment(){
@@ -56,12 +67,12 @@ console.log(this.iid)
 
     const title = this.createAssignmentForm.value.title;
     const desc = this.createAssignmentForm.value.desc;
-    const due = this.currentDate;
+    const due = this.createAssignmentForm.value.due;
     const assignerUID = this.iid
     const done = false;
     const response = null;
-    const assignedTo = "o9KgRhURIph9c6PklwGEbfLi4pl1"
-
+    const assignedTo = this.createAssignmentForm.value.assignedTo;
+    console.log(assignedTo)
     this.firestoreService.createAssignment(assignerUID, assignedTo, title, desc, due, done, response)
     .then(() => {
       loading.dismiss().then(() => {
