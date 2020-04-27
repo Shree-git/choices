@@ -108,7 +108,7 @@ export class AgentTab3Page implements OnInit{
     addEvent() {
       let start = this.event.startTime
       let end = this.event.endTime
-      this.fservice.createEvent(this.event.title,this.event.desc, start, end, false, null, null)
+      this.fservice.createEvent(this.event.title,this.event.desc, start, end, false, null, null,null)
      // this.eventSource.push(eventCopy);
       this.myCal.loadEvents();
       this.resetEvent();

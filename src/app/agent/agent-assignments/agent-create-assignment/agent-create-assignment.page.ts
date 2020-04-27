@@ -5,22 +5,26 @@ import { FirestoreService } from '../../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
-  selector: 'app-create-entry',
-  templateUrl: './create-entry.page.html',
-  styleUrls: ['./create-entry.page.scss'],
+  selector: 'app-agent-create-assignment',
+  templateUrl: './agent-create-assignment.page.html',
+  styleUrls: ['./agent-create-assignment.page.scss'],
   providers: [DatePipe],
 })
-export class CreateEntryPage implements OnInit {
-  public createEntryForm: FormGroup;
-  currentDate = new Date();
+export class AgentCreateAssignmentPage implements OnInit {
+  public createAssignmentForm: FormGroup;
+  currentDate = new Date().toISOString();
   user;
+  id;
+  iid;
   
-  myDate : any = this.datePipe.transform(this.currentDate, 'short');
-  day_week  : any = this.datePipe.transform(this.currentDate, 'EEE');
 
+  getClient(): string{
+    return this.dataService.clientID
+  }
   constructor(
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -28,40 +32,40 @@ export class CreateEntryPage implements OnInit {
     private datePipe: DatePipe,
     formBuilder: FormBuilder,
     public router: Router,
+    private dataService: DataService,
     public ngFireAuth: AngularFireAuth,
 
     ) {
-      this.createEntryForm = formBuilder.group({
+      this.createAssignmentForm = formBuilder.group({
         title: ['', Validators.required],
-        date: this.myDate,
-        day: this.day_week,
-        content: ['', Validators.required],
-        timestamp : this.currentDate.getTime(),
+        desc:['', Validators.required],
+       // due: ['', Validators.required],
       })
-      this.user = this.ngFireAuth.auth.currentUser;
 
      }
 
   ngOnInit() {
-
+this.user = JSON.parse(localStorage.getItem('user'));
+this.id = this.user.uid;
+this.iid = this.id;
+console.log(this.iid)
   }
 
-  async createEntry(){
+  async createAssignment(){
     const loading = await this.loadingCtrl.create();
 
-    const title = this.createEntryForm.value.title;
-    const date = this.createEntryForm.value.date;
-    const day = this.createEntryForm.value.day;
-    const content = this.createEntryForm.value.content;
-    const timestamp = this.createEntryForm.value.timestamp;
-    const uid = this.user.userUID
+    const title = this.createAssignmentForm.value.title;
+    const desc = this.createAssignmentForm.value.desc;
+    const due = this.currentDate;
+    const assignerUID = this.iid
+    const done = false;
+    const response = null;
+    const assignedTo = "o9KgRhURIph9c6PklwGEbfLi4pl1"
 
-    
-
-    this.firestoreService.createEntry(title, date, day, content, timestamp, uid)
+    this.firestoreService.createAssignment(assignerUID, assignedTo, title, desc, due, done, response)
     .then(() => {
       loading.dismiss().then(() => {
-        this.router.navigateByUrl('/tabs/tab1');
+        this.router.navigateByUrl('/agent-tabs/agent-tab1');
       });
     },
       (    error: any) => {

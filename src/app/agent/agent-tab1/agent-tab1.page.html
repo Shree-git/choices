@@ -1,8 +1,8 @@
 <ion-header class="bar-positive" align-title="center">
   <ion-toolbar>
-    <ion-title class="title">Journal AGENT WORKS!</ion-title>
+    <ion-title class="title">Assigned Works</ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/create-entry">
+      <ion-button routerLink="/agent-create-assignment">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
       </ion-buttons>
@@ -30,14 +30,13 @@
     </div>
 <br>
 
-  <ion-card *ngFor="let entry of currentEntries | async |  orderBy: ordering : reverse : true" routerLink="/detail-entry/{{entry.id}}">
+  <ion-card *ngFor="let assign of assignmentList | async">
     <ion-card-header>
-        <img id="header_week" class="title-image" src="assets/days_of_week/{{entry.day}}_icon.png" />
-       <ion-card-title id="header_title">{{entry.title}} </ion-card-title>
-       <ion-card-subtitle id ="header_date">{{entry.date}}</ion-card-subtitle>
+       <ion-card-title id="header_title">{{assign.title}} </ion-card-title>
+       <ion-card-subtitle id ="header_date">{{assign.endTime}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="entry">
-      {{ entry.content }}
+      {{ assign.desc }}
     </ion-card-content>
   </ion-card>
 </ion-content>

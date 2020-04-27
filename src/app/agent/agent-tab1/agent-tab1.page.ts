@@ -5,7 +5,7 @@ import { FirestoreService } from '../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
-
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-agent-tab1',
@@ -14,16 +14,21 @@ import { OrderPipe } from 'ngx-order-pipe';
   providers: [OrderPipe]
 })
 export class AgentTab1Page implements OnInit {
-  public currentEntries;
+  public assignmentList;
   public ordering = 'timestamp';
-
+  public user;
+  public id;
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,
+    public ngFireAuth: AngularFireAuth,
     public router: Router) {}
 
   ngOnInit() {
-    this.currentEntries = this.firestoreService.getYourList("currentEntries").valueChanges();
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.id = this.user.uid
+    console.log(this.id)
+    this.assignmentList = this.firestoreService.getOnly("assignments", "assignerUID", this.id ).valueChanges();
   }
 
   
@@ -33,10 +38,10 @@ export class AgentTab1Page implements OnInit {
 search(ev) {
   let val = ev.target.value;
   if(!val || !val.trim()){
-    this.currentEntries = this.firestoreService.getYourList("currentEntries").valueChanges();
+    this.assignmentList = this.firestoreService.getYourList("assignments").valueChanges();
   }
   else{
-    this.currentEntries = this.firestoreService.getSearched(val, 'currentEntries', 'title', '').valueChanges()
+    this.assignmentList = this.firestoreService.getSearched(val, 'assignments', 'title', '').valueChanges()
 
   }
       

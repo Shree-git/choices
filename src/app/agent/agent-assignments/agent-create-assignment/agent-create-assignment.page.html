@@ -1,21 +1,28 @@
 <ion-header>
     <ion-toolbar>
-      <ion-title>New Entry</ion-title>
+      <ion-title>New Assignment</ion-title>
       <ion-back-button slot="start"></ion-back-button>
     </ion-toolbar>
   </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="createEntryForm" (submit)="createEntry()">
+  <form [formGroup]="createAssignmentForm" (submit)="createAssignment()">
     <div class="field">
       <label>Title</label>
       <input type="text" name ="title"  formControlName="title" class="form-control" id="title">
     </div>
     <div class="field"> 
-      <textarea formControlName="content" id= "content" type="text" placeholder="Content"></textarea>
+      <textarea formControlName="desc" id= "desc" type="text" placeholder="Description"></textarea>
     </div>
+    <!--
+    <div>
+      <label>Due Date</label>
+      <datetime displayFormat="MM/DD/YYYY HH:mm"  id= "due" pickerFormat="MMM D:HH:mm"></datetime>
+      </div>
+    -->
+
 <br><br>
-    <ion-button expand="block" type="submit" [disabled]="!createEntryForm.valid">Add</ion-button>
+    <ion-button expand="block" type="submit" [disabled]="!createAssignmentForm.valid">Add</ion-button>
     <br>
     <ion-button expand="block" color="dark" routerLink='/tabs/tab1'>Cancel</ion-button>
   </form>

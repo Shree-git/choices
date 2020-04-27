@@ -45,7 +45,10 @@ const routes: Routes = [
   path: 'agent-detail-group/:id',
   loadChildren: () => import('./agent/agent-groups/agent-detail-group/agent-detail-group.module').then( m => m.AgentDetailGroupPageModule)
 },
-
+{
+  path: 'agent-create-assignment',
+  loadChildren: () => import('./agent/agent-assignments/agent-create-assignment/agent-create-assignment.module').then( m => m.AgentCreateAssignmentPageModule)
+},
 
 
 ///////////////////ADMIN TO CLIENT

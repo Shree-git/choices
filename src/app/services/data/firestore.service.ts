@@ -6,6 +6,8 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from 'firebase';
 import * as firebase from 'firebase';
 
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +15,11 @@ import * as firebase from 'firebase';
 })
 export class FirestoreService {
   currentDate = new Date();
+  
+  arr;
+  businessCollection
+  
+  
   public collectionRef; public ID; userId; user;
   public db;
   public col: AngularFirestoreCollection<any>;
@@ -30,9 +37,14 @@ export class FirestoreService {
 
 ////////////Assignment methods///////////////
 
-createAssignment( assignerUID: string, userUID: string, eventUID: string, title: string, desc: string, dueTime: string, done: boolean, user_response: string): Promise<void> {
+createAssignment( assignerUID: string, userUID: string, title: string, desc: string, dueTime: string, done: boolean, user_response: string): Promise<void> {
   const assignmentUID = this.firestore.createId();
+  const eventUID = this.firestore.createId();
+
+  this.createEventAssignment(eventUID,title, desc, dueTime, dueTime, userUID, done, assignerUID, assignmentUID, null)
+  
   return this.firestore.doc('assignments/'  + assignmentUID).set({assignmentUID,assignerUID, userUID, eventUID, title, desc, dueTime, done, user_response});
+   
 }
 
  /* EDIT ASSIGNMENT */
@@ -41,14 +53,16 @@ createAssignment( assignerUID: string, userUID: string, eventUID: string, title:
 
 
 
-
-
 ////////////Event methods///////////////
 
-   createEvent( title: string, desc: string, startTime: string, endTime: string, done: boolean, assignerUID: string, notifTime: string): Promise<void> {
+   createEvent( title: string, desc: string, startTime: string, endTime: string, done: boolean, assignerUID: string, assignmentUID: string, notifTime: string): Promise<void> {
     const eventUID = this.firestore.createId();
     const userUID = this.userId;
-    return this.firestore.doc('events/'  + eventUID).set({eventUID, title, desc, startTime, endTime, userUID, done, assignerUID, notifTime});
+    return this.firestore.doc('events/'  + eventUID).set({eventUID, title, desc, startTime, endTime, userUID, done, assignerUID, assignmentUID, notifTime});
+  }
+
+  createEventAssignment( eventUID: string, title: string, desc: string, startTime: string, endTime: string, userUID: string, done: boolean, assignerUID: string, assignmentUID: string, notifTime: string): Promise<void> {
+    return this.firestore.doc('events/'  + eventUID).set({eventUID, title, desc, startTime, endTime, userUID, done, assignerUID, assignmentUID, notifTime});
   }
 
    /* EDIT EVENT */
@@ -162,9 +176,15 @@ getMy(collection : string, field: string): AngularFirestoreCollection<any> {
 }
 
 //gets the details of a particular document
-getDetail(doc:string, id: string): AngularFirestoreDocument<any>{
-  return this.firestore.collection(doc).doc(id);
+getDetail(doc:string, val: string): AngularFirestoreDocument<any>{
+  return this.firestore.collection(doc).doc(val);
 }
+
+//gets the details of a particular document
+getDoc(doc:string, field: string, id: string): AngularFirestoreDocument<any>{
+  return this.firestore.collection(doc, ref => ref.where(field ,'==', id)).doc();
+}
+
 
 //gets all of ONE user's documents
 getList(doc, useriiD): AngularFirestoreCollection<any> {
