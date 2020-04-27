@@ -58,6 +58,7 @@ export class UserDetailPage implements OnInit {
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('id');
     this.iID = userId
+    this.setClient(this.iID)
     this.user = this.fservice.getDetail("users", userId).valueChanges();
     //var user = firebase.auth().currentUser;
 
