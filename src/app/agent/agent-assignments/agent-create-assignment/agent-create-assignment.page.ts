@@ -29,6 +29,11 @@ export class AgentCreateAssignmentPage implements OnInit {
   getClient(): string{
     return this.dataService.clientID
   }
+
+  setGroup(val: string){
+    this.dataService.group = val
+  }
+
   constructor(
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -72,6 +77,7 @@ this.currentGroups = this.firestoreService.getMy("groups", "leader").valueChange
     const done = false;
     const response = null;
     const assignedTo = this.createAssignmentForm.value.assignedTo;
+    this.setGroup(assignedTo)
     console.log(assignedTo)
     this.firestoreService.createAssignment(assignerUID, assignedTo, title, desc, due, done, response)
     .then(() => {

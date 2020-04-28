@@ -6,6 +6,7 @@ import { CalendarComponent} from 'ionic2-calendar/calendar'
 import { formatDate } from '@angular/common';
 import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
@@ -24,11 +25,6 @@ export class Tab3Page  implements OnInit{
     allDay: false
   
   };
-
-  groups = {
-    groupId: ''
-  }
-
   minDate = new Date().toISOString();
 
   eventSource = [];
@@ -40,17 +36,27 @@ export class Tab3Page  implements OnInit{
   }
   
   viewTitle= '';
+
   public eventList;
+  public userList;
+  public groupEvents;
+  public userAssignments;
+  public groupAssignments;
+
   @ViewChild(CalendarComponent, {static: false}) myCal: CalendarComponent;
 
+  getGroup(): string{
+    return this.dataService.group
+  }
+  setGroup(val: string){
+    this.dataService.group = val
+  }
 
-  user;
-  group = [];
-  groupEvents;
   constructor(
     private alertCtrl: AlertController,
     public fservice: FirestoreService,
     public ngFireAuth: AngularFireAuth,
+    private dataService: DataService,
      @Inject(LOCALE_ID)private locale: string
      ) {}
 
@@ -63,39 +69,42 @@ export class Tab3Page  implements OnInit{
     allDay: false
     }}
 
-    findObjectByKey(array, key, value) {
-      for (var i = 0; i < array.length; i++) {
-          if (array[i][key] === value) {
-              return array[i];
-          }
-      }
-      return null;
-  }
 
   ngOnInit() {
     this.resetEvent();
     this.eventList = this.fservice.getYourList("events").snapshotChanges();
-    this.user = JSON.parse(localStorage.getItem('user'));
-    let userId = this.user.uid
-    this.user =this.fservice.getList("users", userId).snapshotChanges()
+    this.userList =this.fservice.getYourList("users").snapshotChanges();
    
-    this.user.subscribe( payload => {
+
+
+    ///adds group events to individual's calendar
+    this.userList.subscribe( payload => {
       payload.forEach( item => {
-        let groups = {
-          groupId: item.payload.doc.data().groupUID,
-        
-        }
-        this.group.push(groups)
+          this.setGroup(item.payload.doc.data().groupUID)
         })
-
+        this.groupEvents = this.fservice.getOnly("events", "userUID", this.getGroup()).snapshotChanges()
+        this.groupEvents.subscribe( payload => {
+          payload.forEach( item => {
+            ///checks if event has already been added to calendar
+            if(this.eventIDS.indexOf(item.payload.doc.data().eventUID) == -1){
+    
+            let eventCopy = {
+              title: item.payload.doc.data().title,
+              desc: item.payload.doc.data().desc,
+              startTime:new Date(item.payload.doc.data().startTime),
+              endTime: new Date(item.payload.doc.data().endTime),
+              allDay: false
+            }
+            this.eventIDS.push(item.payload.doc.data().eventUID)
+            this.eventSource.push(eventCopy);
+    
+            }})  
+            this.myCal.loadEvents();
+            this.resetEvent();
+        })
       })
-      //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        console.log("Group",this.group)
-      this.groupEvents = this.fservice.getOnly("events", "userUID", "ftV7dsLyiROqWognExBz").snapshotChanges()
 
-
-
-/// adds all of user events to calendar
+/// adds all of users individual events to calendar
     this.eventList.subscribe( payload => {
       payload.forEach( item => {
         ///checks if event has already been added to calendar
@@ -117,28 +126,9 @@ export class Tab3Page  implements OnInit{
     })
 
   
-    this.groupEvents.subscribe( payload => {
-      payload.forEach( item => {
-        ///checks if event has already been added to calendar
-        if(this.eventIDS.indexOf(item.payload.doc.data().eventUID) == -1){
+   
 
-        let eventCopy = {
-          title: item.payload.doc.data().title,
-          desc: item.payload.doc.data().desc,
-          startTime:new Date(item.payload.doc.data().startTime),
-          endTime: new Date(item.payload.doc.data().endTime),
-          allDay: false
-        }
-        this.eventIDS.push(item.payload.doc.data().eventUID)
-         this.eventSource.push(eventCopy);
-
-        }})  
-        this.myCal.loadEvents();
-        this.resetEvent();
-    })
-
-
-}
+} // end of ng on init
 
 
 
@@ -169,7 +159,6 @@ export class Tab3Page  implements OnInit{
       let start = this.event.startTime
       let end = this.event.endTime
       this.fservice.createEvent(this.event.title,this.event.desc, start, end, false,null, null, null)
-     // this.eventSource.push(eventCopy);
       this.myCal.loadEvents();
       this.resetEvent();
     }
