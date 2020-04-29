@@ -46,6 +46,30 @@
         (onEventSelected)="onEventSelected($event)"
         (onTitleChanged)="onViewTitleChanged($event)"
         (onTimeSelected)="onTimeSelected($event)"
+        step="30"
+        class="calendar"
         >
       </calendar>
+<h1> Assignments Due</h1>
+      <ion-card *ngFor="let entry of userAssignments | async" routerLink="/detail-assignment/{{entry.assignmentUID}}">
+        <ion-card-header>
+           <ion-card-title id="header_title">{{entry.title}} </ion-card-title>
+        </ion-card-header>
+        <ion-card-subtitle id ="header_date">{{entry.dueTime}}</ion-card-subtitle>
+        <ion-card-content id="content">
+          {{ entry.desc }}
+        </ion-card-content>
+      </ion-card>
+
+
+      <ion-card *ngFor="let entry of groupAssignments | async" routerLink="/detail-assignment/{{entry.assignmentUID}}">
+        <ion-card-header>
+           <ion-card-title id="header_title">{{entry.title}} </ion-card-title>
+        </ion-card-header>
+        <ion-card-subtitle id ="header_date">{{entry.dueTime}}</ion-card-subtitle>
+        <ion-card-content id="content">
+          {{ entry.desc }}
+        </ion-card-content>
+      </ion-card>
+
 </ion-content>

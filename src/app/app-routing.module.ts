@@ -49,6 +49,10 @@ const routes: Routes = [
   path: 'agent-create-assignment',
   loadChildren: () => import('./agent/agent-assignments/agent-create-assignment/agent-create-assignment.module').then( m => m.AgentCreateAssignmentPageModule)
 },
+{
+  path: 'agent-detail-assignment/:id',
+  loadChildren: () => import('./agent/agent-assignments/agent-detail-assignment/agent-detail-assignment.module').then( m => m.AgentDetailAssignmentPageModule)
+},
 
 
 ///////////////////ADMIN TO CLIENT
@@ -108,6 +112,10 @@ const routes: Routes = [
     {
       path: 'view-contact/:id',
       loadChildren: () => import('./addict/contacts/view-contact/view-contact.module').then( m => m.ViewContactPageModule)
+    },
+    {
+      path: 'detail-assignment/:id',
+      loadChildren: () => import('./addict/tab3/detail-assignments/detail-assignments/detail-assignments.module').then( m => m.DetailAssignmentsPageModule)
     },
 
 ];

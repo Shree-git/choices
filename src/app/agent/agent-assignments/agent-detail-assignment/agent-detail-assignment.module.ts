@@ -4,17 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DetailEntryPageRoutingModule } from './agent-detail-assignment-routing.module';
+import { AgentDetailAssignmentPageRoutingModule } from './agent-detail-assignment-routing.module';
 
-import { DetailEntryPage } from './agent-detail-assignment.page';
+import { AgentDetailAssignmentPage } from './agent-detail-assignment.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DetailEntryPageRoutingModule
+    AgentDetailAssignmentPageRoutingModule
   ],
-  declarations: [DetailEntryPage]
+  declarations: [AgentDetailAssignmentPage]
 })
-export class DetailEntryPageModule {}
+export class AgentDetailAssignmentPageModule {}
+  

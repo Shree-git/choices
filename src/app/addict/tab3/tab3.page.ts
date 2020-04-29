@@ -18,6 +18,8 @@ import { DataService } from 'src/app/services/data.service';
 export class Tab3Page  implements OnInit{
 
   event = { 
+    eventUID: '',
+    assignerUID: '',
     title: '',
     desc: '',
     startTime: new Date().toISOString(),
@@ -62,6 +64,8 @@ export class Tab3Page  implements OnInit{
 
   resetEvent(){
     this.event = {
+    eventUID: '',
+    assignerUID: '',
     title: '',
     desc: '',
     startTime: new Date().toISOString(),
@@ -83,12 +87,15 @@ export class Tab3Page  implements OnInit{
           this.setGroup(item.payload.doc.data().groupUID)
         })
         this.groupEvents = this.fservice.getOnly("events", "userUID", this.getGroup()).snapshotChanges()
+        this.groupAssignments = this.fservice.getOnly("assignments", "userUID",this.getGroup() ).valueChanges()
         this.groupEvents.subscribe( payload => {
           payload.forEach( item => {
             ///checks if event has already been added to calendar
             if(this.eventIDS.indexOf(item.payload.doc.data().eventUID) == -1){
     
             let eventCopy = {
+              eventUID: item.payload.doc.data().eventUID,
+              assignerUID: item.payload.doc.data().assignerUID,
               title: item.payload.doc.data().title,
               desc: item.payload.doc.data().desc,
               startTime:new Date(item.payload.doc.data().startTime),
@@ -111,6 +118,8 @@ export class Tab3Page  implements OnInit{
         if(this.eventIDS.indexOf(item.payload.doc.data().eventUID) == -1){
 
         let eventCopy = {
+          eventUID: item.payload.doc.data().eventUID,
+          assignerUID: item.payload.doc.data().assignerUID,
           title: item.payload.doc.data().title,
           desc: item.payload.doc.data().desc,
           startTime:new Date(item.payload.doc.data().startTime),
@@ -127,6 +136,7 @@ export class Tab3Page  implements OnInit{
 
   
    
+this.userAssignments = this.fservice.getYourList("assignments").valueChanges()
 
 } // end of ng on init
 
@@ -140,12 +150,50 @@ export class Tab3Page  implements OnInit{
             header: event.title,
             subHeader: event.desc,
             message: 'From: ' + start + '<br><br>To: ' + end,
-            buttons: ['OK']
+            buttons: [
+              {
+                text: 'Delete',
+                role: 'delete',
+                cssClass: 'secondary',
+                handler: () => {
+
+                  this.deleteEvent(event)
+                }
+              }, {
+                text: 'OK',
+                handler: () => {
+                  console.log('Confirm Okay');
+                }
+              }
+            ]
           });
           alert.present();
         }
    
   
+        async alert(head, mess) {
+          const alert = await this.alertCtrl.create({
+            header: head,
+            message: mess,
+            buttons: ['OK'],
+          });
+        
+          await alert.present();
+          let result = await alert.onDidDismiss();
+        }
+    
+        deleteEvent(event){
+          if(event.assignerUID == null || event.assignerUID == undefined ){
+                      console.log("Delete successful!")
+                      this.fservice.delete('events', event.eventUID)
+                      this.myCal.loadEvents();
+                      this.resetEvent();
+    
+          }
+          else{
+            this.alert("Delete Failed!", "You are unauthorized to delete this event!")
+          }
+        }
 //sets time data for adding new event (???)        
     onTimeSelected(ev) {
       let selected = new Date(ev.selectedTime); 
@@ -153,7 +201,6 @@ export class Tab3Page  implements OnInit{
       selected.setHours(selected.getHours()+1);
       this.event.endTime= (selected.toISOString());
     }
-
 
     addEvent() {
       let start = this.event.startTime
@@ -163,7 +210,6 @@ export class Tab3Page  implements OnInit{
       this.resetEvent();
     }
 
-  
 ///changes the title at the top that tells month and year
   onViewTitleChanged(title){
     this.viewTitle = title;

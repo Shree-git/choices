@@ -30,7 +30,7 @@
     </div>
 <br>
 
-  <ion-card *ngFor="let assign of assignmentList | async">
+  <ion-card *ngFor="let assign of assignmentList | async" routerLink="/agent-detail-assignment/{{assign.assignmentUID}}">
     <ion-card-header>
        <ion-card-title id="header_title">{{assign.title}} </ion-card-title>
        <ion-card-subtitle id ="header_date">{{assign.dueTime}}</ion-card-subtitle>

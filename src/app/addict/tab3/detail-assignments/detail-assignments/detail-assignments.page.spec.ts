@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AgentDetailAssignmentPage } from './agent-detail-assignment.page';
+import {DetailAssignmentsPage } from './detail-assignments.page';
 
-describe('AgentDetailAssignmentPage', () => {
-  let component: AgentDetailAssignmentPage;
-  let fixture: ComponentFixture<AgentDetailAssignmentPage>;
+describe('DetailAssignmentsPage', () => {
+  let component:DetailAssignmentsPage;
+  let fixture: ComponentFixture<DetailAssignmentsPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AgentDetailAssignmentPage ],
+      declarations: [DetailAssignmentsPage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AgentDetailAssignmentPage);
+    fixture = TestBed.createComponent(DetailAssignmentsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
@@ -21,4 +21,4 @@ describe('AgentDetailAssignmentPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});  
+});

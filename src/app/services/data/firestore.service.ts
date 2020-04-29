@@ -3,11 +3,12 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Entry } from '../../models/entry.interface';
 import { DatePipe } from '@angular/common';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { User } from 'firebase';
+import { User } from 'src/app/models/user.interface';
 import * as firebase from 'firebase';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Assignment } from 'src/app/models/assignment.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,21 @@ export class FirestoreService {
     this.db = firebase.firestore();
    }
 
+   getUserID(id: string) {
+    return this.firestore.collection<Assignment>('assignments', ref => ref.where('assignmentUID', 
+      '==', id))
+  .snapshotChanges()
+  .pipe(map(assignments => {
+    const assignment = assignments[0];
+    if (assignment) {
+      const id = assignment.payload.doc.data().userUID;
+      return id;
+    }
+    else {
+      return null;
+    }
+  }));
+}
 
 
 ////////////Assignment methods///////////////
@@ -40,12 +56,16 @@ export class FirestoreService {
 createAssignment( assignerUID: string, userUID: string, title: string, desc: string, dueTime: string, done: boolean, user_response: string): Promise<void> {
   const assignmentUID = this.firestore.createId();
   const eventUID = this.firestore.createId();
-
   this.createEventAssignment(eventUID,title, desc, dueTime, dueTime, userUID, done, assignerUID, assignmentUID, null)
-  
   return this.firestore.doc('assignments/'  + assignmentUID).set({assignmentUID,assignerUID, userUID, eventUID, title, desc, dueTime, done, user_response});
    
 }
+
+editAssignment(assignmentId, new_title, new_desc, new_due, new_user){
+  return this.firestore.doc('assignments/' + assignmentId).set({title: new_title, desc: new_desc, userUID: new_user, dueTime: new_due}, {merge:true});
+}
+
+
 
  /* EDIT ASSIGNMENT */
 /////////////////////////////////////////////////////////////////////////////////////////////////
