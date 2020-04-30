@@ -61,7 +61,7 @@ createAssignment( assignerUID: string, userUID: string, title: string, desc: str
 }
 
 editAssignment(assignmentId, new_title, new_desc, new_due, new_user){
-  this.db.doc("assignments/"+assignmentId).update({"title" : new_title, desc: new_desc, dueTime: new_due, userUID: new_user})
+  this.db.doc("assignments/"+assignmentId).update({title : new_title, desc: new_desc, dueTime: new_due, userUID: new_user})
 } 
 
 
@@ -82,6 +82,19 @@ editAssignment(assignmentId, new_title, new_desc, new_due, new_user){
   createEventAssignment( eventUID: string, title: string, desc: string, startTime: string, endTime: string, userUID: string, done: boolean, assignerUID: string, assignmentUID: string, notifTime: string): Promise<void> {
     return this.firestore.doc('events/'  + eventUID).set({eventUID, title, desc, startTime, endTime, userUID, done, assignerUID, assignmentUID, notifTime});
   }
+
+  editEventAssignment(uid: string, new_title: string, new_desc: string, new_due: string, new_user: string){
+    let doc = this.getOnly("assignments", "assignmentUID", uid ).snapshotChanges()
+    let eventID;
+    doc.subscribe(payload =>{
+      payload.forEach(item =>{
+          eventID = item.payload.doc.data().eventUID
+      })
+      this.db.doc("events/"+ eventID).update({title : new_title, desc: new_desc, startTime: new_due, endTime: new_due, userUID: new_user})
+
+      })
+  } 
+  
 
    /* EDIT EVENT */
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -238,9 +251,22 @@ getListAll(doc): AngularFirestoreCollection<any> {
 delete(doc: string, id: string): Promise<void>{
   return this.firestore.doc(doc + '/' + id).delete();
 }
+
+//get the event associated with the assignmentUID
+//delete event with this assignment UID
+
+//deletes document using a bridging id from another ocument
+deleteBridge(collect: string, field: string, val: string): Promise<void>{
+  let doc = this.getOnly(collect, field, val ).snapshotChanges()
+  let eventID;
+  doc.subscribe(payload =>{
+    payload.forEach(item =>{
+        eventID = item.payload.doc.data().eventUID
+    })
+    return this.firestore.doc(collect + '/' + eventID).delete();      
+    })
+    return null
 /////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
- 
 }
+}
+

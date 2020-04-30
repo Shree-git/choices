@@ -69,12 +69,12 @@ export class AgentDetailAssignmentPage implements OnInit {
         text: 'Delete',
         handler: () => {
           this.fservice.delete("assignments",this.iID);
+          this.fservice.deleteBridge("events", "assignmentUID", this.iID)
           this.router.navigateByUrl('agent-tabs/agent-tab1');
         },
       },
     ],
     });
-
     (await alert).present();
   }
 
@@ -84,33 +84,12 @@ export class AgentDetailAssignmentPage implements OnInit {
     let assignmentid = this.route.snapshot.paramMap.get('id');
     let new_title = (<HTMLInputElement>document.getElementById("edited-title")).value;
     let new_content = (<HTMLInputElement>document.getElementById("edited-content")).value;   
-    
-    
     let assigned_to = (<HTMLInputElement>document.getElementById("assign")).value;
     let new_date = (<HTMLInputElement>document.getElementById("new_date")).value;  
-    
-
-
-//THIS DEFINETLY DOES NOT WORK MY DUDE
     this.fservice.editAssignment(assignmentid, new_title, new_content, new_date, assigned_to);
-
-
+    this.fservice.editEventAssignment(assignmentid, new_title, new_content, new_date, assigned_to)
     this.showEdit();
     this.router.navigateByUrl('agent-tabs/agent-tab1');
-
-
-
   }
-
-  getEmail(){
-    let id = (<HTMLInputElement>document.getElementById("email")).className;  
-    console.log(id)
-    this.firestore.collection('users', ref => ref.where('userUID' ,'==', id)).valueChanges().subscribe((User: any) => {
-      this.test = User[0].firstName + " " + User[0].lastName;
-     // (<HTMLInputElement>document.getElementById("email")).innerHTML = arr;
-      console.log(this.test)
-      return this.test;
-  })}
-  
  
 }
