@@ -61,9 +61,8 @@ createAssignment( assignerUID: string, userUID: string, title: string, desc: str
 }
 
 editAssignment(assignmentId, new_title, new_desc, new_due, new_user){
-  return this.firestore.doc('assignments/' + assignmentId).set({title: new_title, desc: new_desc, userUID: new_user, dueTime: new_due}, {merge:true});
-}
-
+  this.db.doc("assignments/"+assignmentId).update({"title" : new_title, desc: new_desc, dueTime: new_due, userUID: new_user})
+} 
 
 
  /* EDIT ASSIGNMENT */

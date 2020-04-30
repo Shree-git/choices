@@ -44,7 +44,7 @@
   <ion-button color="success" expand="block" [hidden]= "edit == true" id="editbtn" (click)="showEdit()">Edit
       <ion-icon name="create"></ion-icon>
     </ion-button>
-        <ion-button expand="block" color="light" id="memberbtn" routerLink="/agent-detail-members/{{assignment.assignmentUID}}">
+        <ion-button expand="block"[hidden]= "edit == true" color="light" id="memberbtn" routerLink="/agent-detail-members/{{assignment.assignmentUID}}">
       View Members
       </ion-button>
     <ion-button color="success" expand="block" [hidden]= "edit == false" id="editbtn" (click)="editAssignment()">Done 
