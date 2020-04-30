@@ -17,5 +17,5 @@ import { AgentDetailAssignmentPage } from './agent-detail-assignment.page';
   ],
   declarations: [AgentDetailAssignmentPage]
 })
-export class AgentDetailAssignmentPageModule {}
+export class AgentDetailAssignmentPageModule {} 
   

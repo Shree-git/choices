@@ -10,7 +10,7 @@ import { User } from 'firebase';
  
 @Component({
   selector: 'app-agent-detail-assignment',
-  templateUrl: './agent-detail-assignment.html',
+  templateUrl: './agent-detail-assignment.html', 
   styleUrls: ['./agent-detail-assignment.scss'],
 })
 export class AgentDetailAssignmentPage implements OnInit {
