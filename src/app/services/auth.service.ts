@@ -107,48 +107,9 @@ export class AuthService {
     return this.afStore.doc('users/' + userUID).set({userUID, firstName, lastName, email, emailVerified, userType, photoURL, phoneNumber, agentUID, check, groupUID});
   }
   
-
-//data the admin can edit of the clients
-assignAgent(agent){
-  return this.afStore.doc('users/' + this.userData.uid).set({
-    userUID: this.userData.uid,
-    firstName: this.userData.firstName,
-    lastName:this.userData.lastName,
-    email: this.userData.email,
-    emailVerified: this.userData.emailVerified,
-    userType: this.userData.userType,
-    photoURL: this.userData.photoURL,
-    phoneNumber: this.userData.phoneNumber,
-    agentUID: agent,
-    check: this.userData.check,
-    groupUID: this.userData.groupUID,
-  }, {merge:true});
-}
-
   //Data the users can edit of themselves
-  editUserData(first, last, email_A, photo, number){
-    return this.afStore.doc('users/' + this.userData.uid).set({
-      userUID: this.userData.uid,
-      firstName: first,
-      lastName: last,
-      email: email_A,
-      emailVerified: this.userData.emailVerified,
-      userType: this.userData.userType,
-      photoURL: photo,
-      phoneNumber: number,
-    }, {merge:true});
-  }
-  
-  //confusing
-  updatePhoto(photo){
-    var user = this.ngFireAuth.auth.currentUser;
-    user.updateProfile({
-      photoURL: photo
-    }).then(()=>{
-      this.userData.photoURL = user.photoURL;
-    }).catch(err =>{
-      window.alert(err);
-    })
+  updateAccountData(photo, mail, number){
+    this.afStore.doc("users/"+this.userData.userUID).update({photoURL : photo, email: mail, phoneNumber: number})
   }
 
   getUserEmail(){

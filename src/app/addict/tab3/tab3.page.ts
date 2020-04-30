@@ -28,7 +28,7 @@ export class Tab3Page  implements OnInit{
   
   };
   minDate = new Date().toISOString();
-
+  collapseCard = true;
   eventSource = [];
   private eventIDS = [];
   
@@ -206,6 +206,7 @@ this.userAssignments = this.fservice.getYourList("assignments").valueChanges()
       let start = this.event.startTime
       let end = this.event.endTime
       this.fservice.createEvent(this.event.title,this.event.desc, start, end, false,null, null, null)
+      this.collapseCard = !this.collapseCard;
       this.myCal.loadEvents();
       this.resetEvent();
     }

@@ -17,7 +17,7 @@
       <ion-card-header tappable (click)="collapseCard = !collapseCard">
         <ion-card-title>Add New Event</ion-card-title>
       </ion-card-header>
-      <ion-card-content *ngIf="collapseCard">
+      <ion-card-content *ngIf="collapseCard == true">
    
         <ion-item>
           <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>

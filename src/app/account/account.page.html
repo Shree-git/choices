@@ -9,16 +9,16 @@
 
 <ion-content>
   <ion-item>
-    <ion-label display="floating">First Name</ion-label>
-    <ion-input type="text" [(ngModel)]="firstName" [placeholder]="this.authService.userData.first_name"></ion-input>
+    <ion-label display="floating">Photo</ion-label>
+    <ion-input type="text" [(ngModel)]="photo" [placeholder]="this.authService.userData.photoURL"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label display="floating">Last Name</ion-label>
-    <ion-input type="text" [(ngModel)]="lastName" [placeholder]="this.authService.userData.last_name"></ion-input>
+    <ion-label display="floating">Email</ion-label>
+    <ion-input type="text" [(ngModel)]="email" [placeholder]="this.authService.userData.email"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label display="floating">Phone Number</ion-label>
-    <ion-input type="number" [(ngModel)]="phoneNumber" [placeholder]="this.authService.userData.phoneNumber"></ion-input>
+    <ion-input type="number" [(ngModel)]="phone" [placeholder]="this.authService.userData.phoneNumber"></ion-input>
   </ion-item>
   <!--
   <ion-item>

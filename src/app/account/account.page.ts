@@ -12,11 +12,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
-  firstName: string;
-  lastName: string;
+  photo: string;
   email: string;
-  phoneNumber: number;
-  birthDate: Date;
+  phone: number;
 
 
 
@@ -29,21 +27,10 @@ export class AccountPage implements OnInit {
   ngOnInit() {
   }
 
-  /*
+  
   saveUserData(){
-    const {firstName,lastName, phoneNumber, birthDate} = this;
-    const user: User = {
-      userUID: this.authService.userData.userUID,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      phoneNumber: this.phoneNumber,
-      birthdate: this.birthDate,
-    }
-    //this.authService.setAccountData(user);
-    this.location.back(); // <-- go back to previous location on cancel
+    const {photo,email, phone} = this;
+    this.authService.updateAccountData(photo, email, phone);
   }
-  cancel() {
-    this.location.back(); // <-- go back to previous location on cancel
-  }
-  */
+
 }

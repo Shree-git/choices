@@ -27,7 +27,7 @@ export class AgentTab3Page implements OnInit{
   };
 
   minDate = new Date().toISOString();
-
+  collapseCard = true;
   eventSource = [];
   private eventIDS = [];
   
@@ -173,7 +173,7 @@ export class AgentTab3Page implements OnInit{
   deleteAssignment(event){
     console.log("Delete successful!")
     this.fservice.delete('events', event.eventUID)
-    this.fservice.delete('assignments', event.assignmentUID)
+    this.fservice.deleteBridge('assignments', 'eventUID', event.assignmentUID)
   }
   
 //sets time data for adding new event (???)        
@@ -190,6 +190,7 @@ export class AgentTab3Page implements OnInit{
       let end = this.event.endTime
       this.fservice.createEvent(this.event.title,this.event.desc, start, end, false, null, null,null)
      // this.eventSource.push(eventCopy);
+      this.collapseCard = !this.collapseCard;
       this.myCal.loadEvents();
       this.resetEvent();
     }
