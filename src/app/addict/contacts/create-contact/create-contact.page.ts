@@ -37,12 +37,12 @@ export class CreateContactPage implements OnInit {
   
       const title = this.createContactForm.value.title;
       const content = this.createContactForm.value.content;
-      const uid = this.user.userUID
+      const uid = this.user.uid
 
       this.firestoreService.createContact(title, content, uid)
       .then(() => {
         loading.dismiss().then(() => {
-          this.router.navigateByUrl('/src/app/contacts');
+          this.router.navigateByUrl('/tabs/contacts');
         });
       },
         (    error: any) => {

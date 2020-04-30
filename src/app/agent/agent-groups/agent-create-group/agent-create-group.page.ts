@@ -55,7 +55,7 @@ export class AgentCreateGroupPage implements OnInit {
     this.firestoreService.createGroup(title, date)
     .then(() => {
       loading.dismiss().then(() => {
-        this.router.navigateByUrl('agent-tab2');
+        this.router.navigateByUrl('agent-tabs/agent-tab2');
         
       });
       //let cont= this.firestoreService.getSafeContact();

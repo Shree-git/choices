@@ -72,10 +72,15 @@ showCheck(iid, check){
   search(ev) {
     let val = ev.target.value;
     if(!val || !val.trim()){
-      this.currentUsers = this.fservice.getListAll("users").valueChanges();
-    }
+      this.currentUsers = this.fservice.getMy("users", "agentUID").valueChanges();
+      this.currentGroups = this.fservice.getMy("groups", "leader").valueChanges();
+       }
     else{
       this.currentUsers = this.fservice.getSearched(val, 'users', "lastName", "firstName").valueChanges();
+      this.currentGroups = "";
+
+     // this.currentGroups = this.fservice.getMy("groups", "leader").valueChanges();
+
     }}
 
 
@@ -85,7 +90,7 @@ showCheck(iid, check){
       //makes it so that clicking anywhere else on the screen closes drop down
       window.onclick = function(e) {
       var ele=<Element>e.target;
-          if (!ele.matches('#drobtn')){
+          if (!ele.matches('#drobtns')){
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
             for (i = 0; i < dropdowns.length; i++) {

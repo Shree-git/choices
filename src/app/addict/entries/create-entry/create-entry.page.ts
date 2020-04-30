@@ -39,7 +39,6 @@ export class CreateEntryPage implements OnInit {
         timestamp : this.currentDate.getTime(),
       })
       this.user = this.ngFireAuth.auth.currentUser;
-
      }
 
   ngOnInit() {
@@ -54,7 +53,7 @@ export class CreateEntryPage implements OnInit {
     const day = this.createEntryForm.value.day;
     const content = this.createEntryForm.value.content;
     const timestamp = this.createEntryForm.value.timestamp;
-    const uid = this.user.userUID
+    const uid = this.user.uid
 
     
 

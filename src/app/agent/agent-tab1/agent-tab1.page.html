@@ -20,17 +20,17 @@
 
   <div class="dropdown">
       <div id="myDrop" class="dropdown-cont">
-        <a (click) = "order ='title'; reverse = true">Title A-Z</a>
-        <a (click) = "order ='title'; reverse = false">Title Z-A</a>
+        <a (click) = "order ='title'; reverse = false">Title A-Z</a>
+        <a (click) = "order ='title'; reverse = true">Title Z-A</a>
 
 
-        <a (click) = "order ='timestamp'; reverse = false">Oldest</a>
-        <a (click) = "order ='timestamp'; reverse = true">Newest</a>
+        <a (click) = "order ='dueTime'; reverse = false">Earliest</a>
+        <a (click) = "order ='dueTime'; reverse = true">Latest</a>
       </div>
     </div>
 <br>
 
-  <ion-card *ngFor="let assign of assignmentList | async" routerLink="/agent-detail-assignment/{{assign.assignmentUID}}">
+  <ion-card *ngFor="let assign of assignmentList | async  |orderBy: order : reverse : true"  routerLink="/agent-detail-assignment/{{assign.assignmentUID}}">
     <ion-card-header>
        <ion-card-title id="header_title">{{assign.title}} </ion-card-title>
        <ion-card-subtitle id ="header_date">{{assign.dueTime}}</ion-card-subtitle>

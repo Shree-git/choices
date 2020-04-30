@@ -18,7 +18,7 @@
 
 <ion-content>
     <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
-  <button  class="sort" id="drobtn" (click)="dropMenu()">Sort</button>
+  <button  class="sort" id="drobtns" (click)="dropMenu()">Sort</button>
 
   <div class="dro">
       <div id="myDro" class="dropdown-content">
@@ -28,7 +28,7 @@
     </div> 
 <br>
 <!-- |orderBy: order2 : reverse : true-->
-<ion-card *ngFor="let user of currentUsers| async ">
+<ion-card *ngFor="let user of currentUsers| async |orderBy: order : reverse : true ">
   <ion-card-header>
       <img id="photo" class="title-image"  routerLink="/user-detail-agent/{{user.userUID}}"src="{{user.photoURL}}" />
     <!-- "changeCheck(i, user.userUID)"-->
@@ -43,7 +43,7 @@
 </ion-card>
 
 
-<ion-card *ngFor="let group of currentGroups | async " >
+<ion-card *ngFor="let group of currentGroups | async |orderBy: order : reverse : true " >
   <ion-card-header  routerLink="/agent-detail-group/{{group.id}}">
      <ion-card-title id="name">{{group.title}}</ion-card-title>
      <ion-card-subtitle id="user_type">{{group.date}}</ion-card-subtitle>

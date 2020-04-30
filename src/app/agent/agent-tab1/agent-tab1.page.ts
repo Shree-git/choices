@@ -15,7 +15,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AgentTab1Page implements OnInit {
   public assignmentList;
-  public ordering = 'timestamp';
+  public order = 'dueTime';
   public user;
   public id;
   constructor(
@@ -37,7 +37,7 @@ export class AgentTab1Page implements OnInit {
 search(ev) {
   let val = ev.target.value;
   if(!val || !val.trim()){
-    this.assignmentList = this.firestoreService.getYourList("assignments").valueChanges();
+    this.assignmentList = this.firestoreService.getOnly("assignments", "assignerUID", this.id ).valueChanges();
   }
   else{
     this.assignmentList = this.firestoreService.getSearched(val, 'assignments', 'title', '').valueChanges()
