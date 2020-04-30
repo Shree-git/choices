@@ -53,7 +53,14 @@ const routes: Routes = [
   path: 'agent-detail-assignment/:id',
   loadChildren: () => import('./agent/agent-assignments/agent-detail-assignment/agent-detail-assignment.module').then( m => m.AgentDetailAssignmentPageModule)
 },
-
+{
+  path: 'agent-detail-members',
+  loadChildren: () => import('./agent/members-detail-agent/members-detail-agent.module').then( m => m.AgentDetailMembersPageModule)
+},
+{
+  path: 'agent-detail-members/:assignment',
+  loadChildren: () => import('./agent/members-detail-agent/members-detail-agent.module').then( m => m.AgentDetailMembersPageModule)
+},
 
 ///////////////////ADMIN TO CLIENT
 {

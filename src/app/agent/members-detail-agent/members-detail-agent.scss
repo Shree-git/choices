@@ -1,0 +1,87 @@
+
+.sort{
+  position: absolute;
+  top:5%;
+  left: 80%;
+  background-color: #3498DB;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 20px;
+
+}
+.sort:hover, .sort:focus {
+background-color: #2980B9;
+}
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f1f1f1;
+min-width: 20%;
+overflow: auto;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+margin-left: 73%;
+z-index:1000;
+}
+
+.dropdown-content a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+.dropdow a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+#dropbt:active {
+box-shadow: 0 2px #666;
+transform: translateY(3px);
+}
+.title{
+  display: inline-block;
+  margin-left: 40%;
+}
+.title-image {
+  vertical-align: middle;
+  width: 10%;
+  height: 10%;
+  top: 0%;
+}
+
+#photo{
+  display:inline-block;
+  margin-bottom: 0;
+  margin-left: 2%;
+}
+
+#name{
+    display:inline-block;
+    margin-bottom: 0;
+    margin-left: 2%;
+}
+#user_type{
+   margin-left: 5%;
+    display:inline-block;
+    margin-bottom: 0;
+}
+
+ion-card{
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 15px 20px;
+  margin-bottom: 5%;
+  background-color: snow;
+
+}
+.search{
+    width: 75%;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-left: 5%;
+    margin-top: 6%;
+}

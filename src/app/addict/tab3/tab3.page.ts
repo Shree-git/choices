@@ -66,7 +66,7 @@ export class Tab3Page  implements OnInit{
     this.event = {
     eventUID: '',
     assignerUID: '',
-    title: '',
+    title: '', 
     desc: '',
     startTime: new Date().toISOString(),
     endTime: new Date().toISOString(),

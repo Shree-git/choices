@@ -24,6 +24,13 @@ ion-card{
     overflow: hidden;
     font-size: 25px;
   }
+  .entry-members {
+    text-align: center;
+    margin-left: 7%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 1%;
+  }
   .entry-content {
     text-align: center;
     width: 100%;
@@ -51,3 +58,8 @@ ion-card{
   
   }
 
+  #deletebtn{
+    display: inline-block;
+    margin-left: 28%;
+  
+  }

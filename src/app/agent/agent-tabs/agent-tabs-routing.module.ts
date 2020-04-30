@@ -37,6 +37,16 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'agent-detail-members',
+        loadChildren: () => import('../members-detail-agent/members-detail-agent.module').then( m => m.AgentDetailMembersPageModule)
+      },
+      {
+        path: 'agent-detail-members/:assignment',
+        loadChildren: () => import('../members-detail-agent/members-detail-agent.module').then( m => m.AgentDetailMembersPageModule)
+      },
+      
+      
       /*
       {
         path: 'account',

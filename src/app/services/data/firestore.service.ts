@@ -58,7 +58,6 @@ createAssignment( assignerUID: string, userUID: string, title: string, desc: str
   const eventUID = this.firestore.createId();
   this.createEventAssignment(eventUID,title, desc, dueTime, dueTime, userUID, done, assignerUID, assignmentUID, null)
   return this.firestore.doc('assignments/'  + assignmentUID).set({assignmentUID,assignerUID, userUID, eventUID, title, desc, dueTime, done, user_response});
-   
 }
 
 editAssignment(assignmentId, new_title, new_desc, new_due, new_user){
@@ -177,11 +176,34 @@ updateAgent(id: string, val:string){
   this.db.doc("users/"+id).update({"agentUID" : val})
 }  
 
+//updates assignmentUID field of a user
+updateAssignment(id: string, val:string){
+  this.db.doc("users/"+id).update({"assigmentUID" : val})
+}  
+
+
+
  //currently case sensetive 
  //set up to search by two values but is currently incapable
 getSearched(search : string, collection : string, condition: string, condition2: string): AngularFirestoreCollection<any> {
   return this.firestore.collection(collection, ref => ref.where(condition ,'>=', search).where(condition, "<=", search+"z")
   );}
+
+
+ //currently case sensetive 
+ //set up to search by two values but is currently incapable
+ getSpecificSearched(id: string, search : string, collection : string, condition: string, condition2:string): AngularFirestoreCollection<any> {
+  
+  let con1 =  this.firestore.collection(collection, ref => ref.where("groupUID", "==", id).where(condition ,'>=', search).where(condition, "<=", search+"z"));
+  let con2 =  this.firestore.collection(collection, ref => ref.where("groupUID", "==", id).where(condition2 ,'>=', search).where(condition2, "<=", search+"z"));
+  if(con1 != null || con1 != undefined){
+    return con1
+  }
+  else{
+     return con2
+  }
+  }
+
 
 ///gets all documents with field set to a particular condition
 getOnly(collection : string, field: string, condition: string): AngularFirestoreCollection<any> {
@@ -199,13 +221,6 @@ getMy(collection : string, field: string): AngularFirestoreCollection<any> {
 getDetail(doc:string, val: string): AngularFirestoreDocument<any>{
   return this.firestore.collection(doc).doc(val);
 }
-
-//gets the details of a particular document
-getDoc(doc:string, field: string, id: string): AngularFirestoreDocument<any>{
-  return this.firestore.collection(doc, ref => ref.where(field ,'==', id)).doc();
-}
-
-
 //gets all of ONE user's documents
 getList(doc, useriiD): AngularFirestoreCollection<any> {
   return this.firestore.collection(doc, ref => ref.where("userUID" ,'==', useriiD));

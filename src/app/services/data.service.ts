@@ -9,6 +9,7 @@ export class DataService {
   pairing: boolean;
   type: string;
   group: string;
+  assignment: string;
   regular: boolean;
 
   constructor() { }

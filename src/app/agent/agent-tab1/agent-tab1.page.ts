@@ -27,7 +27,6 @@ export class AgentTab1Page implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.id = this.user.uid
-    console.log(this.id)
     this.assignmentList = this.firestoreService.getOnly("assignments", "assignerUID", this.id ).valueChanges();
   }
 

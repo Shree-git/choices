@@ -10,13 +10,11 @@
 
 <ion-content padding>
     <div padding>
-<p>My name is {{test | async}}</p>
 
         <h2 class="entry-titles">
             <span [hidden]="edit == true" (dblclick)="showEdit()">{{ (assignment | async)?.title }}</span>
             <input id= "edited-title"  value="{{ (assignment | async)?.title }}"  [hidden]= "edit == false" >
          </h2>
-          <p (click)= "getEmail()" class = "{{ (assignment | async)?.userUID }}" id="email">Click Me</p>
 
          <p class="entry-date" [hidden]="edit == true" (dblclick)="showEdit()">{{ (assignment | async)?.dueTime }}  </p>
           
@@ -27,7 +25,7 @@
         </ion-item>
 
 
-         <select name ="assign" id="assign" [hidden]= "edit == false" id="assign">
+         <select name ="assign" id="assign"  [hidden]= "edit == false" id="assign">
           <option *ngFor="let user of currentUsers| async " value="{{user.userUID}}">{{user.firstName}} {{user.lastName}}</option>  
           <option *ngFor="let group of currentGroups| async " value="{{group.id}}">{{group.title}}</option>  
         </select>
@@ -46,6 +44,9 @@
   <ion-button color="success" expand="block" [hidden]= "edit == true" id="editbtn" (click)="showEdit()">Edit
       <ion-icon name="create"></ion-icon>
     </ion-button>
+        <ion-button expand="block" color="light" id="memberbtn" routerLink="/agent-detail-members/{{assignment.assignmentUID}}">
+      View Members
+      </ion-button>
     <ion-button color="success" expand="block" [hidden]= "edit == false" id="editbtn" (click)="editAssignment()">Done 
       <ion-icon name="done-all"></ion-icon>
     </ion-button>

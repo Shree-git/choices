@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs'
 import { FirestoreService } from '../../services/data/firestore.service'
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
-import { UserDetailPage } from './user-detail/user-detail.page';
 import { DataService } from 'src/app/services/data.service';
 //'../tab2/user-detail/user-detail.page.ts'
 

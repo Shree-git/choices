@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { Assignment } from '../../../models/assignment.interface'
 import { AlertController } from '@ionic/angular';
-import { User } from 'firebase';
+import {DataService} from '../../../services/data.service'
  
 @Component({
   selector: 'app-agent-detail-assignment',
@@ -20,10 +20,18 @@ export class AgentDetailAssignmentPage implements OnInit {
   public currentGroups;
   public iID;
   public test;
+
+  setAssignment(ag : string){
+    this.dataService.assignment = ag;
+  }
+  getAssignment(){
+   return this.dataService.assignment;
+  }
   constructor(
     public route: ActivatedRoute,
     public router: Router,
     public firestore: AngularFirestore,
+    private dataService: DataService,
     public alertController: AlertController,
     public fservice: FirestoreService
   ) { }
@@ -32,11 +40,9 @@ export class AgentDetailAssignmentPage implements OnInit {
 
     this.currentUsers = this.fservice.getMy("users", "agentUID").valueChanges();
     this.currentGroups = this.fservice.getMy("groups", "leader").valueChanges();
-
-
     const assignmentId = this.route.snapshot.paramMap.get('id');
     this.iID = assignmentId;
-
+    this.setAssignment(this.iID)
     this.assignment = this.fservice.getDetail("assignments", assignmentId).valueChanges();
    // this.test = this.fservice.getUserID(this.iID)
     

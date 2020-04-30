@@ -15,8 +15,6 @@ import {DataService} from '../../../services/data.service'
 export class AgentDetailGroupPage implements OnInit {
   public group: Observable<Group>;
   public groupId;
-
-
   public user: any;
   public iID;
   public array = [];
@@ -42,7 +40,10 @@ export class AgentDetailGroupPage implements OnInit {
   ngOnInit() {
     const groupI = this.route.snapshot.paramMap.get('id');
     this.groupId = groupI;
+    this.setGroup(this.groupId);
     this.group = this.fservice.getDetail("groups",this.groupId).valueChanges();
+    //console.log(this.router.url)
+
   }
 
 
