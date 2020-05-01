@@ -24,6 +24,10 @@ export class CaTab3Page implements OnInit{
     return this.dataService.clientID
   }
 
+  setAdmin(val: boolean){
+    this.dataService.adminUse = val
+  }
+
   constructor(
     private alertCtrl: AlertController,
     public fservice: FirestoreService,
@@ -53,6 +57,12 @@ export class CaTab3Page implements OnInit{
     }
        
   }
+
+  editAssignment(assignId){
+    this.setAdmin(true)
+    this.router.navigateByUrl("/agent-detail-assignment/" + assignId)
+  }
+
      //opens and closes drop down menu
      dropMenu() {
       document.getElementById("myDropd").classList.toggle("show");

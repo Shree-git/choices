@@ -20,10 +20,7 @@ const routes: Routes = [
   path: 'user-detail/:id',
   loadChildren: () => import('./admin/tab2/user-detail/user-detail.module').then( m => m.UserDetailPageModule)
 },
-{
-  path: 'detail-entry-admin/:id',
-  loadChildren: () => import('./admin/entries/detail-entry/detail-entry.module').then( m => m.DetailEntryPageModule)
-},
+
 
 
 

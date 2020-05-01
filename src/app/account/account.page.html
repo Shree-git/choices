@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+  <ion-list lines="none">
   <ion-item>
     <ion-label display="floating">Photo</ion-label>
     <ion-input type="text" [(ngModel)]="photo" [placeholder]="this.authService.userData.photoURL"></ion-input>
@@ -18,15 +19,17 @@
   </ion-item>
   <ion-item>
     <ion-label display="floating">Phone Number</ion-label>
-    <ion-input type="number" [(ngModel)]="phone" [placeholder]="this.authService.userData.phoneNumber"></ion-input>
+    <ion-input type="text" [(ngModel)]="phone" [placeholder]="this.authService.userData.phoneNumber"></ion-input>
   </ion-item>
+  </ion-list>
+
   <!--
   <ion-item>
     <ion-label display="floating">Email</ion-label>
     <ion-input type="text" [(ngModel)]="email" [placeholder]="authService.userData.email" disabled></ion-input>
   </ion-item>
   -->
-  <ion-button type="submit" expand="block" (click)="saveUserData()">Save</ion-button>
   <ion-button expand="block" color="dark" (click)="cancel()">Cancel</ion-button>
+  <ion-button type="submit" expand="block" (click)="saveUserData()">Save</ion-button>
 
 </ion-content>

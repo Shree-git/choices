@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreateEntryPageRoutingModule } from './create-entry-routing.module';
+import { AddUserPageRoutingModule } from './add-user-routing.module';
 
-import { CreateEntryPage } from './create-entry.page';
+import { AddUserPage } from './add-user.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { CreateEntryPage } from './create-entry.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    CreateEntryPageRoutingModule
+    AddUserPageRoutingModule
   ],
-  declarations: [CreateEntryPage]
+  declarations: [AddUserPage]
 })
-export class CreateEntryPageModule {}
+export class AddUserPageModule {}

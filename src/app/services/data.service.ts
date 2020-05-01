@@ -11,6 +11,7 @@ export class DataService {
   group: string;
   assignment: string;
   regular: boolean;
+  adminUse: boolean;
 
   constructor() { }
 

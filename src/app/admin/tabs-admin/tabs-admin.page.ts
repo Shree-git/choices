@@ -13,7 +13,7 @@ export class TabsAdminPage implements OnInit{
 
   pages = [
     {
-      name: 'Journal',
+      name: 'Assignments',
       path: '/tabs-admin/tab1'
     },
     {
@@ -23,6 +23,10 @@ export class TabsAdminPage implements OnInit{
     {
       name: 'Agenda',
       path: '/tabs-admin/tab3'
+    },
+    {
+      name: 'Account',
+      path: '/tabs/account'
     },
   ]
   constructor(

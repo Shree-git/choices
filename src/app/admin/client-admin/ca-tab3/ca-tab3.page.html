@@ -22,7 +22,7 @@
     </div>
   </div>
 <br>
-<ion-card *ngFor="let assign of assignments | async |orderBy: order3 : reverse : true" routerLink="/agent-detail-assignment/{{assign.assignmentUID}}">
+<ion-card *ngFor="let assign of assignments | async |orderBy: order3 : reverse : true" (click) = "editAssignment(assign.assignmentUID)">
   <ion-card-header>
     <ion-card-title id="header_title">{{assign.title}} </ion-card-title>
     <ion-card-subtitle id ="header_date">{{assign.dueTime}}</ion-card-subtitle>

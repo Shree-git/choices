@@ -28,10 +28,6 @@ export class CaTabsPage implements OnInit{
       name: 'Account',
       path: '/tabs/account'
     },
-    {
-      name: 'Safe Contacts',
-      path: '/tabs/contacts'
-    }
   ]
 
   iID;

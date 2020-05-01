@@ -1,40 +1,59 @@
 .field{
  padding-top: 5%;
 }
-ion-title{
-    text-align: center;
-}
+
 #title{
  width: 70%;
- height: 5%;
+ height: 50px;
+ margin-left: 5%;
+ font-size: 17px;
+ border-radius: 10px;
+ display: inline-block;
+ margin-top: 5%;
+
+
 }
 #assign{
-    width: 50%;
-    height: 5%;
+    width: 70%;
+    height: 50px;
     border-radius: 10px;
     display: inline-block;
-    margin-right: 20%;
+    font-size: 17px;
+    margin-left: 5%;
+    margin-top: 5%;
+
    }
-label{
- font-size: 20px;
- padding-left:3%;
- padding-right:1%;
- margin-left: 1%;
-}
 #desc{
  margin-left: 5%;
  width: 90%;
- height: 175px;
+ height: 100px;
+ border: 1px solid rgb(199, 191, 191);
  border-radius: 10px;
- font-size: 15px;
+ font-size: 17px;
+ padding-top: 5%;
  padding-bottom: 5%;
+ margin-top: 5%;
 }
-input{
-margin-left: 1%;
- font-size: 15px;
- border-radius: 10px;
- margin-bottom: 3%;
- display: inline-block;
- border: 1px solid #ccc;
- box-sizing: border-box;
+
+ion-button{
+    width: 40%;
+    margin-bottom: 10%;
+    display: inline-block;
+    height: 50px;
+}
+
+#cancelbtn{
+margin-right:10%;
+margin-left: 5%;
+}
+
+ion-datetime{
+    border: 1px solid rgb(199, 191, 191);
+    width: 90%;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 17px;
+    margin-top: 5%;
+
+
 }

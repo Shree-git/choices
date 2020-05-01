@@ -14,7 +14,7 @@ label{
 #content{
  margin-left: 5%;
  width: 90%;
- height: 425px;
+ height: 225px;
  border-radius: 10px;
  font-size: 25px;
  padding-bottom: 5%;
@@ -27,4 +27,16 @@ margin-left: 5%;
  display: inline-block;
  border: 1px solid #ccc;
  box-sizing: border-box;
+}
+
+ion-button{
+    width: 40%;
+    margin-bottom: 10%;
+    display: inline-block;
+    height: 50px;
+}
+
+#cancelbtn{
+margin-right:10%;
+margin-left: 5%;
 }

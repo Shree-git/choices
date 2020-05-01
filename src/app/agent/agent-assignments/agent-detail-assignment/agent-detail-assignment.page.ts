@@ -20,12 +20,21 @@ export class AgentDetailAssignmentPage implements OnInit {
   public currentGroups;
   public iID;
   public test;
+  assignID;
 
   setAssignment(ag : string){
     this.dataService.assignment = ag;
   }
+
+  setAdmin(ag : boolean){
+    this.dataService.adminUse = ag;
+  }
+
   getAssignment(){
    return this.dataService.assignment;
+  }
+  getAdmin(): boolean{
+    return this.dataService.adminUse
   }
   constructor(
     public route: ActivatedRoute,
@@ -37,13 +46,23 @@ export class AgentDetailAssignmentPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.currentUsers = this.fservice.getMy("users", "agentUID").valueChanges();
-    this.currentGroups = this.fservice.getMy("groups", "leader").valueChanges();
-    const assignmentId = this.route.snapshot.paramMap.get('id');
-    this.iID = assignmentId;
+    const admin = this.getAdmin()
+    this.assignID = this.route.snapshot.paramMap.get('id');
+    this.iID = this.assignID;
     this.setAssignment(this.iID)
-    this.assignment = this.fservice.getDetail("assignments", assignmentId).valueChanges();
+    this.assignment = this.fservice.getDetail("assignments", this.iID).valueChanges();
+
+
+    if(admin == true){
+      this.currentUsers = this.fservice.getOnly("users", "userType", "Client").valueChanges();
+      this.currentGroups = this.fservice.getListAll("groups").valueChanges();
+  }
+    else{
+      this.currentUsers = this.fservice.getMy("users", "agentUID").valueChanges();
+      this.currentGroups = this.fservice.getMy("groups", "leader").valueChanges();
+
+    }
+   
    // this.test = this.fservice.getUserID(this.iID)
     
     //this.test = this.fservice.getUse()
@@ -90,6 +109,7 @@ export class AgentDetailAssignmentPage implements OnInit {
     this.fservice.editEventAssignment(assignmentid, new_title, new_content, new_date, assigned_to)
     this.showEdit();
     this.router.navigateByUrl('agent-tabs/agent-tab1');
+    this.setAdmin(false);
   }
  
 }

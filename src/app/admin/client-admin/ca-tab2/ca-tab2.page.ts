@@ -90,8 +90,7 @@ export class CaTab2Page implements OnInit{
       this.resetEvent();
       this.user = JSON.parse(localStorage.getItem('user'));
       this.assignID = this.user.uid
-      console.log("Current admin id", this.assignID)
-      console.log("From Ca tabs" ,this.getClient())
+      this.userId = this.getClient()
       this.eventList = this.fservice.getOnly("events", "userUID", this.getClient()).snapshotChanges();
       this.userList =this.fservice.getOnly("users", "userUID", this.getClient()).snapshotChanges();
      

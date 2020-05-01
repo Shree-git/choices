@@ -72,7 +72,7 @@ this.currentGroups = this.firestoreService.getMy("groups", "leader").valueChange
 
     const title = this.createAssignmentForm.value.title;
     const desc = this.createAssignmentForm.value.desc;
-    const due = this.createAssignmentForm.value.due;
+    const due = this.datePipe.transform(this.createAssignmentForm.value.due, 'short');
     const assignerUID = this.iid
     const done = false;
     const response = null;

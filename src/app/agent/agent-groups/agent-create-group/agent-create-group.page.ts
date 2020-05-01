@@ -49,7 +49,7 @@ export class AgentCreateGroupPage implements OnInit {
     const loading = await this.loadingCtrl.create();
 
     const title = this.createGroupForm.value.title;
-    const date = new Date().toString();
+    const date = this.myDate
 
 
     this.firestoreService.createGroup(title, date)

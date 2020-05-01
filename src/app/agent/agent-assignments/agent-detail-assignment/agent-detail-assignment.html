@@ -18,14 +18,15 @@
 
          <p class="entry-date" [hidden]="edit == true" (dblclick)="showEdit()">{{ (assignment | async)?.dueTime }}  </p>
           
-
+         <ion-list lines="none">
          <ion-item [hidden]= "edit == false" >
-          <ion-label>Due Date: </ion-label>
-          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" id="new_date" pickerFormat="MMM D:HH:mm" [min]="minDate"></ion-datetime>
+          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" placeholder="Due Time: " id="new_date" pickerFormat="MMM D:HH:mm" [min]="minDate"></ion-datetime>
         </ion-item>
+         </ion-list>
 
 
          <select name ="assign" id="assign"  [hidden]= "edit == false" id="assign">
+          <option value="">Assigned To</option>
           <option *ngFor="let user of currentUsers| async " value="{{user.userUID}}">{{user.firstName}} {{user.lastName}}</option>  
           <option *ngFor="let group of currentGroups| async " value="{{group.id}}">{{group.title}}</option>  
         </select>
@@ -38,9 +39,14 @@
 
 
 
-  <ion-button expand="block" color="danger" (click)="deleteAssignment()"id="deletebtn">Delete
+  <ion-button expand="block" color="danger"[hidden]= "edit == true" (click)="deleteAssignment()"id="deletebtn">Delete
     <ion-icon name="trash"></ion-icon>
   </ion-button>
+
+  <ion-button expand="block" color="light" [hidden]= "edit == false" (click) = "edit = !edit" id="deletebtn">Cancel
+  </ion-button>
+
+
   <ion-button color="success" expand="block" [hidden]= "edit == true" id="editbtn" (click)="showEdit()">Edit
       <ion-icon name="create"></ion-icon>
     </ion-button>

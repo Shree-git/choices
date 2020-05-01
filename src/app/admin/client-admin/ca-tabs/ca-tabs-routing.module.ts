@@ -37,16 +37,6 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: 'contacts',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../contacts/contacts.module').then( m => m.ContactsPageModule)
-          }
-        ]
-      },
       { path: '', redirectTo: 'tab2', pathMatch: 'full' },
     ]
     

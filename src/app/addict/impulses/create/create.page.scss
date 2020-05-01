@@ -25,6 +25,7 @@ form{
     padding-bottom: 5%;
     margin-bottom: 10%;
    }
+   
    ion-item{
    margin-left: 5%;
     font-size: 17px;
@@ -33,4 +34,14 @@ form{
     border: 1px solid #ccc;
     box-sizing: border-box;
    }
-   
+   ion-button{
+    width: 40%;
+    margin-bottom: 10%;
+    display: inline-block;
+    height: 50px;
+}
+
+#cancelbtn{
+margin-right:10%;
+margin-left: 8%;
+}
