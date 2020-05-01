@@ -154,7 +154,7 @@ this.userAssignments = this.fservice.getYourList("assignments").valueChanges()
               {
                 text: 'Delete',
                 role: 'delete',
-                cssClass: 'secondary',
+                cssClass: 'alrtbtn',
                 handler: () => {
 
                   this.deleteEvent(event)

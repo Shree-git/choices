@@ -31,20 +31,16 @@
         </div>
     <br>
     <!--|  orderBy: ordering : reverse : true--><!--routerLink="/view-contact/{{contact.id}}"  -->
-      <ion-card *ngFor="let contact of userContacts | async" (click)="callContact(contact.content)"> 
-        
+      <ion-card *ngFor="let contact of userContacts | async"> 
         <ion-card-header>
-           <ion-card-title id="header_title">{{contact.title}} </ion-card-title>
+           <ion-card-title id="header_title" routerLink="/view-contact/{{contact.id}}">{{contact.title}}</ion-card-title>
+           <ion-card-title id="header_num" routerLink="/view-contact/{{contact.id}}">{{ contact.content }} </ion-card-title>
+
            <ion-icon item-start
           ios="ios-call"
           md="md-call"
           tappable
-          style="margin-left: 70%; font-size:25px;"
-          ></ion-icon>
+          (click)="callContact(contact.content)"></ion-icon>
         </ion-card-header>
-        <ion-card-content class="entry">
-          {{ contact.content }}
-        </ion-card-content>
-       
       </ion-card>
     </ion-content>

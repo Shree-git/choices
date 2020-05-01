@@ -15,19 +15,9 @@ import { Assignment } from 'src/app/models/assignment.interface';
   
 })
 export class FirestoreService {
-  currentDate = new Date();
-  
-  arr;
-  businessCollection
-  
-  
-  public collectionRef; public ID; userId; user;
+  userId; user;
   public db;
-  public col: AngularFirestoreCollection<any>;
-
-  myDate : any = this.datePipe.transform(this.currentDate, 'short');
-  day_week  : any = this.datePipe.transform(this.currentDate, 'EEE');
-
+  
   constructor(public firestore: AngularFirestore,  private datePipe: DatePipe, public ngFireAuth: AngularFireAuth,) {
     this.user = this.ngFireAuth.auth.currentUser;
     this.userId = this.user.uid
@@ -157,8 +147,7 @@ editAssignment(assignmentId, new_title, new_desc, new_due, new_user){
   }
 
   editEntry(entryId, new_title, new_content){
-    return this.firestore.doc('currentEntries/' + entryId).set({title: new_title, content: new_content, date: this.myDate, day: this.day_week, timestamp: this.currentDate.getTime(), userUID : this.userId,
-    }, {merge:true});
+    this.db.doc("currentEntries/"+ entryId).update({title : new_title, content: new_content})
   }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -175,8 +164,7 @@ editAssignment(assignmentId, new_title, new_desc, new_due, new_user){
     }
   
  editContact(contactId, new_title, new_content){
-      return this.firestore.doc('userContacts/' + contactId).set({title: new_title, content: new_content, userUID : this.userId,
-      }, {merge:true});
+      this.db.doc("userContacts/"+contactId).update({title : new_title, content: new_content})
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -252,9 +240,6 @@ delete(doc: string, id: string): Promise<void>{
   return this.firestore.doc(doc + '/' + id).delete();
 }
 
-//get the event associated with the assignmentUID
-//delete event with this assignment UID
-
 //deletes document using a bridging id from another ocument
 deleteBridge(collect: string, field: string, val: string): Promise<void>{
   let doc = this.getOnly(collect, field, val ).snapshotChanges()
@@ -265,6 +250,33 @@ deleteBridge(collect: string, field: string, val: string): Promise<void>{
     })
     return this.firestore.doc(collect + '/' + eventID).delete();      
     })
+    return null
+/////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
+//deletes user and all documents assoicated with user
+deleteAll(id: string): Promise<void>{
+  this.firestore.doc("users" + '/' + id).delete();
+  let assignments = this.getOnly("assignments", "userUID", id ).snapshotChanges()
+  let events = this.getOnly("events", "userUID", id ).snapshotChanges()
+  let entries = this.getOnly("currentEntries", "userUID", id ).snapshotChanges()
+  let impulses = this.getOnly("impulseList", "userUID", id ).snapshotChanges()
+  let contacts = this.getOnly("userContacts", "userUID", id).snapshotChanges()
+  assignments.subscribe(payload =>{
+    payload.forEach(item =>{
+        this.firestore.doc("assignments" + '/' + item.payload.doc.data().assignmentUID).delete();})})
+    events.subscribe(payload =>{
+      payload.forEach(item =>{
+          this.firestore.doc("events" + '/' + item.payload.doc.data().eventUID).delete();})})
+      entries.subscribe(payload =>{
+        payload.forEach(item =>{
+            this.firestore.doc("currentEntries" + '/' + item.payload.doc.data().id).delete();})})
+        impulses.subscribe(payload =>{
+          payload.forEach(item =>{
+              this.firestore.doc("impulseList" + '/' + item.payload.doc.data().id).delete();})})
+          contacts.subscribe(payload =>{
+            payload.forEach(item =>{
+                this.firestore.doc("userContacts" + '/' + item.payload.doc.data().id).delete();})})
     return null
 /////////////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -18,12 +18,6 @@
         <span> <p class="entry-content" [hidden]="edit == true" (dblclick)="showEdit()">{{ (assignment | async)?.desc }}</p>
    <textarea class="edit-content" id= "edited-content" [hidden]= "edit == false" >{{ (assignment | async)?.desc }} </textarea></span>
     </div>
-  <ion-button expand="block" color="danger" id="deletebtn">
-    <ion-icon name="trash"></ion-icon>
-  </ion-button>
-  <ion-button color="success" expand="block" id="editbtn"(click)="editEntry()">
-      <ion-icon name="done-all"></ion-icon>
-    </ion-button>
     <input
   style="display: none"
   type="file" (change)="onFileChanged($event)"

@@ -25,29 +25,4 @@ export class DetailPage implements OnInit {
     this.iID = impulseId;
     this.impulse = this.fservice.getDetail("impulseList",impulseId).valueChanges();
   }
-
-  async deleteImpulse(){
-    const alert = this.alertController.create({
-      message: 'Are you sure you want to delete this impulse?',
-      buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: ca => {
-          console.log('cancel ca');
-        },
-      },
-      {
-        text: 'Delete',
-        handler: () => {
-          this.fservice.delete("impulseList", this.iID);
-          this.router.navigateByUrl('tabs/tab2');
-        },
-      },
-    ],
-    });
-
-    (await alert).present();
-  }
-
 }

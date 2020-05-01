@@ -52,7 +52,7 @@ export class CreatePage implements OnInit {
     const loading = await this.loadingCtrl.create();
 
     const title = this.createImpulseForm.value.title;
-    const date = new Date().toString();
+    const date = this.myDate;
     const scale = this.createImpulseForm.value.scale;
     const description = this.createImpulseForm.value.description;
     const timestamp = this.createImpulseForm.value.timestamp;

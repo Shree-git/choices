@@ -8,21 +8,31 @@
 <ion-content>
 
   <form [formGroup]="createImpulseForm" (submit)="createImpulse()">
+    <ion-list lines="none">
     <ion-item>
-      <ion-label stacked>Impulse</ion-label>
+      <ion-label id= "impulse">Impulse</ion-label>
       <ion-input formControlName="title" type="text" placeholder="What's the impulse?"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label stacked>Scale</ion-label>
+    </ion-list>
+
+<ion-list lines="none">
+    <ion-item id= "scale" no-lines>
+      <ion-label >Scale</ion-label>
       <ion-input formControlName="scale" type="number" placeholder="1-10"></ion-input>
     </ion-item>
+</ion-list>
+<ion-list lines="none">
 
-    <ion-item>
-      <ion-label stacked>Description</ion-label>
+
+    <ion-item id= "content" no-lines>
+      <ion-label >Description</ion-label>
       <ion-textarea formControlName="description" type="text" placeholder="What are you feeling?"></ion-textarea>
     </ion-item>
+</ion-list>
 
-    <ion-button expand="block" type="submit" [disabled]="!createImpulseForm.valid">Add</ion-button>
-    <ion-button expand="block" color="dark" routerLink='/tabs/tab2'>Cancel</ion-button>
+    <ion-button expand="block" id="cancelbtn" color="dark" routerLink='/tabs/tab2'>Cancel</ion-button>
+    <br>  
+    <ion-button expand="block" id="addbtn" type="submit" [disabled]="!createImpulseForm.valid">Add</ion-button>
+
   </form>
 </ion-content>
