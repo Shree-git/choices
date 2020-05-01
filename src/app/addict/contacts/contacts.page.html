@@ -30,7 +30,6 @@
           </div>
         </div>
     <br>
-    <!--|  orderBy: ordering : reverse : true--><!--routerLink="/view-contact/{{contact.id}}"  -->
       <ion-card *ngFor="let contact of userContacts | async"> 
         <ion-card-header>
            <ion-card-title id="header_title" routerLink="/view-contact/{{contact.id}}">{{contact.title}}</ion-card-title>

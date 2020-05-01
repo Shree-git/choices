@@ -3,18 +3,16 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CaTab3Page } from './ca-tab3.page';
-import { CalendarModule } from 'ion2-calendar';
-
-
+import { CaTab3Page} from './ca-tab3.page';
+import { OrderModule} from 'ngx-order-pipe';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: CaTab3Page }]),
-    CalendarModule
+    OrderModule,
+    RouterModule.forChild([{ path: '', component: CaTab3Page }])
   ],
   declarations: [CaTab3Page]
 })

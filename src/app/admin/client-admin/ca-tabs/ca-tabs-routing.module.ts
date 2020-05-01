@@ -8,7 +8,7 @@ const routes: Routes = [
     component: CaTabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'ca-tab1',
         children: [
           {
             path: '',
@@ -18,7 +18,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'ca-tab2',
         children: [
           {
             path: '',
@@ -28,7 +28,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab3',
+        path: 'ca-tab3',
         children: [
           {
             path: '',
@@ -37,21 +37,11 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: 'contacts',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../contacts/contacts.module').then( m => m.ContactsPageModule)
-          }
-        ]
-      },
-      { path: '', redirectTo: 'tab2', pathMatch: 'full' },
+      { path: '', redirectTo: 'ca-tab2', pathMatch: 'full' },
     ]
     
   },
-  { path: '', redirectTo: 'tab2', pathMatch: 'full' },
+  { path: '', redirectTo: 'ca-tab2', pathMatch: 'full' },
 ];
 
 @NgModule({
