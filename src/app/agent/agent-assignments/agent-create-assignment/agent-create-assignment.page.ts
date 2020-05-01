@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DataService } from 'src/app/services/data.service';
-
+ 
  
 @Component({
   selector: 'app-agent-create-assignment',

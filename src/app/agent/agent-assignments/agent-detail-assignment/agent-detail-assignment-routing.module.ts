@@ -9,7 +9,7 @@ const routes: Routes = [
     component: AgentDetailAssignmentPage
   }
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

@@ -29,7 +29,7 @@ export class AgentDetailAssignmentPage implements OnInit {
   setAdmin(ag : boolean){
     this.dataService.adminUse = ag;
   }
-
+ 
   getAssignment(){
    return this.dataService.assignment;
   }

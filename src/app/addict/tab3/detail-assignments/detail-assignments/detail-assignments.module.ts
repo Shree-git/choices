@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DetailAssignmentsPageRoutingModule } from './detail-assignments-routing.module';
 
 import { DetailAssignmentsPage } from './detail-assignments.page';
-
+ 
 @NgModule({
   imports: [
     CommonModule,

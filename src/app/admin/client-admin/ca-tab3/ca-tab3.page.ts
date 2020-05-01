@@ -1,5 +1,4 @@
 import { Platform } from '@ionic/angular';
-import { CalendarComponentOptions } from 'ion2-calendar';
 import { Component, ViewChild, OnInit} from '@angular/core';
 import { Observable } from 'rxjs'
 import { FirestoreService } from '../../../services/data/firestore.service'

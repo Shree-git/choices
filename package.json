@@ -14,7 +14,7 @@
   "private": true,
   "dependencies": {
     "@angular/common": "~9.0.7",
-    "@angular/core": "^9.0.7",
+    "@angular/core": "^9.1.4",
     "@angular/fire": "^5.4.2",
     "@angular/forms": "~9.0.7",
     "@angular/platform-browser": "~9.0.7",
@@ -34,7 +34,7 @@
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
     "firebase": "^7.14.2",
-    "ion2-calendar": "^3.0.0-rc.0",
+    "ionic": "^5.4.16",
     "ionic2-calendar": "^0.6.2",
     "moment": "^2.24.0",
     "ng": "0.0.0",
@@ -42,6 +42,7 @@
     "nodemailer": "^6.4.6",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
+    "uninstall-all-modules": "^1.0.5",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
