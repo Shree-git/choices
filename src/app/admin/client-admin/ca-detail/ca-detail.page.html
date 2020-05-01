@@ -8,10 +8,11 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card class="impulse-card">
-    <ion-card-content class="entry-titles">{{ (impulse | async)?.title }}</ion-card-content>
-    <ion-card-content class="entry-info">Date: {{ (impulse | async)?.date }}</ion-card-content>
-    <ion-card-content class="entry-info">Scale: {{ (impulse | async)?.scale }}</ion-card-content>
-    <ion-card-content class="entry-content">Description: {{ (impulse | async)?.description }}</ion-card-content>
-  </ion-card>
+  <div padding>
+      <h2 class="entry-titles">{{ (impulse | async)?.title }}</h2>
+
+       <h3 id="entry-date">Date: {{ (impulse | async)?.date }} </h3>
+       <h4 id="entry-scale">Scale: {{ (impulse | async)?.scale }} </h4>
+       <h6 id="entry-desc">Description: {{ (impulse | async)?.description }} </h6>
+</div>
 </ion-content>

@@ -41,7 +41,7 @@ export class CaDetailPage implements OnInit {
         text: 'Delete',
         handler: () => {
           this.fservice.delete("impulseList", this.iID);
-          this.router.navigateByUrl('tabs/tab2');
+          this.router.navigateByUrl('ca-tabs/tab1');
         },
       },
     ],

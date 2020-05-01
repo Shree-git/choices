@@ -53,7 +53,8 @@ createAssignmentAdmin( assignerUID: string, userUID: string, title: string, desc
   const assignmentUID = this.firestore.createId();
   const eventUID = this.firestore.createId();
   this.createEventAssignment(eventUID,title, desc, startTime, endTime, userUID, done, assignerUID, assignmentUID, null)
-  return this.firestore.doc('assignments/'  + assignmentUID).set({assignmentUID,assignerUID, userUID, eventUID, title, desc, endTime, done, user_response});
+  const dueTime = endTime;
+  return this.firestore.doc('assignments/'  + assignmentUID).set({assignmentUID,assignerUID, userUID, eventUID, title, desc, dueTime, done, user_response});
 }
 
 
