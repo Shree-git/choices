@@ -87,8 +87,8 @@ export class CaTab2Page implements OnInit{
   
     ngOnInit() {
       this.resetEvent();
-      this.eventList = this.fservice.getList("events", this.getClient()).snapshotChanges();
-      this.userList =this.fservice.getList("users", this.getClient()).snapshotChanges();
+      this.eventList = this.fservice.getYourList("events").snapshotChanges();
+      this.userList =this.fservice.getYourList("users").snapshotChanges();
      
   
   

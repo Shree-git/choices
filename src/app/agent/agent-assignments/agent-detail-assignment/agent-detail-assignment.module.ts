@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AgentDetailAssignmentPageRoutingModule } from './agent-detail-assignment-routing.module';
 
 import { AgentDetailAssignmentPage } from './agent-detail-assignment.page';
- 
+
 @NgModule({
   imports: [
     CommonModule,

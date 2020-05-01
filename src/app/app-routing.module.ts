@@ -68,6 +68,10 @@ const routes: Routes = [
   loadChildren: () => import('./admin/client-admin/ca-tabs/ca-tabs.module').then(m => m.CaTabsPageModule)
 },
 
+{
+  path: 'ca-detail/:id',
+  loadChildren: () => import('./admin/client-admin/ca-detail/ca-detail.module').then( m => m.CaDetailPageModule)
+},
  
 
 

@@ -13,17 +13,25 @@ export class CaTabsPage implements OnInit{
 
   pages = [
     {
-      name: 'Impulses',
-      path: '/ca-tabs/ca-tab1'
+      name: 'Entries',
+      path: '/tabs/tab1'
     },
     {
       name: 'Agenda',
-      path: '/ca-tabs/ca-tab2'
+      path: '/tabs/tab2'
     },
     {
-      name: 'Assignments',
-      path: '/ca-tabs/ca-tab3'
+      name: 'Goals',
+      path: '/tabs/tab3'
     },
+    {
+      name: 'Account',
+      path: '/tabs/account'
+    },
+    {
+      name: 'Safe Contacts',
+      path: '/tabs/contacts'
+    }
   ]
 
   iID;

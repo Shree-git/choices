@@ -21,9 +21,9 @@ export class CaDetailPage implements OnInit {
   ) { }
  
   ngOnInit() {
-  //  const impulseId = this.route.snapshot.paramMap.get('id');
-    //this.iID = impulseId;
-    //this.impulse = this.fservice.getDetail("impulseList",impulseId).valueChanges();
+    const impulseId = this.route.snapshot.paramMap.get('id');
+    this.iID = impulseId;
+    this.impulse = this.fservice.getDetail("impulseList",impulseId).valueChanges();
   }
 
   async deleteImpulse(){
