@@ -21,7 +21,7 @@ export class TabsPage implements OnInit{
       path: '/tabs/tab2'
     },
     {
-      name: 'Agenda',
+      name: 'Wellness',
       path: '/tabs/tab3'
     },
     {

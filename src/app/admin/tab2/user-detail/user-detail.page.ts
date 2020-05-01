@@ -163,12 +163,8 @@ export class UserDetailPage implements OnInit {
       {
         text: 'Delete',
         handler: () => {
-
-          //delete user
-        //delete all entries, events, impules, contacts, assignments with user
-        //and user authorization 
-          this.fservice.deleteAll(this.iID);
-          this.router.navigateByUrl('tabs-admin/tab1');
+          this.fservice.delete("users", this.iID);
+          this.router.navigateByUrl('tabs/tab1');
         },
       },
     ],

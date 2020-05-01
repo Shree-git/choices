@@ -16,11 +16,9 @@ h1{
     text-align: center;
 
 }
-#cal{
-    padding-right: 0;
-    padding-left: 0;
-    padding-bottom: 0;
-    padding-top: 0;
+calendar{
+    padding: 0;
+
 }
 
 #header_title{
@@ -49,5 +47,4 @@ ion-card{
   border-radius: 15px 20px;
   margin-bottom: 5%;
   background-color: snow;
-  top:0;
 }

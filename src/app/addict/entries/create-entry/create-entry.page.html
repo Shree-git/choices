@@ -8,7 +8,8 @@
 <ion-content padding>
   <form [formGroup]="createEntryForm" (submit)="createEntry()">
     <div class="field">
-      <input type="text" name ="title"  formControlName="title" placeholder="Title"class="form-control" id="title">
+      <label>Title</label>
+      <input type="text" name ="title"  formControlName="title" class="form-control" id="title">
     </div>
     <div class="field"> 
       <textarea formControlName="content" id= "content" type="text" placeholder="Content"></textarea>

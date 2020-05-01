@@ -19,14 +19,10 @@
         <span> <p class="entry-content" [hidden]="edit == true" (dblclick)="showEdit()">{{ (entry | async)?.content }}</p>
    <textarea class="edit-content" id= "edited-content" [hidden]= "edit == false" >{{ (entry | async)?.content }} </textarea></span>
     </div>
-  <ion-button expand="block" color="danger" id="deletebtn"(click)="deleteEntry()">Delete
+  <ion-button expand="block" color="danger" id="deletebtn"(click)="deleteEntry()">
     <ion-icon name="trash"></ion-icon>
   </ion-button>
-  <ion-button color="success" expand="block" [hidden]= "edit == true"   id="editbtn" (click)="showEdit()">Edit
-      <ion-icon name="create"></ion-icon>
-    </ion-button>
-   
-    <ion-button color="success" expand="block" [hidden]= "edit == false" id="editbtn" (click)="editEntry()">Done 
+  <ion-button color="success" expand="block" id="editbtn"(click)="editEntry()">
       <ion-icon name="done-all"></ion-icon>
     </ion-button>
 </ion-content>

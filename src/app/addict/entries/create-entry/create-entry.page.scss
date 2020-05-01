@@ -1,6 +1,9 @@
 .field{
  padding-top: 5%;
 }
+ion-title{
+    text-align: center;
+}
 #title{
  width: 70%;
  height: 5%;
@@ -15,14 +18,14 @@ label{
  margin-left: 5%;
  width: 90%;
  height: 425px;
- border-radius: 10px;
+ border-radius: 15px 50px;
  font-size: 25px;
  padding-bottom: 5%;
 }
 input{
-margin-left: 5%;
+margin-left: 1%;
  font-size: 30px;
- border-radius: 10px;
+ border-radius: 20px;
  margin-bottom: 3%;
  display: inline-block;
  border: 1px solid #ccc;

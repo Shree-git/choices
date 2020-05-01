@@ -3,31 +3,22 @@
           display:inline-block;
           margin-bottom: 0;
           margin-left: 2%;
-          top:0;
-          margin-top:0;
       }
-      
-      #header_num{
-        display:inline-block;
-        margin-bottom: 0;
-        margin-left: 2%;
-        top:0;
-        margin-top:0;
-        font-size: 15px;
-    }
-      ion-icon{
-        display:inline-block;
-        margin-left: 10%;
-        font-size:30px;
+
+      .entry{
+          max-height: 115px;
+          overflow: hidden;
+          margin-bottom: 3%;
+          margin-top: 0;
+          font-size: 20px;
+  
       }
       ion-card{
         width: 90%;
-        height: 100px;
+        height: 115px;
         margin-left: 5%;
-        top:0;
         border-radius: 20px;
         margin-bottom: 5%;
-        padding: 2%;
   
         background-color: snow;
       }
@@ -37,6 +28,8 @@
           border-radius: 20px;
           margin-left: 5%;
           margin-top: 6%;
+  
+  
   
       }
   
