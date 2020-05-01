@@ -1,27 +1,34 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref='/user-detail/{{this.userId}}'></ion-back-button>
+      <ion-back-button defaultHref='/user-detail/{{userId}}'></ion-back-button>
     </ion-buttons>
-    <ion-title class="title">Goals</ion-title>
+    <ion-title class="title">Assignments</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
- <!-- Basic/Single Date Select -->
- <ion-calendar [(ngModel)]="date" [options]="optionsSingle" (change)="onChange($event)" [type]="type"
-   [format]="'YYYY-MM-DD'">
- </ion-calendar>
-<!--
- // Date Range
- <h2 text-center>Date Range</h2>
- <ion-calendar [(ngModel)]="dateRange" [options]="optionsRange" [type]="type" [format]="'YYYY-MM-DD'">
- </ion-calendar>
+  <ion-searchbar class="search" debounce="500" (ionInput)="search($event)" placeholder="Search"></ion-searchbar>
+<button  class="sort" id="dropb" (click)="dropMenu()">Sort</button>
 
- //Multi Date Select
- <h2 text-center>Multi Date</h2>
- <ion-calendar [(ngModel)]="dateMulti" [options]="optionsMulti" [type]="type" [format]="'YYYY-MM-DD'">
- </ion-calendar>
--->
+<div class="dropdown">
+    <div id="myDropd" class="dropdown-content">
+      <a (click) = "order3 ='title'; reverse = false">Title A-Z</a>
+      <a (click) = "order3 ='title'; reverse = true">Title Z-A</a>
+      <a (click) = "order3 ='timestamp'; reverse = true">Newest</a>
+      <a (click) = "order3 ='timestamp'; reverse = false">Oldest</a>
+      <a (click) = "order3 ='scale'; reverse = true">Highest</a>
+      <a (click) = "order3 ='scale'; reverse = false">Lowest</a>
+    </div>
+  </div>
+<br>
+<ion-card *ngFor="let assign of assignments | async |orderBy: order3 : reverse : true" routerLink="/agent-detail-assignment/{{assign.assignmentUID}}">
+  <ion-card-header>
+    <ion-card-title id="header_title">{{assign.title}} </ion-card-title>
+    <ion-card-subtitle id ="header_date">{{assign.dueTime}}</ion-card-subtitle>
+ </ion-card-header>
+ <ion-card-content class="entry">
+   {{ assign.desc }}
+ </ion-card-content>
+</ion-card>
 </ion-content>

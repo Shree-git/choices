@@ -59,6 +59,13 @@ createAssignment( assignerUID: string, userUID: string, title: string, desc: str
   this.createEventAssignment(eventUID,title, desc, dueTime, dueTime, userUID, done, assignerUID, assignmentUID, null)
   return this.firestore.doc('assignments/'  + assignmentUID).set({assignmentUID,assignerUID, userUID, eventUID, title, desc, dueTime, done, user_response});
 }
+createAssignmentAdmin( assignerUID: string, userUID: string, title: string, desc: string, startTime: string, endTime: string, done: boolean, user_response: string): Promise<void> {
+  const assignmentUID = this.firestore.createId();
+  const eventUID = this.firestore.createId();
+  this.createEventAssignment(eventUID,title, desc, startTime, endTime, userUID, done, assignerUID, assignmentUID, null)
+  return this.firestore.doc('assignments/'  + assignmentUID).set({assignmentUID,assignerUID, userUID, eventUID, title, desc, endTime, done, user_response});
+}
+
 
 editAssignment(assignmentId, new_title, new_desc, new_due, new_user){
   this.db.doc("assignments/"+assignmentId).update({title : new_title, desc: new_desc, dueTime: new_due, userUID: new_user})
@@ -78,7 +85,6 @@ editAssignment(assignmentId, new_title, new_desc, new_due, new_user){
     const userUID = this.userId;
     return this.firestore.doc('events/'  + eventUID).set({eventUID, title, desc, startTime, endTime, userUID, done, assignerUID, assignmentUID, notifTime});
   }
-
   createEventAssignment( eventUID: string, title: string, desc: string, startTime: string, endTime: string, userUID: string, done: boolean, assignerUID: string, assignmentUID: string, notifTime: string): Promise<void> {
     return this.firestore.doc('events/'  + eventUID).set({eventUID, title, desc, startTime, endTime, userUID, done, assignerUID, assignmentUID, notifTime});
   }
@@ -204,16 +210,10 @@ getSearched(search : string, collection : string, condition: string, condition2:
 
  //currently case sensetive 
  //set up to search by two values but is currently incapable
- getSpecificSearched(id: string, search : string, collection : string, condition: string, condition2:string): AngularFirestoreCollection<any> {
+ getSpecificSearched(id: string, field: string, search : string, collection : string, condition: string): AngularFirestoreCollection<any> {
   
-  let con1 =  this.firestore.collection(collection, ref => ref.where("groupUID", "==", id).where(condition ,'>=', search).where(condition, "<=", search+"z"));
-  let con2 =  this.firestore.collection(collection, ref => ref.where("groupUID", "==", id).where(condition2 ,'>=', search).where(condition2, "<=", search+"z"));
-  if(con1 != null || con1 != undefined){
-    return con1
-  }
-  else{
-     return con2
-  }
+  return this.firestore.collection(collection, ref => ref.where(field, "==", id).where(condition ,'>=', search).where(condition, "<=", search+"z"));
+  
   }
 
 

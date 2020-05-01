@@ -18,9 +18,10 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class CaTab2Page implements OnInit{
   public userId;
-  public iID;
+  public assignID;
   userAssignments;
   userList;
+  user;
   groupEvents;
   groupAssignments;
 
@@ -87,8 +88,12 @@ export class CaTab2Page implements OnInit{
   
     ngOnInit() {
       this.resetEvent();
-      this.eventList = this.fservice.getYourList("events").snapshotChanges();
-      this.userList =this.fservice.getYourList("users").snapshotChanges();
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.assignID = this.user.uid
+      console.log("Current admin id", this.assignID)
+      console.log("From Ca tabs" ,this.getClient())
+      this.eventList = this.fservice.getOnly("events", "userUID", this.getClient()).snapshotChanges();
+      this.userList =this.fservice.getOnly("users", "userUID", this.getClient()).snapshotChanges();
      
   
   
@@ -252,7 +257,7 @@ this.event.endTime= (selected.toISOString());
 addEvent() {
 let start = this.event.startTime
 let end = this.event.endTime
-this.fservice.createEvent(this.event.title,this.event.desc, start, end, false, null, null,null)
+this.fservice.createAssignmentAdmin(this.assignID, this.getClient(), this.event.title,this.event.desc, start, end, false, null)
 // this.eventSource.push(eventCopy);
 this.myCal.loadEvents();
 this.resetEvent();

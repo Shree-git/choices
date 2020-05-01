@@ -86,6 +86,14 @@ export class UserDetailPage implements OnInit {
 
   }
 
+  viewUser(){
+    console.log(this.iID)
+    this.setClient(this.iID)
+    console.log(this.getClient())
+    this.router.navigateByUrl("/ca-tabs");
+
+  }
+
   Pair(){
 
     //checks if pairing is on. if it is then set agent field in user data

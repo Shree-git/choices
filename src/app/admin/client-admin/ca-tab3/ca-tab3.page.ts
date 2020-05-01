@@ -1,35 +1,76 @@
-import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { CalendarComponentOptions } from 'ion2-calendar';
+import { Component, ViewChild, OnInit} from '@angular/core';
+import { Observable } from 'rxjs'
+import { FirestoreService } from '../../../services/data/firestore.service'
+import { CalendarComponent} from 'ionic2-calendar/calendar'
+import { formatDate } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { OrderPipe } from 'ngx-order-pipe';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-ca-tab3',
   templateUrl: 'ca-tab3.page.html',
-  styleUrls: ['ca-tab3.page.scss']
+  styleUrls: ['ca-tab3.page.scss'],
+  providers: [OrderPipe]
 })
-export class CaTab3Page {
-
-
-  optionsSingle: CalendarComponentOptions = {
-    color: 'danger'
-  };
-
-  dateRange: { from: string; to: string; };
-  type: 'string'; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
-  optionsRange: CalendarComponentOptions = {
-    pickMode: 'range',
-    color: 'danger'
-  };
-
-  // Multi Select
-  dateMulti: string[];
-  optionsMulti: CalendarComponentOptions = {
-    pickMode: 'multi',
-    color: 'danger'
-  };
-  constructor( public platform: Platform) {}
-  onChange($event) {
-    console.log($event);
+export class CaTab3Page implements OnInit{
+  assignments
+  userId
+  public order3 = 'dueTime';
+  getClient(): string{
+    return this.dataService.clientID
   }
 
+  constructor(
+    private alertCtrl: AlertController,
+    public fservice: FirestoreService,
+    public route: ActivatedRoute,
+    private orderPipe: OrderPipe,
+    private dataService: DataService,
+    public router: Router,
+
+    ) {}
+
+
+  ngOnInit() {
+    console.log("From Ca 3" ,this.getClient())
+    this.userId = this.getClient()
+    this.assignments = this.fservice.getList("assignments", this.userId).valueChanges();
+   
+  }
+
+  search(ev) {
+    let val = ev.target.value;
+    if(!val || !val.trim()){
+      this.assignments = this.fservice.getList("assignments", this.userId).valueChanges();
+    }
+    else{
+      this.assignments = this.fservice.getSpecificSearched(this.userId,"userUID", val, 'assignments', 'title').valueChanges();
+  
+    }
+       
+  }
+     //opens and closes drop down menu
+     dropMenu() {
+      document.getElementById("myDropd").classList.toggle("show");
+      //makes it so that clicking anywhere else on the screen closes drop down
+      window.onclick = function(e) {
+      var ele=<Element>e.target;
+          if (!ele.matches('#dropb')){
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+          }
+    }
+  }
 }
+
+
