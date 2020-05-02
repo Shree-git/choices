@@ -18,7 +18,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone
   ) {
-    this.ngFireAuth.auth.onAuthStateChanged(user => {
+    this.ngFireAuth.onAuthStateChanged(user => {
       if(user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -39,7 +39,7 @@ export class AuthService {
     password: string
   ): Promise<firebase.auth.UserCredential> {
 
-    return this.ngFireAuth.auth.signInWithEmailAndPassword(email, password);
+    return this.ngFireAuth.signInWithEmailAndPassword(email, password);
 
   }
 
@@ -48,18 +48,18 @@ export class AuthService {
     email: string,
     password: string
   ): Promise<any> {
-    return this.ngFireAuth.auth.createUserWithEmailAndPassword(email, password).then(()=>{
+    return this.ngFireAuth.createUserWithEmailAndPassword(email, password).then(()=>{
     });
   }
 
-  sendVerificationMail(){
-    return this.ngFireAuth.auth.currentUser.sendEmailVerification().then(()=>{
+  async sendVerificationMail(){
+    return (await this.ngFireAuth.currentUser).sendEmailVerification().then(()=>{
       this.router.navigate(['verify-email']);
     })
   }
 
   resetPassword(email: string): Promise<void> {
-    return this.ngFireAuth.auth.sendPasswordResetEmail(email).then(()=>{
+    return this.ngFireAuth.sendPasswordResetEmail(email).then(()=>{
       window.alert('Check your email to reset your password!')
       this.router.navigateByUrl('/login')
     }).catch((error) => {
@@ -127,7 +127,7 @@ export class AuthService {
   }
 
   logOutUser(): Promise<void> {
-    return this.ngFireAuth.auth.signOut().then(()=>{
+    return this.ngFireAuth.signOut().then(()=>{
       console.log("Logout successful");
       localStorage.removeItem('user');
       this.router.navigateByUrl('/register');

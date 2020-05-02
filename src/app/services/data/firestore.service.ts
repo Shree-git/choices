@@ -19,7 +19,7 @@ export class FirestoreService {
   public db;
   
   constructor(public firestore: AngularFirestore,  private datePipe: DatePipe, public ngFireAuth: AngularFireAuth,) {
-    this.user = this.ngFireAuth.auth.currentUser;
+    this.user = this.ngFireAuth.currentUser;
     this.userId = this.user.uid
     this.db = firebase.firestore();
    }

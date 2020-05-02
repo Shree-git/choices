@@ -26,7 +26,7 @@ export class CreateContactPage implements OnInit {
         title: ['', Validators.required],
         content: ['', Validators.required],
       })
-      this.user = this.ngFireAuth.auth.currentUser;
+      this.user = this.ngFireAuth.currentUser;
 
      }
      ngOnInit() {

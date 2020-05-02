@@ -38,7 +38,7 @@ export class CreateEntryPage implements OnInit {
         content: ['', Validators.required],
         timestamp : this.currentDate.getTime(),
       })
-      this.user = this.ngFireAuth.auth.currentUser;
+      this.user = this.ngFireAuth.currentUser;
      }
 
   ngOnInit() {

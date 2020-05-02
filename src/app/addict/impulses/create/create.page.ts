@@ -39,7 +39,7 @@ export class CreatePage implements OnInit {
         description: ['', Validators.required],
         timestamp : this.currentDate.getTime(),
       })
-      this.user = this.ngFireAuth.auth.currentUser;
+      this.user = this.ngFireAuth.currentUser;
 
      }
 

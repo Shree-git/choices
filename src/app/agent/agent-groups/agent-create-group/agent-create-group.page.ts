@@ -36,7 +36,7 @@ export class AgentCreateGroupPage implements OnInit {
         title: ['', [Validators.maxLength(50), Validators.required]],
         date: this.myDate,
       })
-      this.user = this.ngFireAuth.auth.currentUser;
+      this.user = this.ngFireAuth.currentUser;
 
      }
 
