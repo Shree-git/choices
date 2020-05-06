@@ -19,6 +19,7 @@ export class CaTab1Page implements OnInit {
   public impulseList;
   public order3 = 'timestamp';
   public userId;
+  reverse = false
 
   getClient(): string{
     return this.dataService.clientID

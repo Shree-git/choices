@@ -24,6 +24,7 @@ export class CaTab2Page implements OnInit{
   user;
   groupEvents;
   groupAssignments;
+  collapseCard = true;
 
   getClient(): string{
     return this.dataService.clientID

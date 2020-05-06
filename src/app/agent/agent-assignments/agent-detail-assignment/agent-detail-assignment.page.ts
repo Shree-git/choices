@@ -15,11 +15,12 @@ import {DataService} from '../../../services/data.service'
 })
 export class AgentDetailAssignmentPage implements OnInit {
   
-  public assignment: Observable<Assignment>;
+  public assignment;
   public currentUsers;
   public currentGroups;
   public iID;
   public test;
+  public minDate = new Date()
   assignID;
 
   setAssignment(ag : string){

@@ -18,10 +18,4 @@
         <span> <p class="entry-content" [hidden]="edit == true" (dblclick)="showEdit()">{{ (assignment | async)?.desc }}</p>
    <textarea class="edit-content" id= "edited-content" [hidden]= "edit == false" >{{ (assignment | async)?.desc }} </textarea></span>
     </div>
-    <input
-  style="display: none"
-  type="file" (change)="onFileChanged($event)"
-  #fileInput>
-<button (click)="fileInput.click()">Select File</button>
-<button (click)="onUpload()">Upload!</button>
 </ion-content>

@@ -18,6 +18,7 @@ export class AgentTab1Page implements OnInit {
   public order = 'dueTime';
   public user;
   public id;
+  reverse =false;
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,

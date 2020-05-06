@@ -17,6 +17,7 @@ export class Tab2Page implements OnInit{
   type = "all";
   order2 = 'lastName';
   pairing: any;
+  reverse = false
 
   getClient(): string{
     return this.dataService.clientID

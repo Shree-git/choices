@@ -16,7 +16,7 @@ import { OrderPipe } from 'ngx-order-pipe';
 export class ContactsPage implements OnInit {
   public userContacts;
   public ordering = 'title';
-
+reverse = false;
   everybody;
   constructor(public callNumber: CallNumber, public contacts: Contacts,public firestoreService: FirestoreService,private orderPipe: OrderPipe, public router: Router) {
     this.everybody = this.contacts.find(["*"]);
