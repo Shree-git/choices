@@ -8,10 +8,8 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
-    <ion-card-content class="entry-titles">{{ (group | async)?.title }}</ion-card-content>
-    <ion-card-content class="entry-info">Date: {{ (group | async)?.date }}</ion-card-content>
-  </ion-card>
+    <h2 class="entry-titles">{{ (group | async)?.title }}</h2>
+    <p class="entry-date">Date: {{ (group | async)?.date }}</p>
   <br>
   <ion-button expand="block" color="light" id="groupbtn" routerLink="/agent-detail-members">
     View Group

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, Form } from '@angular/forms'
 import { LoadingController, AlertController } from '@ionic/angular'
 import { FirestoreService } from '../../../services/data/firestore.service'
 import { Router } from '@angular/router';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class AddUserPage implements OnInit {
     public firestoreService: FirestoreService,
     formBuilder: FormBuilder,
     public router: Router,
+    private _location: Location,
+
     ) {
       this.inviteUserForm = formBuilder.group({
         email: ['', [Validators.maxLength(50), Validators.required]],
@@ -32,6 +35,11 @@ export class AddUserPage implements OnInit {
 
   async inviteUser(){
     const email = this.inviteUserForm.value.email;
-        this.router.navigateByUrl('admin-tabs/tab2');
+       this.back();
   }
+  
+  back(){
+    this._location.back();
+  }
+
 }

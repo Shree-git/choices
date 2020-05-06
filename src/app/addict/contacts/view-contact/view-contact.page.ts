@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { Contact } from '../../../models/contact.interface'
 import { AlertController } from '@ionic/angular';
+import {Location} from '@angular/common';
  
 @Component({
   selector: 'app-view-contact',
@@ -16,14 +17,21 @@ export class ViewContactPage implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
+    
     public alertController: AlertController,
-    public fservice: FirestoreService
+    public fservice: FirestoreService,
+    private _location: Location,
+
   ) { }
 
   ngOnInit() {
     const contactId = this.route.snapshot.paramMap.get('id');
     this.iID = contactId;
     this.contact = this.fservice.getDetail("userContacts", contactId).valueChanges();
+  }
+
+  back(){
+    this._location.back();
   }
 
   async deleteContact(){
@@ -41,7 +49,10 @@ export class ViewContactPage implements OnInit {
         text: 'Delete',
         handler: () => {
           this.fservice.delete("userContacts", this.iID);
-          this.router.navigateByUrl('contacts');
+
+
+          /////HERE ROUTE BACK
+          this._location.back();
         },
       },
     ],

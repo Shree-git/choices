@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { Impulse } from '../../../models/impulse.interface'
 import { AlertController } from '@ionic/angular';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-detail',
@@ -16,9 +17,15 @@ export class DetailPage implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
+    private _location: Location,
+
     public alertController: AlertController,
     public fservice: FirestoreService
   ) { }
+  back(){
+    this._location.back();
+  }
+  
 
   ngOnInit() {
     const impulseId = this.route.snapshot.paramMap.get('id');

@@ -13,8 +13,8 @@ import { DataService } from 'src/app/services/data.service';
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
-  
 })
+
 export class Tab3Page  implements OnInit{
 
   event = { 
@@ -72,12 +72,13 @@ export class Tab3Page  implements OnInit{
     endTime: new Date().toISOString(),
     allDay: false
     }}
-
+user;
 
   ngOnInit() {
     this.resetEvent();
-    this.eventList = this.fservice.getYourList("events").snapshotChanges();
-    this.userList =this.fservice.getYourList("users").snapshotChanges();
+    this.user = JSON.parse(localStorage.getItem('user'));    
+    this.eventList = this.fservice.getList("events", this.user.uid).snapshotChanges();
+    this.userList =this.fservice.getList("users", this.user.uid).snapshotChanges();
    
 
 
@@ -136,7 +137,7 @@ export class Tab3Page  implements OnInit{
 
   
    
-this.userAssignments = this.fservice.getYourList("assignments").valueChanges()
+this.userAssignments = this.fservice.getList("assignments", this.user.uid).valueChanges()
 
 } // end of ng on init
 

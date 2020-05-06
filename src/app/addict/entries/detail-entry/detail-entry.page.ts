@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { Entry } from '../../../models/entry.interface'
 import { AlertController } from '@ionic/angular';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-detail-entry',
@@ -16,6 +17,8 @@ export class DetailEntryPage implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
+    private _location: Location,
+
     public alertController: AlertController,
     public fservice: FirestoreService
   ) { }
@@ -45,7 +48,7 @@ export class DetailEntryPage implements OnInit {
         text: 'Delete',
         handler: () => {
           this.fservice.delete("currentEntries",this.iID);
-          this.router.navigateByUrl('tabs/tab1');
+          this._location.back();
         },
       },
     ],
@@ -61,11 +64,15 @@ export class DetailEntryPage implements OnInit {
     
     this.fservice.editEntry(entryid, new_title, new_content);
     this.showEdit();
-    this.router.navigateByUrl('tabs/tab1');
+    this._location.back();
 
 
 
   }
+  back(){
+    this._location.back();
+  }
+  
 
   
 

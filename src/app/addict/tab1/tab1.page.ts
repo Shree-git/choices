@@ -16,14 +16,16 @@ import { OrderPipe } from 'ngx-order-pipe';
 export class Tab1Page implements OnInit {
   public currentEntries;
   public ordering = 'timestamp';
-
+  user;
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,
     public router: Router) {}
 
   ngOnInit() {
-    this.currentEntries = this.firestoreService.getYourList("currentEntries").valueChanges();
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.currentEntries = this.firestoreService.getList("currentEntries",this.user.uid).valueChanges();
+    
   }
 
   
@@ -33,13 +35,12 @@ export class Tab1Page implements OnInit {
 search(ev) {
   let val = ev.target.value;
   if(!val || !val.trim()){
-    this.currentEntries = this.firestoreService.getYourList("currentEntries").valueChanges();
+    this.currentEntries = this.firestoreService.getList("currentEntries",this.user.uid).valueChanges();
   }
   else{
     this.currentEntries = this.firestoreService.getSearched(val, 'currentEntries', 'title', '').valueChanges()
 
-  }
-     
+  }    
 }
 
    //opens and closes drop down menu

@@ -1,10 +1,11 @@
 import { Component, OnInit, ɵConsole, Output, Input } from '@angular/core';
 import { FirestoreService } from '../../../services/data/firestore.service'
 import { ActivatedRoute, Router, PreloadingStrategy } from '@angular/router'
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import * as firebase from 'firebase/app';
 import {DataService} from '../../../services/data.service'
+import {Location} from '@angular/common';
 
 
 
@@ -52,6 +53,8 @@ export class UserDetailPage implements OnInit {
     public alertController: AlertController,
     public fservice: FirestoreService,
     public auth: AuthService,
+    public navCtrl: NavController,
+    private _location: Location,
     private dataService: DataService
   ) { }
 
@@ -84,6 +87,14 @@ export class UserDetailPage implements OnInit {
   
 
 
+  }
+
+  goBack() {
+    this.navCtrl.pop();
+  }
+
+  back(){
+    this._location.back();
   }
 
   viewUser(){
@@ -126,7 +137,7 @@ export class UserDetailPage implements OnInit {
                                 //client does not have an agent so route to list of all users and create a pair of client and agent
                                 if(agent == undefined || agent == null){
                                   self.setPairing(true)
-                                  self.router.navigateByUrl("/tab2-admin"); 
+                                  self.back() 
                             
                                 }
 
@@ -145,7 +156,7 @@ export class UserDetailPage implements OnInit {
                               else if(type == "Agent"){
                                 self.setAgent(documentSnapshot.data().userUID)
                                 self.setPairing(true)
-                                self.router.navigateByUrl("/tab2-admin")
+                                self.back()
 
                               }}
                               
@@ -176,7 +187,7 @@ export class UserDetailPage implements OnInit {
         //delete all entries, events, impules, contacts, assignments with user
         //and user authorization 
           this.fservice.deleteAll(this.iID);
-          this.router.navigateByUrl('tabs-admin/tab1');
+          this.back()
         },
       },
     ],

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button (click) = "back()"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ (entry | async)?.title }}</ion-title>
 
@@ -27,6 +27,5 @@
     </ion-button>
    
     <ion-button color="success" expand="block" [hidden]= "edit == false" id="editbtn" (click)="editEntry()">Done 
-      <ion-icon name="done-all"></ion-icon>
     </ion-button>
 </ion-content>

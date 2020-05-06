@@ -9,7 +9,7 @@ import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Assignment } from 'src/app/models/assignment.interface';
-
+ 
 @Injectable({
   providedIn: 'root',
   
@@ -19,7 +19,7 @@ export class FirestoreService {
   public db;
   
   constructor(public firestore: AngularFirestore,  private datePipe: DatePipe, public ngFireAuth: AngularFireAuth,) {
-    this.user = this.ngFireAuth.currentUser;
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.userId = this.user.uid
     this.db = firebase.firestore();
    }

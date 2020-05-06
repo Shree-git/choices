@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { Impulse } from '../../../models/impulse.interface'
 import { AlertController } from '@ionic/angular';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-ca-detail',
@@ -16,6 +17,7 @@ export class CaDetailPage implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
+    private _location: Location,
     public alertController: AlertController,
     public fservice: FirestoreService
   ) { }
@@ -24,6 +26,10 @@ export class CaDetailPage implements OnInit {
     const impulseId = this.route.snapshot.paramMap.get('id');
     this.iID = impulseId;
     this.impulse = this.fservice.getDetail("impulseList",impulseId).valueChanges();
+  }
+
+  back(){
+    this._location.back();
   }
 
   async deleteImpulse(){
@@ -41,7 +47,7 @@ export class CaDetailPage implements OnInit {
         text: 'Delete',
         handler: () => {
           this.fservice.delete("impulseList", this.iID);
-          this.router.navigateByUrl('ca-tabs/tab1');
+          this._location.back();
         },
       },
     ],

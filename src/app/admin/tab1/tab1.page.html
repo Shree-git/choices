@@ -30,14 +30,13 @@
     </div>
 <br>
 
-  <ion-card *ngFor="let entry of currentEntries | async |  orderBy: ordering : reverse : true" routerLink="/detail-entry/{{entry.id}}">
+  <ion-card *ngFor="let entry of currentEntries | async |  orderBy: ordering : reverse : true" routerLink="/agent-detail-assignment/{{entry.assignmentUID}}">
     <ion-card-header>
-        <img id="header_week" class="title-image" src="assets/days_of_week/{{entry.day}}_icon.png" />
        <ion-card-title id="header_title">{{entry.title}} </ion-card-title>
-       <ion-card-subtitle id ="header_date">{{entry.date}}</ion-card-subtitle>
+       <ion-card-subtitle id ="header_date">{{entry.dueTime}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="entry">
-      {{ entry.content }}
+      {{ entry.desc }}
     </ion-card-content>
   </ion-card>
 </ion-content>

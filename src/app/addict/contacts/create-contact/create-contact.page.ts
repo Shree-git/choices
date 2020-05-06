@@ -4,6 +4,7 @@ import { LoadingController, AlertController } from '@ionic/angular'
 import { FirestoreService } from '../../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-create-contact',
@@ -19,6 +20,8 @@ export class CreateContactPage implements OnInit {
     public alertCtrl: AlertController,
     public firestoreService: FirestoreService,
     formBuilder: FormBuilder,
+    private _location: Location,
+
     public ngFireAuth: AngularFireAuth,
     public router: Router
     ) {
@@ -42,7 +45,7 @@ export class CreateContactPage implements OnInit {
       this.firestoreService.createContact(title, content, uid)
       .then(() => {
         loading.dismiss().then(() => {
-          this.router.navigateByUrl('/tabs/contacts');
+          this._location.back();
         });
       },
         (    error: any) => {
@@ -50,6 +53,10 @@ export class CreateContactPage implements OnInit {
       });
       return await loading.present();
     }
+    back(){
+      this._location.back();
+    }
+    
   
   }
   

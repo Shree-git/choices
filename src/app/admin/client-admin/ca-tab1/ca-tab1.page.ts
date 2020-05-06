@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
 import { DataService } from 'src/app/services/data.service';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -26,6 +27,8 @@ export class CaTab1Page implements OnInit {
   constructor(
     public firestoreService: FirestoreService,
     public route: ActivatedRoute,
+    private _location: Location,
+
     private orderPipe: OrderPipe,
     private dataService: DataService,
     public router: Router) {}
@@ -43,8 +46,16 @@ export class CaTab1Page implements OnInit {
       this.impulseList = this.firestoreService.getSearched(val, 'impulseList', 'title', '').valueChanges()
   
     }
+    
        
   }
+  
+
+  back(){
+    this._location.back();
+  }
+  
+
      //opens and closes drop down menu
      dropMenu() {
       document.getElementById("myDropd").classList.toggle("show");

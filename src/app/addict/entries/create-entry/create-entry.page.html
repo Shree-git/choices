@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
       <ion-title>New Entry</ion-title>
-      <ion-back-button slot="start"></ion-back-button>
+      <ion-back-button slot="start" (click) = "back()"></ion-back-button>
     </ion-toolbar>
   </ion-header>
 
@@ -14,7 +14,7 @@
       <textarea formControlName="content" id= "content" type="text" placeholder="Content"></textarea>
     </div>
 <br><br>
-<ion-button id="cancelbtn" expand="block" color="dark" routerLink='/tabs/tab1'>Cancel</ion-button>
+<ion-button id="cancelbtn" expand="block" color="dark" (click) = "back()">Cancel</ion-button>
     <ion-button expand="block" type="submit" [disabled]="!createEntryForm.valid">Add</ion-button>
   </form>
 </ion-content>

@@ -5,6 +5,7 @@ import { FirestoreService } from '../../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/auth';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -26,6 +27,8 @@ export class CreateEntryPage implements OnInit {
     public alertCtrl: AlertController,
     public firestoreService: FirestoreService,
     private datePipe: DatePipe,
+    private _location: Location,
+
     formBuilder: FormBuilder,
     public router: Router,
     public ngFireAuth: AngularFireAuth,
@@ -44,6 +47,10 @@ export class CreateEntryPage implements OnInit {
   ngOnInit() {
 
   }
+  back(){
+    this._location.back();
+  }
+  
 
   async createEntry(){
     const loading = await this.loadingCtrl.create();
@@ -60,7 +67,7 @@ export class CreateEntryPage implements OnInit {
     this.firestoreService.createEntry(title, date, day, content, timestamp, uid)
     .then(() => {
       loading.dismiss().then(() => {
-        this.router.navigateByUrl('/tabs/tab1');
+        this._location.back();
       });
     },
       (    error: any) => {

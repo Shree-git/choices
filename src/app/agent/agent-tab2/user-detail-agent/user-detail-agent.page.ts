@@ -187,7 +187,10 @@ export class UserDetailAgentPage implements OnInit {
     (await alert).present();
   }
 
-
+viewUser(){
+  this.setClient(this.iID)
+  this.router.navigateByUrl('/ca-tabs')
+}
   
 
 }

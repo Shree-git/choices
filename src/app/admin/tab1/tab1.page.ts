@@ -5,6 +5,7 @@ import { FirestoreService } from '../../services/data/firestore.service'
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { OrderPipe } from 'ngx-order-pipe';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -20,11 +21,21 @@ export class Tab1Page implements OnInit {
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,
-    public router: Router) {}
+    private _location: Location,
 
+    public router: Router) {}
+user
   ngOnInit() {
-    this.currentEntries = this.firestoreService.getYourList("currentEntries").valueChanges();
+    this.user = JSON.parse(localStorage.getItem('user'));    
+    this.currentEntries = this.firestoreService.getListAll("assignments").valueChanges();
   }
+  
+  back(){
+    this._location.back();
+  }
+  
+
+
 
   
 //searches through the list of current entries. If search is left empty after already clicking in
@@ -33,10 +44,10 @@ export class Tab1Page implements OnInit {
 search(ev) {
   let val = ev.target.value;
   if(!val || !val.trim()){
-    this.currentEntries = this.firestoreService.getYourList("currentEntries").valueChanges();
+    this.currentEntries = this.firestoreService.getListAll("assignments").valueChanges();
   }
   else{
-    this.currentEntries = this.firestoreService.getSearched(val, 'currentEntries', 'title', '').valueChanges()
+    this.currentEntries = this.firestoreService.getSearched(val, 'assignments', 'title', '').valueChanges()
 
   }
      

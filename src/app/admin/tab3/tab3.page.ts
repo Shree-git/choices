@@ -58,10 +58,11 @@ export class Tab3Page implements OnInit{
     endTime: new Date().toISOString(),
     allDay: false
     }}
-
+user;
   ngOnInit() {
     this.resetEvent();
-    this.eventList = this.fservice.getYourList("events").snapshotChanges();
+    this.user = JSON.parse(localStorage.getItem('user'));    
+    this.eventList = this.fservice.getList("events", this.user.uid).snapshotChanges();
 
 
 /// adds all of user events to calendar

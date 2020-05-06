@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { Assignment } from '../../../../models/assignment.interface'
 import { AlertController } from '@ionic/angular';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-detail-assignments',
@@ -19,6 +21,7 @@ export class DetailAssignmentsPage implements OnInit {
     public route: ActivatedRoute,
     public router: Router,
     public alertController: AlertController,
+    private _location: Location,
     public fservice: FirestoreService
   ) { }
 
@@ -34,4 +37,9 @@ export class DetailAssignmentsPage implements OnInit {
   }
  
   
+  back(){
+    this._location.back();
+  }
+  
+
 }

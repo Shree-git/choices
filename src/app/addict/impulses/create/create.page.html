@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>New Impulse</ion-title>
-    <ion-back-button slot="start"></ion-back-button>
+    <ion-back-button slot="start" (click) = "back()"></ion-back-button>
   </ion-toolbar>
 </ion-header>
 
@@ -30,7 +30,7 @@
     </ion-item>
 </ion-list>
 
-    <ion-button expand="block" id="cancelbtn" color="dark" routerLink='/tabs/tab2'>Cancel</ion-button>
+    <ion-button expand="block" id="cancelbtn" color="dark" (click) = "back()">Cancel</ion-button>
     <ion-button expand="block" id="addbtn" type="submit" [disabled]="!createImpulseForm.valid">Add</ion-button>
 
   </form>
