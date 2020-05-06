@@ -17,7 +17,6 @@ export class Tab1Page implements OnInit {
   public currentEntries;
   public ordering = 'timestamp';
   user;
-  reverse =false;
   constructor(
     public firestoreService: FirestoreService,
     private orderPipe: OrderPipe,

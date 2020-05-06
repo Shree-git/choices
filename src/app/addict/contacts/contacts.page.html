@@ -21,13 +21,17 @@
     
       <div class="dropdown">
           <div id="myDrop" class="dropdown-cont">
-            <a (click) = "ordering ='title'; reverse = true">Title A-Z</a>
-            <a (click) = "ordering ='title'; reverse = false">Title Z-A</a>
+            <a (click) = "order ='title'; reverse = true">Title A-Z</a>
+            <a (click) = "order ='title'; reverse = false">Title Z-A</a>
+    
+    
+            <a (click) = "order ='timestamp'; reverse = false">Oldest</a>
+            <a (click) = "order ='timestamp'; reverse = true">Newest</a>
           </div>
         </div>
     <br>
     <!--|  orderBy: ordering : reverse : true--><!--routerLink="/view-contact/{{contact.id}}"  -->
-      <ion-card *ngFor="let contact of userContacts | async|  orderBy: ordering : reverse : true"> 
+      <ion-card *ngFor="let contact of userContacts | async"> 
         <ion-card-header>
            <ion-card-title id="header_title" routerLink="/view-contact/{{contact.id}}">{{contact.title}}</ion-card-title>
            <ion-card-title id="header_num" routerLink="/view-contact/{{contact.id}}">{{ contact.content }} </ion-card-title>

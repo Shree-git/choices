@@ -19,7 +19,6 @@ export class AgentDetailMembersPage implements OnInit {
   public groupId;
   public assignments;
   public groupMembers;
-  reverse =false;
   public user: any;
   public iID;
   public arry = [];

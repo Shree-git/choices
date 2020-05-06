@@ -16,8 +16,6 @@ import {DataService} from '../../services/data.service'
 export class AgentTab2Page implements OnInit{
   public currentUsers;
   public currentGroups;
-  reverse = false;
-  order = 'lastName'
   new_members = new Array<string>()
 
 

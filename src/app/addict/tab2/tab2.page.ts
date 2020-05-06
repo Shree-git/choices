@@ -15,7 +15,6 @@ import { OrderPipe } from 'ngx-order-pipe';
 export class Tab2Page implements OnInit{
   public impulseList;
   public order = 'timestamp';
-  reverse = false
   user;
   constructor(
     public firestoreService: FirestoreService,

@@ -18,7 +18,6 @@ import { DataService } from 'src/app/services/data.service';
 export class CaTab3Page implements OnInit{
   assignments
   userId
-  reverse = false;
   public order3 = 'dueTime';
   getClient(): string{
     return this.dataService.clientID

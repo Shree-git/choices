@@ -17,7 +17,6 @@ import {Location} from '@angular/common';
 export class Tab1Page implements OnInit {
   public currentEntries;
   public ordering = 'timestamp';
-  reverse = false;
 
   constructor(
     public firestoreService: FirestoreService,
