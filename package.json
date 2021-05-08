@@ -46,7 +46,7 @@
     "minimist": "^1.2.5",
     "moment": "^2.24.0",
     "ng": "0.0.0",
-    "ng-packagr": "^9.1.2",
+    "ng-packagr": "^10.1.1",
     "ngx-order-pipe": "^2.0.4",
     "nodemailer": "^6.4.6",
     "rxjs": "~6.5.1",
